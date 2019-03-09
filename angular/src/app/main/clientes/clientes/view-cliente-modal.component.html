@@ -1,0 +1,70 @@
+<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>{{l("")}}</span>
+                </h4>
+                <button type="button" class="close" (click)="close()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <h6>{{l("ID_CLIENTE")}} :</h6>
+                        {{item.cliente.iD_CLIENTE}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("NOMBRE_CLIENTE")}} :</h6>
+                        {{item.cliente.nombrE_CLIENTE}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("APELLIDO_CLIENTE")}} :</h6>
+                        {{item.cliente.apellidO_CLIENTE}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("generO_CLIENTE")}} :</h6>
+                        {{l( generos[item.cliente.generO_CLIENTE])}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("FECHA_CLIENTE")}} :</h6>
+                        {{item.cliente.fechA_CLIENTE}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("CELULAR_CLIENTE")}} :</h6>
+                        {{item.cliente.celulaR_CLIENTE}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("DIRECCION_CLIENTE")}} :</h6>
+                        {{item.cliente.direccioN_CLIENTE}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("DEPARTAMENTO_CLIENTE")}} :</h6>
+                        {{item.cliente.departamentO_CLIENTE}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("MUNICIPIO_CLIENTE")}} :</h6>
+                        {{item.cliente.municipiO_CLIENTE}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("EMPRESA_CLIENTE")}} :</h6>
+                        {{item.cliente.empresA_CLIENTE}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("PROFESION_CLIENTE")}} :</h6>
+                        {{item.cliente.profesioN_CLIENTE}}
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="saving" type="button" class="btn btn-primary blue" (click)="close()">{{l("Close")}}</button>
+            </div>
+        </div>
+    </div>
+
+</div>

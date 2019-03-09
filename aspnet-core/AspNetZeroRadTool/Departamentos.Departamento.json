@@ -1,0 +1,73 @@
+{
+  "IsRegenerate": false,
+  "MenuPosition": "main",
+  "RelativeNamespace": "Departamentos",
+  "EntityName": "Departamento",
+  "EntityNamePlural": "Departamentos",
+  "TableName": "Departamentos",
+  "PrimaryKeyType": "long",
+  "BaseClass": "Entity",
+  "EntityHistory": true,
+  "AutoMigration": true,
+  "UpdateDatabase": true,
+  "CreateUserInterface": true,
+  "CreateViewOnly": true,
+  "CreateExcelExport": true,
+  "PagePermission": {
+    "Host": false,
+    "Tenant": false
+  },
+  "Properties": [
+    {
+      "Name": "ID_DEPARTAMENTO",
+      "Type": "string",
+      "MaxLength": 12,
+      "MinLength": 2,
+      "Range": {
+        "IsRangeSet": false,
+        "MinimumValue": 0,
+        "MaximumValue": 0
+      },
+      "Required": true,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      }
+    },
+    {
+      "Name": "NOMBRE_DEPARTAMENTO",
+      "Type": "string",
+      "MaxLength": 36,
+      "MinLength": 4,
+      "Range": {
+        "IsRangeSet": false,
+        "MinimumValue": 0,
+        "MaximumValue": 0
+      },
+      "Required": false,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      }
+    }
+  ],
+  "NavigationProperties": [
+    {
+      "Namespace": "PALMASoft.Paises",
+      "ForeignEntityName": "Pais",
+      "IdType": "long",
+      "IsNullable": false,
+      "PropertyName": "PaisId",
+      "DisplayPropertyName": "NOMBRE_PAIS",
+      "DuplicationNumber": 0,
+      "RelationType": "single"
+    }
+  ],
+  "EnumDefinitions": []
+}

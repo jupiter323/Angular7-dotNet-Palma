@@ -1,0 +1,52 @@
+<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #departamentoForm="ngForm" novalidate (ngSubmit)="save()" autocomplete="off">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span *ngIf="departamento.id">{{l("EditDepartamento")}}</span>
+                        <span *ngIf="!departamento.id">{{l("CreateNewDepartamento")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close" [disabled]="saving">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                 
+
+					<div class="form-group m-form__group">
+                        <label for="PaisNOMBRE_PAIS">{{l("Pais")}}</label>
+                        <div class="input-group">
+                            <input class="form-control" id="PaisNOMBRE_PAIS" name="paisNOMBRE_PAIS" [(ngModel)]="paisNOMBRE_PAIS" type="text" disabled>     
+                            <div class="input-group-append">
+                                <button class="btn btn-primary blue" (click)="openSelectPaisModal()" type="button"><i class="fa fa-search"></i> {{l("Pick")}}</button>
+                            </div> <div class="input-group-prepend">
+                                <button class="btn btn-danger" type="button" (click)="setPaisIdNull()"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <input class="form-control" name="departamento.paisId" [(ngModel)]="departamento.paisId" type="text" required hidden>
+		 
+
+								<div class="form-group">
+									<label for="Departamento_ID_DEPARTAMENTO">{{l("ID_DEPARTAMENTO")}} *</label>
+									<input type="text" id="Departamento_ID_DEPARTAMENTO" class="form-control" [(ngModel)]="departamento.iD_DEPARTAMENTO" name="ID_DEPARTAMENTO"   minlength="2"  maxlength="12"  required/>
+								</div>
+					
+								<div class="form-group">
+									<label for="Departamento_NOMBRE_DEPARTAMENTO">{{l("NOMBRE_DEPARTAMENTO")}}</label>
+									<input type="text" id="Departamento_NOMBRE_DEPARTAMENTO" class="form-control" [(ngModel)]="departamento.nombrE_DEPARTAMENTO" name="NOMBRE_DEPARTAMENTO"   minlength="4"  maxlength="36" />
+								</div>
+					
+
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary blue" [disabled]="!departamentoForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{l("Save")}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+<paisLookupTableModal #paisLookupTableModal (modalSave)="getNewPaisId()"></paisLookupTableModal>
+		 
+</div>

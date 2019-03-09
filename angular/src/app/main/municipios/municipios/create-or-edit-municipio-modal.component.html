@@ -1,0 +1,52 @@
+<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #municipioForm="ngForm" novalidate (ngSubmit)="save()" autocomplete="off">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span *ngIf="municipio.id">{{l("EditMunicipio")}}</span>
+                        <span *ngIf="!municipio.id">{{l("CreateNewMunicipio")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close" [disabled]="saving">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                 
+
+					<div class="form-group m-form__group">
+                        <label for="DepartamentoNOMBRE_DEPARTAMENTO">{{l("Departamento")}}</label>
+                        <div class="input-group">
+                            <input class="form-control" id="DepartamentoNOMBRE_DEPARTAMENTO" name="departamentoNOMBRE_DEPARTAMENTO" [(ngModel)]="departamentoNOMBRE_DEPARTAMENTO" type="text" disabled>     
+                            <div class="input-group-append">
+                                <button class="btn btn-primary blue" (click)="openSelectDepartamentoModal()" type="button"><i class="fa fa-search"></i> {{l("Pick")}}</button>
+                            </div> <div class="input-group-prepend">
+                                <button class="btn btn-danger" type="button" (click)="setDepartamentoIdNull()"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <input class="form-control" name="municipio.departamentoId" [(ngModel)]="municipio.departamentoId" type="text" required hidden>
+		 
+
+								<div class="form-group">
+									<label for="Municipio_ID_MUNICIPIO">{{l("ID_MUNICIPIO")}} *</label>
+									<input type="text" id="Municipio_ID_MUNICIPIO" class="form-control" [(ngModel)]="municipio.iD_MUNICIPIO" name="ID_MUNICIPIO"   minlength="2"  maxlength="12"  required/>
+								</div>
+					
+								<div class="form-group">
+									<label for="Municipio_NOMBRE_MUNICIPIO">{{l("NOMBRE_MUNICIPIO")}}</label>
+									<input type="text" id="Municipio_NOMBRE_MUNICIPIO" class="form-control" [(ngModel)]="municipio.nombrE_MUNICIPIO" name="NOMBRE_MUNICIPIO"   minlength="4"  maxlength="36" />
+								</div>
+					
+
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary blue" [disabled]="!municipioForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{l("Save")}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+<departamentoLookupTableModal #departamentoLookupTableModal (modalSave)="getNewDepartamentoId()"></departamentoLookupTableModal>
+		 
+</div>

@@ -1,0 +1,38 @@
+<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #paisForm="ngForm" novalidate (ngSubmit)="save()" autocomplete="off">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span *ngIf="pais.id">{{l("EditPais")}}</span>
+                        <span *ngIf="!pais.id">{{l("CreateNewPais")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close" [disabled]="saving">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                 
+
+
+								<div class="form-group">
+									<label for="Pais_ID_PAIS">{{l("ID_PAIS")}} *</label>
+									<input type="text" id="Pais_ID_PAIS" class="form-control" [(ngModel)]="pais.iD_PAIS" name="ID_PAIS"   minlength="2"  maxlength="12"  required/>
+								</div>
+					
+								<div class="form-group">
+									<label for="Pais_NOMBRE_PAIS">{{l("NOMBRE_PAIS")}}</label>
+									<input type="text" id="Pais_NOMBRE_PAIS" class="form-control" [(ngModel)]="pais.nombrE_PAIS" name="NOMBRE_PAIS"   minlength="4"  maxlength="36" />
+								</div>
+					
+
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary blue" [disabled]="!paisForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{l("Save")}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
