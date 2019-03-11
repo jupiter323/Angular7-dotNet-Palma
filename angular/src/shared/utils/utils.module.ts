@@ -4,6 +4,7 @@ import { AutoFocusDirective } from './auto-focus.directive';
 import { BusyIfDirective } from './busy-if.directive';
 import { ButtonBusyDirective } from './button-busy.directive';
 import { FileDownloadService } from './file-download.service';
+import { FileImportService } from './file-import.service';
 import { FriendProfilePictureComponent } from './friend-profile-picture.component';
 import { LocalStorageService } from './local-storage.service';
 import { MomentFormatPipe } from './moment-format.pipe';
@@ -19,12 +20,14 @@ import { TreeDataHelperService } from './tree-data-helper.service';
 import { LocalizePipe } from '@shared/common/pipes/localize.pipe';
 import { PermissionPipe } from '@shared/common/pipes/permission.pipe';
 
+
 @NgModule({
     imports: [
         CommonModule
     ],
     providers: [
         FileDownloadService,
+        FileImportService,
         LocalStorageService,
         ScriptLoaderService,
         StyleLoaderService,

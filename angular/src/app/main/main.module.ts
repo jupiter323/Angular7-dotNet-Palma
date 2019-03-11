@@ -24,7 +24,7 @@ import { CreateOrEditPaisModalComponent } from './paises/paises/create-or-edit-p
 import { AutoCompleteModule } from 'primeng/primeng';
 import { PaginatorModule } from 'primeng/primeng';
 import { EditorModule } from 'primeng/primeng';
-import { InputMaskModule } from 'primeng/primeng';import { FileUploadModule } from 'primeng/primeng';
+import { InputMaskModule } from 'primeng/primeng'; import { FileUploadModule } from 'primeng/primeng';
 import { TableModule } from 'primeng/table';
 
 import { UtilsModule } from '@shared/utils/utils.module';
@@ -41,11 +41,11 @@ NgxBootstrapDatePickerConfigService.registerNgxBootstrapDatePickerLocales();
 
 @NgModule({
     imports: [
-		FileUploadModule,
-		AutoCompleteModule,
-		PaginatorModule,
-		EditorModule,
-		InputMaskModule,		TableModule,
+        FileUploadModule,
+        AutoCompleteModule,
+        PaginatorModule,
+        EditorModule,
+        InputMaskModule, TableModule,
 
         CommonModule,
         FormsModule,
@@ -62,18 +62,18 @@ NgxBootstrapDatePickerConfigService.registerNgxBootstrapDatePickerLocales();
         BsDropdownModule.forRoot()
     ],
     declarations: [
-		ClientesComponent,
-		ViewClienteModalComponent,		CreateOrEditClienteModalComponent,
+        ClientesComponent,
+        ViewClienteModalComponent, CreateOrEditClienteModalComponent,
         MunicipiosComponent,
         MunicipioComboComponent,
-		ViewMunicipioModalComponent,		CreateOrEditMunicipioModalComponent,
-    DepartamentoLookupTableModalComponent,
+        ViewMunicipioModalComponent, CreateOrEditMunicipioModalComponent,
+        DepartamentoLookupTableModalComponent,
         DepartamentosComponent,
-        DepartamentoComboComponent, 
-		ViewDepartamentoModalComponent,		CreateOrEditDepartamentoModalComponent,
-    PaisLookupTableModalComponent,
-		PaisesComponent,
-		ViewPaisModalComponent,		CreateOrEditPaisModalComponent,
+        DepartamentoComboComponent,
+        ViewDepartamentoModalComponent, CreateOrEditDepartamentoModalComponent,
+        PaisLookupTableModalComponent,
+        PaisesComponent,
+        ViewPaisModalComponent, CreateOrEditPaisModalComponent,
         DashboardComponent
     ],
     providers: [

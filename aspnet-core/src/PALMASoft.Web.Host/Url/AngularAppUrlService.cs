@@ -5,9 +5,11 @@ namespace PALMASoft.Web.Url
 {
     public class AngularAppUrlService : AppUrlServiceBase
     {
+        private const string V = "account/reset-password";
+
         public override string EmailActivationRoute => "account/confirm-email";
 
-        public override string PasswordResetRoute => "account/reset-password";
+        public override string PasswordResetRoute => V;
 
         public AngularAppUrlService(
                 IWebUrlService webUrlService,

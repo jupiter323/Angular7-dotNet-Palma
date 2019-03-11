@@ -1,7 +1,7 @@
 import { Component, Injector, ViewEncapsulation, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Http } from '@angular/http';
-import { PaisesServiceProxy, PaisDto  } from '@shared/service-proxies/service-proxies';
+import { PaisesServiceProxy, PaisDto } from '@shared/service-proxies/service-proxies';
 import { NotifyService } from '@abp/notify/notify.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { TokenAuthServiceProxy } from '@shared/service-proxies/service-proxies';
@@ -15,6 +15,8 @@ import { FileDownloadService } from '@shared/utils/file-download.service';
 import { EntityTypeHistoryModalComponent } from '@app/shared/common/entityHistory/entity-type-history-modal.component';
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import { FileImportService } from '@shared/utils/file-import.service';
+import * as XLSX from 'xlsx';
 
 @Component({
     templateUrl: './paises.component.html',
@@ -28,6 +30,7 @@ export class PaisesComponent extends AppComponentBase {
     @ViewChild('entityTypeHistoryModal') entityTypeHistoryModal: EntityTypeHistoryModalComponent;
     @ViewChild('dataTable') dataTable: Table;
     @ViewChild('paginator') paginator: Paginator;
+    @ViewChild('file') file;
 
     advancedFiltersAreShown = false;
     filterText = '';
@@ -44,7 +47,8 @@ export class PaisesComponent extends AppComponentBase {
         private _notifyService: NotifyService,
         private _tokenAuth: TokenAuthServiceProxy,
         private _activatedRoute: ActivatedRoute,
-        private _fileDownloadService: FileDownloadService
+        private _fileDownloadService: FileDownloadService,
+        private _fileImportService: FileImportService
     ) {
         super(injector);
     }
@@ -113,12 +117,51 @@ export class PaisesComponent extends AppComponentBase {
 
     exportToExcel(): void {
         this._paisesServiceProxy.getPaisesToExcel(
-        this.filterText,
+            this.filterText,
             this.iD_PAISFilter,
             this.nombrE_PAISFilter,
-        )
-        .subscribe(result => {
+        ).subscribe(result => {
             this._fileDownloadService.downloadTempFile(result);
-         });
+        });
+    }
+    onFileChange(evt: any) {
+        /* wire up file reader */
+        const target: DataTransfer = <DataTransfer>(evt.target);
+        if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+        const reader: FileReader = new FileReader();
+        reader.onload = (e: any) => {
+            /* read workbook */
+            const bstr: string = e.target.result;
+            const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
+
+            /* grab first sheet */
+            const wsname: string = wb.SheetNames[0];
+            const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+            /* save data */
+            let data = <AOA>(XLSX.utils.sheet_to_json(ws, { header: 1 }));
+            console.log(data);
+        };
+        reader.readAsBinaryString(target.files[0]);
+    }
+    public changeListener(evt: FileList) {
+        console.log(evt);
+        if (evt && evt.length > 0) {
+            let file: File = evt.item(0);
+            console.log(file.name);
+            console.log(file.size);
+            console.log(file.type);
+            let reader: FileReader = new FileReader();
+            reader.readAsText(file);
+            reader.onload = (e) => {
+                let csv = reader.result;
+                console.log(csv);
+            }
+
+
+        }
+    }
+    addFiles() {
+        this.file.nativeElement.click();
     }
 }
