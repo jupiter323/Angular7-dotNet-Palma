@@ -37,9 +37,11 @@ export class CreateOrEditPaisModalComponent extends AppComponentBase {
             this.pais = new CreateOrEditPaisDto();
             this.pais.id = paisId;
 
+            console.log("is id:", paisId)
             this.active = true;
             this.modal.show();
         } else {
+            console.log("is after id:", paisId)
             this._paisesServiceProxy.getPaisForEdit(paisId).subscribe(result => {
                 this.pais = result.pais;
 
@@ -52,7 +54,7 @@ export class CreateOrEditPaisModalComponent extends AppComponentBase {
 
     save(): void {
             this.saving = true;
-
+            console.log("save pais",this.pais)
 			
             this._paisesServiceProxy.createOrEdit(this.pais)
              .pipe(finalize(() => { this.saving = false;}))

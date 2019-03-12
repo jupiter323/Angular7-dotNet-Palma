@@ -14,6 +14,8 @@ using PALMASoft.Authorization;
 using Abp.Extensions;
 using Abp.Authorization;
 using Microsoft.EntityFrameworkCore;
+using System.Json;
+using System.Diagnostics;
 
 namespace PALMASoft.Paises
 {
@@ -112,8 +114,9 @@ namespace PALMASoft.Paises
 
 		public async Task<FileDto> GetPaisesToExcel(GetAllPaisesForExcelInput input)
          {
-			
-			var filteredPaises = _paisRepository.GetAll()
+
+            
+            var filteredPaises = _paisRepository.GetAll()
 						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.ID_PAIS.Contains(input.Filter) || e.NOMBRE_PAIS.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ID_PAISFilter),  e => e.ID_PAIS.ToLower() == input.ID_PAISFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.NOMBRE_PAISFilter),  e => e.NOMBRE_PAIS.ToLower() == input.NOMBRE_PAISFilter.ToLower().Trim());
@@ -129,6 +132,17 @@ namespace PALMASoft.Paises
 
             return _paisesExcelExporter.ExportToFile(paisListDtos);
          }
+
+        public void importcsv(string data)
+        {
+            if (data!=null)
+            {
+                // JsonObject resource = (JsonObject)JsonObject.Parse(data.);               
+                Debug.WriteLine("input : in ", data);
+            }
+          
+            Debug.WriteLine("input : out ");
+        }
 
 
     }

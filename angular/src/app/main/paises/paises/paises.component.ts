@@ -1,7 +1,7 @@
 import { Component, Injector, ViewEncapsulation, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Http } from '@angular/http';
-import { PaisesServiceProxy, PaisDto } from '@shared/service-proxies/service-proxies';
+import { PaisesServiceProxy, PaisDto, CreateOrEditPaisDto } from '@shared/service-proxies/service-proxies';
 import { NotifyService } from '@abp/notify/notify.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { TokenAuthServiceProxy } from '@shared/service-proxies/service-proxies';
@@ -17,6 +17,7 @@ import * as _ from 'lodash';
 import * as moment from 'moment';
 import { FileImportService } from '@shared/utils/file-import.service';
 import * as XLSX from 'xlsx';
+import { finalize } from 'rxjs/operators';
 
 @Component({
     templateUrl: './paises.component.html',
@@ -36,8 +37,9 @@ export class PaisesComponent extends AppComponentBase {
     filterText = '';
     iD_PAISFilter = '';
     nombrE_PAISFilter = '';
-
-
+    saving
+    getting
+    initializing
     _entityTypeFullName = 'PALMASoft.Paises.Pais';
     entityHistoryEnabled = false;
 
@@ -128,6 +130,7 @@ export class PaisesComponent extends AppComponentBase {
         /* wire up file reader */
         const target: DataTransfer = <DataTransfer>(evt.target);
         if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+        this.initPasis();
         const reader: FileReader = new FileReader();
         reader.onload = (e: any) => {
             /* read workbook */
@@ -139,28 +142,45 @@ export class PaisesComponent extends AppComponentBase {
             const ws: XLSX.WorkSheet = wb.Sheets[wsname];
 
             /* save data */
-            let data = <AOA>(XLSX.utils.sheet_to_json(ws, { header: 1 }));
-            console.log(data);
+            let data = (XLSX.utils.sheet_to_json(ws, { header: 1 }));
+            let sendJsonData = this._fileImportService.parseJsonFromArray(data);
+            this._paisesServiceProxy.importcsv(sendJsonData).subscribe(result => {
+                console.log(result);
+            });
+            sendJsonData.values.forEach((x, i) => {
+                var pais: CreateOrEditPaisDto = new CreateOrEditPaisDto();
+                pais.iD_PAIS = x[0];
+                pais.nombrE_PAIS = x[1];
+                this.insert(pais);
+            });
+
+
         };
         reader.readAsBinaryString(target.files[0]);
     }
-    public changeListener(evt: FileList) {
-        console.log(evt);
-        if (evt && evt.length > 0) {
-            let file: File = evt.item(0);
-            console.log(file.name);
-            console.log(file.size);
-            console.log(file.type);
-            let reader: FileReader = new FileReader();
-            reader.readAsText(file);
-            reader.onload = (e) => {
-                let csv = reader.result;
-                console.log(csv);
-            }
-
-
-        }
+    initPasis(): void {
+        this.initializing = true;
+        this._paisesServiceProxy.getAll("", "", "", "", 0, 10000)
+            .pipe(finalize(() => { this.initializing = false; this.reloadPage() }))
+            .subscribe(result => {
+                result.items.forEach((x) => {
+                    this._paisesServiceProxy.delete(x.pais.id)
+                        .subscribe(() => {
+                            // this.notify.success(this.l('SuccessfullyDeleted'));
+                        });
+                })
+            });
     }
+    insert(pais: CreateOrEditPaisDto): void {
+        this.saving = true;
+
+        this._paisesServiceProxy.createOrEdit(pais)
+            .pipe(finalize(() => { this.saving = false; this.reloadPage(); }))
+            .subscribe(() => {
+                this.notify.info(this.l('SavedSuccessfully'));
+            });
+    }
+
     addFiles() {
         this.file.nativeElement.click();
     }

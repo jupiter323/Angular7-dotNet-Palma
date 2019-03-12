@@ -21,6 +21,7 @@ namespace PALMASoft.Paises
 
 		Task<FileDto> GetPaisesToExcel(GetAllPaisesForExcelInput input);
 
-		
+        void importcsv(string data);
+
     }
 }
