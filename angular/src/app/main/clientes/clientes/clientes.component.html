@@ -10,6 +10,10 @@
                 </span>
             </div>
             <div class="col-md-6 text-right">
+                    <button class="btn btn-outline-success" (click)="addFiles()">
+                            <input #file type="file" class="display-none" accept=".xlsx,.xls,.csv"
+                                (change)="onFileChange($event)"><i class="fa fa-file-excel"></i>
+                            {{l("ImpoExcel")}}</button>
 				<button (click)="exportToExcel()" class="btn btn-outline-success"><i class="fa fa-file-excel"></i> {{l("ExportToExcel")}}</button>
                 <button *ngIf="isGranted('Pages.Clientes.Create')" (click)="createCliente()" 
 			class="btn btn-primary blue"><i class="fa fa-plus"></i> {{l("CreateNewCliente")}}</button>
