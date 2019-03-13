@@ -1,7 +1,7 @@
 import { Component, Injector, ViewEncapsulation, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Http } from '@angular/http';
-import { MunicipiosServiceProxy, MunicipioDto  } from '@shared/service-proxies/service-proxies';
+import { MunicipiosServiceProxy, MunicipioDto, CreateOrEditMunicipioDto } from '@shared/service-proxies/service-proxies';
 import { NotifyService } from '@abp/notify/notify.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { TokenAuthServiceProxy } from '@shared/service-proxies/service-proxies';
@@ -15,7 +15,9 @@ import { FileDownloadService } from '@shared/utils/file-download.service';
 import { EntityTypeHistoryModalComponent } from '@app/shared/common/entityHistory/entity-type-history-modal.component';
 import * as _ from 'lodash';
 import * as moment from 'moment';
-
+import * as XLSX from 'xlsx';
+import { finalize } from 'rxjs/operators';
+import { FileImportService } from '@shared/utils/file-import.service';
 @Component({
     templateUrl: './municipios.component.html',
     encapsulation: ViewEncapsulation.None,
@@ -45,7 +47,8 @@ export class MunicipiosComponent extends AppComponentBase {
         private _notifyService: NotifyService,
         private _tokenAuth: TokenAuthServiceProxy,
         private _activatedRoute: ActivatedRoute,
-        private _fileDownloadService: FileDownloadService
+        private _fileDownloadService: FileDownloadService,
+        private _fileImportService: FileImportService,
     ) {
         super(injector);
     }
@@ -124,4 +127,70 @@ export class MunicipiosComponent extends AppComponentBase {
             this._fileDownloadService.downloadTempFile(result);
          });
     }
+    //
+     //
+
+     @ViewChild('file') file;
+     initializing
+     saving
+     isInitAndInsert = false;
+     onFileChange(evt: any) {
+         /* wire up file reader */
+         const target: DataTransfer = <DataTransfer>(evt.target);
+         if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+         if (this.isInitAndInsert) this.initEntityRecords();
+         const reader: FileReader = new FileReader();
+         reader.onload = (e: any) => {
+             /* read workbook */
+             const bstr: string = e.target.result;
+             const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
+ 
+             /* grab first sheet */
+             const wsname: string = wb.SheetNames[0];
+             const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+ 
+             /* save data */
+             let data = (XLSX.utils.sheet_to_json(ws, { header: 1 }));
+             let sendJsonData = this._fileImportService.parseJsonFromArray(data);
+             // this._paisesServiceProxy.importcsv(sendJsonData).subscribe(result => {
+             //     console.log(result);
+             // });
+             sendJsonData.values.forEach((x, i) => {
+                 var municipio: CreateOrEditMunicipioDto = new CreateOrEditMunicipioDto();
+                 municipio.iD_MUNICIPIO = x[0];
+                 municipio.nombrE_MUNICIPIO = x[1];
+                 municipio.departamentoId = x[3];               
+                 this.insert(municipio);
+             });
+ 
+ 
+         };
+         reader.readAsBinaryString(target.files[0]);
+     }
+     initEntityRecords(): void {
+         this.initializing = true;
+         this._municipiosServiceProxy.getAll("", "", "", "", "", 0, 10000)
+             .pipe(finalize(() => { this.initializing = false; this.reloadPage() }))
+             .subscribe(result => {
+                 result.items.forEach((x) => {
+                     this._municipiosServiceProxy.delete(x.municipio.id)
+                         .subscribe(() => {
+                             // this.notify.success(this.l('SuccessfullyDeleted'));
+                         });
+                 })
+             });
+     }
+     insert(municipio: MunicipioDto): void {
+         this.saving = true;
+ 
+         this._municipiosServiceProxy.createOrEdit(municipio)
+             .pipe(finalize(() => { this.saving = false; this.reloadPage(); }))
+             .subscribe(() => {
+                 this.notify.info(this.l('SavedSuccessfully'));
+             });
+     }
+ 
+     addFiles() {
+         this.file.nativeElement.click();
+     }
 }

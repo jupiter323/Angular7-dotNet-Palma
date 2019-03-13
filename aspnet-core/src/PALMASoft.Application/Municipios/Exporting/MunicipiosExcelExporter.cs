@@ -37,14 +37,16 @@ namespace PALMASoft.Municipios.Exporting
                         sheet,
                         L("ID_MUNICIPIO"),
                         L("NOMBRE_MUNICIPIO"),
-                        (L("Departamento")) + L("NOMBRE_DEPARTAMENTO")
+                        (L("Departamento")) + L("NOMBRE_DEPARTAMENTO"),
+                        (L("Departamento")) + ("_ID")
                         );
 
                     AddObjects(
                         sheet, 2, municipios,
                         _ => _.Municipio.ID_MUNICIPIO,
                         _ => _.Municipio.NOMBRE_MUNICIPIO,
-                        _ => _.DepartamentoNOMBRE_DEPARTAMENTO
+                        _ => _.DepartamentoNOMBRE_DEPARTAMENTO,
+                        _ => _.Municipio.DepartamentoId
                         );
 
 					
