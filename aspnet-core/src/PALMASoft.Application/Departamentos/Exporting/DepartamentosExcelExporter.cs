@@ -37,14 +37,16 @@ namespace PALMASoft.Departamentos.Exporting
                         sheet,
                         L("ID_DEPARTAMENTO"),
                         L("NOMBRE_DEPARTAMENTO"),
-                        (L("Pais")) + L("NOMBRE_PAIS")
+                        (L("Pais")) + L("NOMBRE_PAIS"),
+                        (L("Pais")) + ("_ID")
                         );
 
                     AddObjects(
                         sheet, 2, departamentos,
                         _ => _.Departamento.ID_DEPARTAMENTO,
                         _ => _.Departamento.NOMBRE_DEPARTAMENTO,
-                        _ => _.PaisNOMBRE_PAIS
+                        _ => _.PaisNOMBRE_PAIS,
+                        _ => _.Departamento.PaisId
                         );
 
 					

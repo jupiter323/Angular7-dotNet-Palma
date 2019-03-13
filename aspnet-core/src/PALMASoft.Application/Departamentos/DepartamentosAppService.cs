@@ -15,7 +15,7 @@ using PALMASoft.Authorization;
 using Abp.Extensions;
 using Abp.Authorization;
 using Microsoft.EntityFrameworkCore;
-
+using System.Diagnostics;
 namespace PALMASoft.Departamentos
 {
 	[AbpAuthorize(AppPermissions.Pages_Departamentos)]
@@ -138,8 +138,8 @@ namespace PALMASoft.Departamentos
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ID_DEPARTAMENTOFilter),  e => e.ID_DEPARTAMENTO.ToLower() == input.ID_DEPARTAMENTOFilter.ToLower().Trim())
 						.WhereIf(!string.IsNullOrWhiteSpace(input.NOMBRE_DEPARTAMENTOFilter),  e => e.NOMBRE_DEPARTAMENTO.ToLower() == input.NOMBRE_DEPARTAMENTOFilter.ToLower().Trim());
 
-
-			var query = (from o in filteredDepartamentos
+            Debug.WriteLine("input : inputjjj ", filteredDepartamentos);
+            var query = (from o in filteredDepartamentos
                          join o1 in _paisRepository.GetAll() on o.PaisId equals o1.Id into j1
                          from s1 in j1.DefaultIfEmpty()
                          

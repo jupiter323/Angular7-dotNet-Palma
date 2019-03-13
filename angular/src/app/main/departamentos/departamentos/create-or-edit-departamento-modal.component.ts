@@ -57,7 +57,7 @@ export class CreateOrEditDepartamentoModalComponent extends AppComponentBase {
 
     save(): void {
             this.saving = true;
-
+            console.log(this.departamento)
 			
             this._departamentosServiceProxy.createOrEdit(this.departamento)
              .pipe(finalize(() => { this.saving = false;}))

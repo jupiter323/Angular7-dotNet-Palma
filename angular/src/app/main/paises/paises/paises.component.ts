@@ -126,11 +126,12 @@ export class PaisesComponent extends AppComponentBase {
             this._fileDownloadService.downloadTempFile(result);
         });
     }
+    isInitAndInsert = false;
     onFileChange(evt: any) {
         /* wire up file reader */
         const target: DataTransfer = <DataTransfer>(evt.target);
         if (target.files.length !== 1) throw new Error('Cannot use multiple files');
-        this.initPasis();
+        if(this.isInitAndInsert) this.initPasis();
         const reader: FileReader = new FileReader();
         reader.onload = (e: any) => {
             /* read workbook */
