@@ -16,6 +16,7 @@ export class FileImportService {
         return jsonData;
     }
     excelDateValueToMoment(excelData: any) {
+        console.log("type of moment base :",typeof(excelData));
         return moment(this.parseDateExcel(excelData));
 
     }
@@ -32,5 +33,18 @@ export class FileImportService {
         const excelTimestampAsUnixTimestamp = excelTimestamp * secondsInDay * 1000;
         const parsed = excelTimestampAsUnixTimestamp + delta;
         return isNaN(parsed) ? null : parsed;
+    }
+
+    duplicatedMRObjectArray(arr, key) {
+        const unique = arr
+            .map(e => e[key])
+
+            // store the keys of the unique objects
+            .map((e, i, final) => final.indexOf(e) === i && i)
+
+            // eliminate the dead keys & store unique objects
+            .filter(e => arr[e]).map(e => arr[e]);
+
+        return unique;
     }
 }

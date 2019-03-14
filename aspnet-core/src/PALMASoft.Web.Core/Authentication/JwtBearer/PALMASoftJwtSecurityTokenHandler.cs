@@ -6,6 +6,7 @@ using Abp.Dependency;
 using Abp.Domain.Uow;
 using Abp.Runtime.Caching;
 using Abp.Threading;
+using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using PALMASoft.Authorization.Users;
 
@@ -31,8 +32,9 @@ namespace PALMASoft.Web.Authentication.JwtBearer
 
         public ClaimsPrincipal ValidateToken(string securityToken, TokenValidationParameters validationParameters, out SecurityToken validatedToken)
         {
+     
             var cacheManager = IocManager.Instance.Resolve<ICacheManager>();
-
+            
             var principal = _tokenHandler.ValidateToken(securityToken, validationParameters, out validatedToken);
 
             var userIdentifierString = principal.Claims.First(c => c.Type == AppConsts.UserIdentifier);
