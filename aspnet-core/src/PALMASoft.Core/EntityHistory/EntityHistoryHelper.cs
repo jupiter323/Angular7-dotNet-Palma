@@ -1,3 +1,4 @@
+using PALMASoft.Fincas;
 using PALMASoft.Clientes;
 using PALMASoft.Municipios;
 using PALMASoft.Departamentos;

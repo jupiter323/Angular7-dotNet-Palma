@@ -2,6 +2,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppCommonModule } from '@app/shared/common/app-common.module';
+import { FincasComponent } from './fincas/fincas/fincas.component';
+import { ViewFincaModalComponent } from './fincas/fincas/view-finca-modal.component';
+import { CreateOrEditFincaModalComponent } from './fincas/fincas/create-or-edit-finca-modal.component';
+import { ClienteLookupTableModalComponent } from './fincas/fincas/cliente-lookup-table-modal.component';
+
 import { ClientesComponent } from './clientes/clientes/clientes.component';
 import { ViewClienteModalComponent } from './clientes/clientes/view-cliente-modal.component';
 import { CreateOrEditClienteModalComponent } from './clientes/clientes/create-or-edit-cliente-modal.component';
@@ -62,6 +67,9 @@ NgxBootstrapDatePickerConfigService.registerNgxBootstrapDatePickerLocales();
         BsDropdownModule.forRoot()
     ],
     declarations: [
+		FincasComponent,
+		ViewFincaModalComponent,		CreateOrEditFincaModalComponent,
+    ClienteLookupTableModalComponent,
         ClientesComponent,
         ViewClienteModalComponent, CreateOrEditClienteModalComponent,
         MunicipiosComponent,

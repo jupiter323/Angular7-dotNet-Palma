@@ -1190,6 +1190,62 @@ namespace PALMASoft.Migrations
                     b.ToTable("Departamentos");
                 });
 
+            modelBuilder.Entity("PALMASoft.Fincas.Finca", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CONTACTO_FINCA");
+
+                    b.Property<string>("CORREGIMIENTO_FINCA");
+
+                    b.Property<string>("CORREO_FINCA");
+
+                    b.Property<long?>("ClienteId");
+
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<long?>("CreatorUserId");
+
+                    b.Property<string>("DEPARTAMENTO_FINCA");
+
+                    b.Property<long?>("DeleterUserId");
+
+                    b.Property<DateTime?>("DeletionTime");
+
+                    b.Property<string>("ID_FINCA")
+                        .IsRequired()
+                        .HasMaxLength(12);
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("LATITUD_FINCA");
+
+                    b.Property<string>("LONGITUD_FINCA");
+
+                    b.Property<DateTime?>("LastModificationTime");
+
+                    b.Property<long?>("LastModifierUserId");
+
+                    b.Property<string>("MUNICIPIO_FINCA");
+
+                    b.Property<string>("NOMBRE_FINCA")
+                        .HasMaxLength(36);
+
+                    b.Property<string>("TELEFONO_FINCA");
+
+                    b.Property<string>("UBICACION_FINCA");
+
+                    b.Property<string>("VEREDA_FINCA");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClienteId");
+
+                    b.ToTable("Fincas");
+                });
+
             modelBuilder.Entity("PALMASoft.Friendships.Friendship", b =>
                 {
                     b.Property<long>("Id")
@@ -1606,6 +1662,13 @@ namespace PALMASoft.Migrations
                         .WithMany()
                         .HasForeignKey("PaisId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("PALMASoft.Fincas.Finca", b =>
+                {
+                    b.HasOne("PALMASoft.Clientes.Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId");
                 });
 
             modelBuilder.Entity("PALMASoft.MultiTenancy.Payments.SubscriptionPayment", b =>

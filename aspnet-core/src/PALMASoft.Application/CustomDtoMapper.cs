@@ -1,3 +1,5 @@
+using PALMASoft.Fincas.Dtos;
+using PALMASoft.Fincas;
 using PALMASoft.Clientes.Dtos;
 using PALMASoft.Clientes;
 using PALMASoft.Municipios.Dtos;
@@ -48,6 +50,8 @@ namespace PALMASoft
     {
         public static void CreateMappings(IMapperConfigurationExpression configuration)
         {
+           configuration.CreateMap<CreateOrEditFincaDto, Finca>();
+           configuration.CreateMap<Finca, FincaDto>();
            configuration.CreateMap<CreateOrEditClienteDto, Cliente>();
            configuration.CreateMap<Cliente, ClienteDto>();
            configuration.CreateMap<CreateOrEditMunicipioDto, Municipio>();

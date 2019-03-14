@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FincasComponent } from './fincas/fincas/fincas.component';
 import { ClientesComponent } from './clientes/clientes/clientes.component';
 import { MunicipiosComponent } from './municipios/municipios/municipios.component';
 import { DepartamentosComponent } from './departamentos/departamentos/departamentos.component';
@@ -12,6 +13,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
             {
                 path: '',
                 children: [
+                    { path: 'fincas/fincas', component: FincasComponent, data: { permission: 'Pages.Fincas' }  },
                     { path: 'clientes/clientes', component: ClientesComponent, data: { permission: 'Pages.Clientes' }  },
                     { path: 'municipios/municipios', component: MunicipiosComponent, data: { permission: 'Pages.Municipios' }  },
                     { path: 'departamentos/departamentos', component: DepartamentosComponent, data: { permission: 'Pages.Departamentos' }  },

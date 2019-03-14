@@ -1,0 +1,312 @@
+<div [@routerTransition]>
+    <div class="m-subheader">
+        <div class="d-flex align-items-center">
+            <div class="mr-auto col-md-6">
+                <h3 class="m-subheader__title m-subheader__title--separator">
+                    <span>{{l("Fincas")}}</span>
+                </h3>
+                <span class="m-section__sub">
+                    {{l("FincasHeaderInfo")}}
+                </span>
+            </div>
+            <div class="col-md-6 text-right">
+				<button (click)="exportToExcel()" class="btn btn-outline-success"><i class="fa fa-file-excel"></i> {{l("ExportToExcel")}}</button>
+                <button *ngIf="isGranted('Pages.Fincas.Create')" (click)="createFinca()" 
+			class="btn btn-primary blue"><i class="fa fa-plus"></i> {{l("CreateNewFinca")}}</button>
+            </div>
+        </div>
+    </div>
+    <div class="m-content">
+        <div class="m-portlet m-portlet--mobile">
+            <div class="m-portlet__body">
+
+				<form class="horizontal-form" autocomplete="off">
+                    <div class="m-form m-form--label-align-right">
+                        <div class="row align-items-center m--margin-bottom-10">
+                            <div class="col-xl-12">
+                                <div class="form-group m-form__group align-items-center">
+                                    <div class="input-group">
+                                        <input [(ngModel)]="filterText" name="filterText" autoFocus class="form-control m-input" [placeholder]="l('SearchWithThreeDot')" type="text">
+                                        <span class="input-group-btn">
+                                            <button (click)="getFincas()" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						 <div class="row m--margin-bottom-10" [hidden]="!advancedFiltersAreShown">
+						 	<div class="col-md-12">
+						         <div class="m-separator m-separator--dashed"></div>
+						     </div>
+
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="ID_FINCAFilter">{{l("ID_FINCA")}}</label>
+									<input type="text" class="form-control" id="ID_FINCAFilter" name="iD_FINCAFilter" [(ngModel)]="iD_FINCAFilter">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="NOMBRE_FINCAFilter">{{l("NOMBRE_FINCA")}}</label>
+									<input type="text" class="form-control" id="NOMBRE_FINCAFilter" name="nombrE_FINCAFilter" [(ngModel)]="nombrE_FINCAFilter">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="DEPARTAMENTO_FINCAFilter">{{l("DEPARTAMENTO_FINCA")}}</label>
+									<input type="text" class="form-control" id="DEPARTAMENTO_FINCAFilter" name="departamentO_FINCAFilter" [(ngModel)]="departamentO_FINCAFilter">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="MUNICIPIO_FINCAFilter">{{l("MUNICIPIO_FINCA")}}</label>
+									<input type="text" class="form-control" id="MUNICIPIO_FINCAFilter" name="municipiO_FINCAFilter" [(ngModel)]="municipiO_FINCAFilter">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="VEREDA_FINCAFilter">{{l("VEREDA_FINCA")}}</label>
+									<input type="text" class="form-control" id="VEREDA_FINCAFilter" name="veredA_FINCAFilter" [(ngModel)]="veredA_FINCAFilter">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="CORREGIMIENTO_FINCAFilter">{{l("CORREGIMIENTO_FINCA")}}</label>
+									<input type="text" class="form-control" id="CORREGIMIENTO_FINCAFilter" name="corregimientO_FINCAFilter" [(ngModel)]="corregimientO_FINCAFilter">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="UBICACION_FINCAFilter">{{l("UBICACION_FINCA")}}</label>
+									<input type="text" class="form-control" id="UBICACION_FINCAFilter" name="ubicacioN_FINCAFilter" [(ngModel)]="ubicacioN_FINCAFilter">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="LONGITUD_FINCAFilter">{{l("LONGITUD_FINCA")}}</label>
+									<input type="text" class="form-control" id="LONGITUD_FINCAFilter" name="longituD_FINCAFilter" [(ngModel)]="longituD_FINCAFilter">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="LATITUD_FINCAFilter">{{l("LATITUD_FINCA")}}</label>
+									<input type="text" class="form-control" id="LATITUD_FINCAFilter" name="latituD_FINCAFilter" [(ngModel)]="latituD_FINCAFilter">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="CONTACTO_FINCAFilter">{{l("CONTACTO_FINCA")}}</label>
+									<input type="text" class="form-control" id="CONTACTO_FINCAFilter" name="contactO_FINCAFilter" [(ngModel)]="contactO_FINCAFilter">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="TELEFONO_FINCAFilter">{{l("TELEFONO_FINCA")}}</label>
+									<input type="text" class="form-control" id="TELEFONO_FINCAFilter" name="telefonO_FINCAFilter" [(ngModel)]="telefonO_FINCAFilter">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="CORREO_FINCAFilter">{{l("CORREO_FINCA")}}</label>
+									<input type="text" class="form-control" id="CORREO_FINCAFilter" name="correO_FINCAFilter" [(ngModel)]="correO_FINCAFilter">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="ClienteNOMBRE_CLIENTEFilter">({{l("Cliente")}}) {{l("NOMBRE_CLIENTE")}}</label>
+									<input type="text" class="form-control" id="ClienteNOMBRE_CLIENTEFilter" name="clienteNOMBRE_CLIENTEFilter" [(ngModel)]="clienteNOMBRE_CLIENTEFilter">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row margin-bottom-10">
+                            <div class="col-sm-12">
+                                <span class="clickable-item text-muted" *ngIf="!advancedFiltersAreShown" (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i class="fa fa-angle-down"></i> {{l("ShowAdvancedFilters")}}</span>
+                                <span class="clickable-item text-muted" *ngIf="advancedFiltersAreShown" (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i class="fa fa-angle-up"></i> {{l("HideAdvancedFilters")}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="row align-items-center">
+                    <!--<Primeng-Datatable-Start>-->
+                    <div class="primeng-datatable-container"
+                         [busyIf]="primengTableHelper.isLoading">
+                        <p-table #dataTable
+                                     (onLazyLoad)="getFincas($event)"
+                                     [value]="primengTableHelper.records"
+                                     rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
+                                     [paginator]="false"
+                                     [lazy]="true"
+                                     [scrollable]="true"
+                                     ScrollWidth="100%"
+                                     [responsive]="primengTableHelper.isResponsive"
+                                     [resizableColumns]="primengTableHelper.resizableColumns">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="width: 130px" [hidden]="!isGrantedAny('Pages.Fincas.Edit', 'Pages.Fincas.Delete')">{{l('Actions')}}</th>
+                                    <th style="width: 150px" pSortableColumn="clienteNOMBRE_CLIENTE">
+                                        {{l('NOMBRE_CLIENTE')}}
+                                        <p-sortIcon field="clienteNOMBRE_CLIENTE"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="finca.iD_FINCA">
+                                        {{l('ID_FINCA')}}
+                                        <p-sortIcon field="finca.iD_FINCA"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="finca.nombrE_FINCA">
+                                        {{l('NOMBRE_FINCA')}}
+                                        <p-sortIcon field="finca.nombrE_FINCA"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="finca.departamentO_FINCA">
+                                        {{l('DEPARTAMENTO_FINCA')}}
+                                        <p-sortIcon field="finca.departamentO_FINCA"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="finca.municipiO_FINCA">
+                                        {{l('MUNICIPIO_FINCA')}}
+                                        <p-sortIcon field="finca.municipiO_FINCA"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="finca.veredA_FINCA">
+                                        {{l('VEREDA_FINCA')}}
+                                        <p-sortIcon field="finca.veredA_FINCA"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="finca.corregimientO_FINCA">
+                                        {{l('CORREGIMIENTO_FINCA')}}
+                                        <p-sortIcon field="finca.corregimientO_FINCA"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="finca.ubicacioN_FINCA">
+                                        {{l('UBICACION_FINCA')}}
+                                        <p-sortIcon field="finca.ubicacioN_FINCA"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="finca.longituD_FINCA">
+                                        {{l('LONGITUD_FINCA')}}
+                                        <p-sortIcon field="finca.longituD_FINCA"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="finca.latituD_FINCA">
+                                        {{l('LATITUD_FINCA')}}
+                                        <p-sortIcon field="finca.latituD_FINCA"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="finca.contactO_FINCA">
+                                        {{l('CONTACTO_FINCA')}}
+                                        <p-sortIcon field="finca.contactO_FINCA"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="finca.telefonO_FINCA">
+                                        {{l('TELEFONO_FINCA')}}
+                                        <p-sortIcon field="finca.telefonO_FINCA"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="finca.correO_FINCA">
+                                        {{l('CORREO_FINCA')}}
+                                        <p-sortIcon field="finca.correO_FINCA"></p-sortIcon>
+                                    </th>
+
+                                </tr>
+                            </ng-template>                           
+							<ng-template pTemplate="body" let-record="$implicit">
+                                <tr>
+                                    <td style="width: 130px"
+                                        [hidden]="!isGrantedAny('Pages.Fincas.Edit', 'Pages.Fincas.Delete')">
+                                       <div class="btn-group dropdown" dropdown container="body">
+                                            <button class="dropdown-toggle btn btn-sm btn-primary" dropdownToggle>
+                                                <i class="fa fa-cog"></i><span class="caret"></span> {{l("Actions")}}
+                                            </button>
+												<ul class="dropdown-menu"  *dropdownMenu>
+												<li>
+													<a href="javascript:;"
+														(click)="viewFincaModal.show(record)">{{l('View')}}</a>
+												</li>
+												<li>
+													<a href="javascript:;" *ngIf="permission.isGranted('Pages.Fincas.Edit')"
+														(click)="createOrEditFincaModal.show(record.finca.id)">{{l('Edit')}}</a>
+												</li>
+												<li>
+											        <a href="javascript:;" *ngIf="permission.isGranted('Pages.Fincas.Delete')"
+														(click)="deleteFinca(record.finca)">{{l('Delete')}}</a>
+												</li>
+                                                <li>
+                                                    <a href="javascript:;" *ngIf="entityHistoryEnabled"
+                                                       (click)="showHistory(record.finca)">{{l('History')}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td style="width:150px">
+												<span class="ui-column-title"> {{l('NOMBRE_CLIENTE')}}</span>
+												{{record.clienteNOMBRE_CLIENTE}}
+											</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('ID_FINCA')}}</span>
+											{{record.finca.iD_FINCA}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('NOMBRE_FINCA')}}</span>
+											{{record.finca.nombrE_FINCA}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('DEPARTAMENTO_FINCA')}}</span>
+											{{record.finca.departamentO_FINCA}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('MUNICIPIO_FINCA')}}</span>
+											{{record.finca.municipiO_FINCA}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('VEREDA_FINCA')}}</span>
+											{{record.finca.veredA_FINCA}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('CORREGIMIENTO_FINCA')}}</span>
+											{{record.finca.corregimientO_FINCA}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('UBICACION_FINCA')}}</span>
+											{{record.finca.ubicacioN_FINCA}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('LONGITUD_FINCA')}}</span>
+											{{record.finca.longituD_FINCA}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('LATITUD_FINCA')}}</span>
+											{{record.finca.latituD_FINCA}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('CONTACTO_FINCA')}}</span>
+											{{record.finca.contactO_FINCA}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('TELEFONO_FINCA')}}</span>
+											{{record.finca.telefonO_FINCA}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('CORREO_FINCA')}}</span>
+											{{record.finca.correO_FINCA}}
+										</td>
+
+                                </tr>
+                            </ng-template>
+                        </p-table>
+						<div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+                            {{l('NoData')}}
+                        </div>
+                        <div class="primeng-paging-container">
+                            <p-paginator rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
+                                         #paginator
+                                         (onPageChange)="getFincas($event)"
+                                         [totalRecords]="primengTableHelper.totalRecordsCount"
+                                         [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage">
+                            </p-paginator>
+                            <span class="total-records-count">
+                                {{l('TotalRecordsCount', primengTableHelper.totalRecordsCount)}}
+                            </span>
+                        </div>
+                    </div>
+                    <!--<Primeng-Datatable-End>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <createOrEditFincaModal #createOrEditFincaModal (modalSave)="getFincas()"></createOrEditFincaModal>
+    <viewFincaModal #viewFincaModal></viewFincaModal>
+     <entityTypeHistoryModal #entityTypeHistoryModal></entityTypeHistoryModal>
+</div>
