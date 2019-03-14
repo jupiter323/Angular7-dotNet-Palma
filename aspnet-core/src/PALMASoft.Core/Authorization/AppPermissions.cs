@@ -6,6 +6,11 @@ namespace PALMASoft.Authorization
     /// </summary>
     public static class AppPermissions
     {
+        public const string Pages_Fincas = "Pages.Fincas";
+        public const string Pages_Fincas_Create = "Pages.Fincas.Create";
+        public const string Pages_Fincas_Edit = "Pages.Fincas.Edit";
+        public const string Pages_Fincas_Delete = "Pages.Fincas.Delete";
+
         public const string Pages_Clientes = "Pages.Clientes";
         public const string Pages_Clientes_Create = "Pages.Clientes.Create";
         public const string Pages_Clientes_Edit = "Pages.Clientes.Edit";

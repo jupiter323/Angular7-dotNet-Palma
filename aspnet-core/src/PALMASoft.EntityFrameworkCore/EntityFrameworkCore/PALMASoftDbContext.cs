@@ -1,3 +1,4 @@
+using PALMASoft.Fincas;
 using PALMASoft.Clientes;
 using PALMASoft.Municipios;
 using PALMASoft.Departamentos;
@@ -19,6 +20,8 @@ namespace PALMASoft.EntityFrameworkCore
 {
     public class PALMASoftDbContext : AbpZeroDbContext<Tenant, Role, User, PALMASoftDbContext>, IAbpPersistedGrantDbContext
     {
+        public virtual DbSet<Finca> Fincas { get; set; }
+
         public virtual DbSet<Cliente> Clientes { get; set; }
 
         public virtual DbSet<Municipio> Municipios { get; set; }

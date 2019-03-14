@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
-  <texts>
+  <texts>    <text name="Fincas">Fincas</text>
+    <text name="Finca">Finca</text>
+    <text name="ID_FINCA">I d _ f i n c a</text>
+    <text name="NOMBRE_FINCA">N o m b r e _ f i n c a</text>
+    <text name="DEPARTAMENTO_FINCA">D e p a r t a m e n t o _ f i n c a</text>
+    <text name="MUNICIPIO_FINCA">M u n i c i p i o _ f i n c a</text>
+    <text name="VEREDA_FINCA">V e r e d a _ f i n c a</text>
+    <text name="CORREGIMIENTO_FINCA">C o r r e g i m i e n t o _ f i n c a</text>
+    <text name="UBICACION_FINCA">U b i c a c i o n _ f i n c a</text>
+    <text name="LONGITUD_FINCA">L o n g i t u d _ f i n c a</text>
+    <text name="LATITUD_FINCA">L a t i t u d _ f i n c a</text>
+    <text name="CONTACTO_FINCA">C o n t a c t o _ f i n c a</text>
+    <text name="TELEFONO_FINCA">T e l e f o n o _ f i n c a</text>
+    <text name="CORREO_FINCA">C o r r e o _ f i n c a</text>
+    <text name="FincasHeaderInfo">Fincas header info</text>
+    <text name="CreateNewFinca">Create new finca</text>
+    <text name="EditFinca">Edit finca</text>
+    <text name="DeleteFinca">Delete finca</text>
+    <text name="ClienteNOMBRE_CLIENTE">Cliente n o m b r e _ c l i e n t e</text>
+    <text name="PickCliente">Pick cliente</text>
+
     <text name="Clientes">Clientes</text>
     <text name="Cliente">Cliente</text>
     <text name="ID_CLIENTE">I d _ c l i e n t e</text>

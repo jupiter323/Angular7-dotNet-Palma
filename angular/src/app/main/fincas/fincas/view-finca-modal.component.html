@@ -1,0 +1,78 @@
+<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>{{l("")}}</span>
+                </h4>
+                <button type="button" class="close" (click)="close()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <h6>{{l("ID_FINCA")}} :</h6>
+                        {{item.finca.iD_FINCA}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("NOMBRE_FINCA")}} :</h6>
+                        {{item.finca.nombrE_FINCA}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("DEPARTAMENTO_FINCA")}} :</h6>
+                        {{item.finca.departamentO_FINCA}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("MUNICIPIO_FINCA")}} :</h6>
+                        {{item.finca.municipiO_FINCA}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("VEREDA_FINCA")}} :</h6>
+                        {{item.finca.veredA_FINCA}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("CORREGIMIENTO_FINCA")}} :</h6>
+                        {{item.finca.corregimientO_FINCA}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("UBICACION_FINCA")}} :</h6>
+                        {{item.finca.ubicacioN_FINCA}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("LONGITUD_FINCA")}} :</h6>
+                        {{item.finca.longituD_FINCA}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("LATITUD_FINCA")}} :</h6>
+                        {{item.finca.latituD_FINCA}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("CONTACTO_FINCA")}} :</h6>
+                        {{item.finca.contactO_FINCA}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("TELEFONO_FINCA")}} :</h6>
+                        {{item.finca.telefonO_FINCA}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("CORREO_FINCA")}} :</h6>
+                        {{item.finca.correO_FINCA}}
+                    </div>
+
+                    <div class="col-6 mb-3">
+                        <h6>({{l("Cliente")}}) {{l("NOMBRE_CLIENTE")}} :</h6>
+                        {{item.clienteNOMBRE_CLIENTE}}
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="saving" type="button" class="btn btn-primary blue" (click)="close()">{{l("Close")}}</button>
+            </div>
+        </div>
+    </div>
+
+</div>

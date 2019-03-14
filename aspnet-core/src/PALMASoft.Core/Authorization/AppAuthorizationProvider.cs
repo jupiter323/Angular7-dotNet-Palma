@@ -30,6 +30,13 @@ namespace PALMASoft.Authorization
 
             var pages = context.GetPermissionOrNull(AppPermissions.Pages) ?? context.CreatePermission(AppPermissions.Pages, L("Pages"));
 
+            var fincas = pages.CreateChildPermission(AppPermissions.Pages_Fincas, L("Fincas"));
+            fincas.CreateChildPermission(AppPermissions.Pages_Fincas_Create, L("CreateNewFinca"));
+            fincas.CreateChildPermission(AppPermissions.Pages_Fincas_Edit, L("EditFinca"));
+            fincas.CreateChildPermission(AppPermissions.Pages_Fincas_Delete, L("DeleteFinca"));
+
+
+
             var clientes = pages.CreateChildPermission(AppPermissions.Pages_Clientes, L("Clientes"));
             clientes.CreateChildPermission(AppPermissions.Pages_Clientes_Create, L("CreateNewCliente"));
             clientes.CreateChildPermission(AppPermissions.Pages_Clientes_Edit, L("EditCliente"));
