@@ -132,3 +132,4 @@ src/PALMASoft.Web.Public/wwwroot/view-resources/Views/_Bundles
 src/PALMASoft.Web.Public/wwwroot/view-resources/**/*.min.*
 src/PALMASoft.Web.Public/wwwroot/Common/**/*.min.*
 src/PALMASoft.Web.Public/node_modules
+src/PALMASoft.Web.Host/appsettings.json
