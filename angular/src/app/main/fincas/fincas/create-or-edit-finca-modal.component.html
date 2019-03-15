@@ -1,102 +1,126 @@
-<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <form *ngIf="active" #fincaForm="ngForm" novalidate (ngSubmit)="save()" autocomplete="off">
-                <div class="modal-header">
-                    <h4 class="modal-title">
-                        <span *ngIf="finca.id">{{l("EditFinca")}}</span>
-                        <span *ngIf="!finca.id">{{l("CreateNewFinca")}}</span>
-                    </h4>
-                    <button type="button" class="close" (click)="close()" aria-label="Close" [disabled]="saving">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                 
+<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+	aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<form *ngIf="active" #fincaForm="ngForm" novalidate (ngSubmit)="save()" autocomplete="off">
+				<div class="modal-header">
+					<h4 class="modal-title">
+						<span *ngIf="finca.id">{{l("EditFinca")}}</span>
+						<span *ngIf="!finca.id">{{l("CreateNewFinca")}}</span>
+					</h4>
+					<button type="button" class="close" (click)="close()" aria-label="Close" [disabled]="saving">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
 
 					<div class="form-group m-form__group">
-                        <label for="ClienteNOMBRE_CLIENTE">{{l("Cliente")}}</label>
-                        <div class="input-group">
-                            <input class="form-control" id="ClienteNOMBRE_CLIENTE" name="clienteNOMBRE_CLIENTE" [(ngModel)]="clienteNOMBRE_CLIENTE" type="text" disabled>     
-                            <div class="input-group-append">
-                                <button class="btn btn-primary blue" (click)="openSelectClienteModal()" type="button"><i class="fa fa-search"></i> {{l("Pick")}}</button>
-                            </div> <div class="input-group-prepend">
-                                <button class="btn btn-danger" type="button" (click)="setClienteIdNull()"><i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <input class="form-control" name="finca.clienteId" [(ngModel)]="finca.clienteId" type="text"  hidden>
-		 
+						<label for="ClienteNOMBRE_CLIENTE">{{l("Cliente")}}</label>
+						<div class="input-group">
+							<input class="form-control" id="ClienteNOMBRE_CLIENTE" name="clienteNOMBRE_CLIENTE"
+								[(ngModel)]="clienteNOMBRE_CLIENTE" type="text" disabled>
+							<div class="input-group-append">
+								<button class="btn btn-primary blue" (click)="openSelectClienteModal()" type="button"><i
+										class="fa fa-search"></i> {{l("Pick")}}</button>
+							</div>
+							<div class="input-group-prepend">
+								<button class="btn btn-danger" type="button" (click)="setClienteIdNull()"><i
+										class="fa fa-times"></i></button>
+							</div>
+						</div>
+					</div>
+					<input class="form-control" name="finca.clienteId" [(ngModel)]="finca.clienteId" type="text" hidden>
 
-								<div class="form-group">
-									<label for="Finca_ID_FINCA">{{l("ID_FINCA")}} *</label>
-									<input type="text" id="Finca_ID_FINCA" class="form-control" [(ngModel)]="finca.iD_FINCA" name="ID_FINCA"   minlength="2"  maxlength="12"  required/>
-								</div>
-					
-								<div class="form-group">
-									<label for="Finca_NOMBRE_FINCA">{{l("NOMBRE_FINCA")}}</label>
-									<input type="text" id="Finca_NOMBRE_FINCA" class="form-control" [(ngModel)]="finca.nombrE_FINCA" name="NOMBRE_FINCA"   minlength="4"  maxlength="36" />
-								</div>
-					
-								<div class="form-group">
-									<label for="Finca_DEPARTAMENTO_FINCA">{{l("DEPARTAMENTO_FINCA")}}</label>
-									<input type="text" id="Finca_DEPARTAMENTO_FINCA" class="form-control" [(ngModel)]="finca.departamentO_FINCA" name="DEPARTAMENTO_FINCA"    />
-								</div>
-					
-								<div class="form-group">
-									<label for="Finca_MUNICIPIO_FINCA">{{l("MUNICIPIO_FINCA")}}</label>
-									<input type="text" id="Finca_MUNICIPIO_FINCA" class="form-control" [(ngModel)]="finca.municipiO_FINCA" name="MUNICIPIO_FINCA"    />
-								</div>
-					
-								<div class="form-group">
-									<label for="Finca_VEREDA_FINCA">{{l("VEREDA_FINCA")}}</label>
-									<input type="text" id="Finca_VEREDA_FINCA" class="form-control" [(ngModel)]="finca.veredA_FINCA" name="VEREDA_FINCA"    />
-								</div>
-					
-								<div class="form-group">
-									<label for="Finca_CORREGIMIENTO_FINCA">{{l("CORREGIMIENTO_FINCA")}}</label>
-									<input type="text" id="Finca_CORREGIMIENTO_FINCA" class="form-control" [(ngModel)]="finca.corregimientO_FINCA" name="CORREGIMIENTO_FINCA"    />
-								</div>
-					
-								<div class="form-group">
-									<label for="Finca_UBICACION_FINCA">{{l("UBICACION_FINCA")}}</label>
-									<input type="text" id="Finca_UBICACION_FINCA" class="form-control" [(ngModel)]="finca.ubicacioN_FINCA" name="UBICACION_FINCA"    />
-								</div>
-					
-								<div class="form-group">
-									<label for="Finca_LONGITUD_FINCA">{{l("LONGITUD_FINCA")}}</label>
-									<input type="text" id="Finca_LONGITUD_FINCA" class="form-control" [(ngModel)]="finca.longituD_FINCA" name="LONGITUD_FINCA"    />
-								</div>
-					
-								<div class="form-group">
-									<label for="Finca_LATITUD_FINCA">{{l("LATITUD_FINCA")}}</label>
-									<input type="text" id="Finca_LATITUD_FINCA" class="form-control" [(ngModel)]="finca.latituD_FINCA" name="LATITUD_FINCA"    />
-								</div>
-					
-								<div class="form-group">
-									<label for="Finca_CONTACTO_FINCA">{{l("CONTACTO_FINCA")}}</label>
-									<input type="text" id="Finca_CONTACTO_FINCA" class="form-control" [(ngModel)]="finca.contactO_FINCA" name="CONTACTO_FINCA"    />
-								</div>
-					
-								<div class="form-group">
-									<label for="Finca_TELEFONO_FINCA">{{l("TELEFONO_FINCA")}}</label>
-									<input type="text" id="Finca_TELEFONO_FINCA" class="form-control" [(ngModel)]="finca.telefonO_FINCA" name="TELEFONO_FINCA"    />
-								</div>
-					
-								<div class="form-group">
-									<label for="Finca_CORREO_FINCA">{{l("CORREO_FINCA")}}</label>
-									<input type="text" id="Finca_CORREO_FINCA" class="form-control" [(ngModel)]="finca.correO_FINCA" name="CORREO_FINCA"    />
-								</div>
-					
 
-                </div>
-                <div class="modal-footer">
-                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{l("Cancel")}}</button>
-                    <button type="submit" class="btn btn-primary blue" [disabled]="!fincaForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{l("Save")}}</span></button>
-                </div>
-            </form>
-        </div>
-    </div>
-<clienteLookupTableModal #clienteLookupTableModal (modalSave)="getNewClienteId()"></clienteLookupTableModal>
-		 
+					<div class="form-group">
+						<label for="Finca_ID_FINCA">{{l("ID_FINCA")}} *</label>
+						<input type="text" id="Finca_ID_FINCA" class="form-control" [(ngModel)]="finca.iD_FINCA"
+							name="ID_FINCA" minlength="2" maxlength="12" required />
+					</div>
+
+					<div class="form-group">
+						<label for="Finca_NOMBRE_FINCA">{{l("NOMBRE_FINCA")}}</label>
+						<input type="text" id="Finca_NOMBRE_FINCA" class="form-control" [(ngModel)]="finca.nombrE_FINCA"
+							name="NOMBRE_FINCA" minlength="4" maxlength="36" />
+
+					</div>
+
+					<div class="form-group">
+						<label for="Finca_DEPARTAMENTO_FINCA">{{l("DEPARTAMENTO_FINCA")}}</label>
+				
+						<departamento-combo name="DEPARTAMENTO_FINCA" [(ngModel)]="finca.departamentO_FINCA">
+						</departamento-combo>
+					</div>
+
+					<div class="form-group">
+						<label for="Finca_MUNICIPIO_FINCA">{{l("MUNICIPIO_FINCA")}}</label>
+					
+						<municipio-combo [departmentId]="finca.departamentO_FINCA" name="MUNICIPIO_FINCA"
+							[(ngModel)]="finca.municipiO_FINCA">
+						</municipio-combo>
+					</div>
+
+					<div class="form-group">
+						<label for="Finca_VEREDA_FINCA">{{l("VEREDA_FINCA")}}</label>
+						<input type="text" id="Finca_VEREDA_FINCA" class="form-control" [(ngModel)]="finca.veredA_FINCA"
+							name="VEREDA_FINCA" />
+					</div>
+
+					<div class="form-group">
+						<label for="Finca_CORREGIMIENTO_FINCA">{{l("CORREGIMIENTO_FINCA")}}</label>
+						<input type="text" id="Finca_CORREGIMIENTO_FINCA" class="form-control"
+							[(ngModel)]="finca.corregimientO_FINCA" name="CORREGIMIENTO_FINCA" />
+					</div>
+
+					<div class="form-group">
+						<label for="Finca_UBICACION_FINCA">{{l("UBICACION_FINCA")}}</label>
+						<input type="text" id="Finca_UBICACION_FINCA" class="form-control"
+							[(ngModel)]="finca.ubicacioN_FINCA" name="UBICACION_FINCA" />
+					</div>
+
+					<div class="form-group">
+						<label for="Finca_LONGITUD_FINCA">{{l("LONGITUD_FINCA")}}</label>
+						<input type="text" id="Finca_LONGITUD_FINCA" class="form-control"
+							[(ngModel)]="finca.longituD_FINCA" name="LONGITUD_FINCA" />
+					</div>
+
+					<div class="form-group">
+						<label for="Finca_LATITUD_FINCA">{{l("LATITUD_FINCA")}}</label>
+						<input type="text" id="Finca_LATITUD_FINCA" class="form-control"
+							[(ngModel)]="finca.latituD_FINCA" name="LATITUD_FINCA" />
+					</div>
+
+					<div class="form-group">
+						<label for="Finca_CONTACTO_FINCA">{{l("CONTACTO_FINCA")}}</label>
+						<input type="text" id="Finca_CONTACTO_FINCA" class="form-control"
+							[(ngModel)]="finca.contactO_FINCA" name="CONTACTO_FINCA" />
+					</div>
+
+					<div class="form-group">
+						<label for="Finca_TELEFONO_FINCA">{{l("TELEFONO_FINCA")}}</label>
+						<input type="text" id="Finca_TELEFONO_FINCA" class="form-control"
+							[(ngModel)]="finca.telefonO_FINCA" name="TELEFONO_FINCA" />
+					</div>
+
+					<div class="form-group">
+						<label for="Finca_CORREO_FINCA">{{l("CORREO_FINCA")}}</label>
+						<input type="text" id="Finca_CORREO_FINCA" class="form-control" [(ngModel)]="finca.correO_FINCA"
+							name="CORREO_FINCA" />
+					</div>
+
+
+				</div>
+				<div class="modal-footer">
+					<button [disabled]="saving" type="button" class="btn btn-default"
+						(click)="close()">{{l("Cancel")}}</button>
+					<button type="submit" class="btn btn-primary blue" [disabled]="!fincaForm.form.valid"
+						[buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i>
+						<span>{{l("Save")}}</span></button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<clienteLookupTableModal #clienteLookupTableModal (modalSave)="getNewClienteId()"></clienteLookupTableModal>
+
 </div>

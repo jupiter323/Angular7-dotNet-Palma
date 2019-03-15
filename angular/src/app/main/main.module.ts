@@ -67,9 +67,9 @@ NgxBootstrapDatePickerConfigService.registerNgxBootstrapDatePickerLocales();
         BsDropdownModule.forRoot()
     ],
     declarations: [
-		FincasComponent,
-		ViewFincaModalComponent,		CreateOrEditFincaModalComponent,
-    ClienteLookupTableModalComponent,
+        FincasComponent,
+        ViewFincaModalComponent, CreateOrEditFincaModalComponent,
+        ClienteLookupTableModalComponent,
         ClientesComponent,
         ViewClienteModalComponent, CreateOrEditClienteModalComponent,
         MunicipiosComponent,
