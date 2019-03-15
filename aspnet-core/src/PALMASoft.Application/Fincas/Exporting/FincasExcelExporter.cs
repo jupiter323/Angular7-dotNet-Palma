@@ -47,7 +47,8 @@ namespace PALMASoft.Fincas.Exporting
                         L("CONTACTO_FINCA"),
                         L("TELEFONO_FINCA"),
                         L("CORREO_FINCA"),
-                        (L("Cliente")) + L("NOMBRE_CLIENTE")
+                        (L("Cliente")) + L("NOMBRE_CLIENTE"),
+                        (L("Cliente")) + ("_ID")
                         );
 
                     AddObjects(
@@ -64,7 +65,9 @@ namespace PALMASoft.Fincas.Exporting
                         _ => _.Finca.CONTACTO_FINCA,
                         _ => _.Finca.TELEFONO_FINCA,
                         _ => _.Finca.CORREO_FINCA,
-                        _ => _.ClienteNOMBRE_CLIENTE
+                        _ => _.ClienteNOMBRE_CLIENTE,
+                        _ => _.Finca.ClienteId
+
                         );
 
 					

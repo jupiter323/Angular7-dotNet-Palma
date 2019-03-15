@@ -137,7 +137,7 @@ export class MunicipiosComponent extends AppComponentBase {
      onFileChange(evt: any) {
          /* wire up file reader */
          const target: DataTransfer = <DataTransfer>(evt.target);
-         if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+         if (target.files.length !== 1) return new Error('Cannot use multiple files');
          if (this.isInitAndInsert) this.initEntityRecords();
          const reader: FileReader = new FileReader();
          reader.onload = (e: any) => {
@@ -169,7 +169,7 @@ export class MunicipiosComponent extends AppComponentBase {
      }
      initEntityRecords(): void {
          this.initializing = true;
-         this._municipiosServiceProxy.getAll("", "", "", "", "", 0, 10000)
+         this._municipiosServiceProxy.getAll("", "", "", "", "", undefined,undefined)
              .pipe(finalize(() => { this.initializing = false; this.reloadPage() }))
              .subscribe(result => {
                  result.items.forEach((x) => {

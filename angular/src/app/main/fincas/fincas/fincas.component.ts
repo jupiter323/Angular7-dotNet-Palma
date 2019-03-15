@@ -1,7 +1,7 @@
 import { Component, Injector, ViewEncapsulation, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Http } from '@angular/http';
-import { FincasServiceProxy, FincaDto  } from '@shared/service-proxies/service-proxies';
+import { FincasServiceProxy, FincaDto, CreateOrEditFincaDto } from '@shared/service-proxies/service-proxies';
 import { NotifyService } from '@abp/notify/notify.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { TokenAuthServiceProxy } from '@shared/service-proxies/service-proxies';
@@ -15,6 +15,9 @@ import { FileDownloadService } from '@shared/utils/file-download.service';
 import { EntityTypeHistoryModalComponent } from '@app/shared/common/entityHistory/entity-type-history-modal.component';
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import * as XLSX from 'xlsx';
+import { finalize } from 'rxjs/operators';
+import { FileImportService } from '@shared/utils/file-import.service';
 
 @Component({
     templateUrl: './fincas.component.html',
@@ -43,7 +46,7 @@ export class FincasComponent extends AppComponentBase {
     contactO_FINCAFilter = '';
     telefonO_FINCAFilter = '';
     correO_FINCAFilter = '';
-        clienteNOMBRE_CLIENTEFilter = '';
+    clienteNOMBRE_CLIENTEFilter = '';
 
 
     _entityTypeFullName = 'PALMASoft.Fincas.Finca';
@@ -55,7 +58,8 @@ export class FincasComponent extends AppComponentBase {
         private _notifyService: NotifyService,
         private _tokenAuth: TokenAuthServiceProxy,
         private _activatedRoute: ActivatedRoute,
-        private _fileDownloadService: FileDownloadService
+        private _fileDownloadService: FileDownloadService,
+        private _fileImportService: FileImportService,
     ) {
         super(injector);
     }
@@ -135,7 +139,7 @@ export class FincasComponent extends AppComponentBase {
 
     exportToExcel(): void {
         this._fincasServiceProxy.getFincasToExcel(
-        this.filterText,
+            this.filterText,
             this.iD_FINCAFilter,
             this.nombrE_FINCAFilter,
             this.departamentO_FINCAFilter,
@@ -150,8 +154,106 @@ export class FincasComponent extends AppComponentBase {
             this.correO_FINCAFilter,
             this.clienteNOMBRE_CLIENTEFilter,
         )
-        .subscribe(result => {
-            this._fileDownloadService.downloadTempFile(result);
-         });
+            .subscribe(result => {
+                this._fileDownloadService.downloadTempFile(result);
+            });
+    }
+    // //
+
+    @ViewChild('file') file;
+    initializing
+    saving
+    isInitAndInsert = false;
+    getting
+    onFileChange(evt: any) {
+        /* wire up file reader */
+        const target: DataTransfer = <DataTransfer>(evt.target);
+        if (target.files.length !== 1) return new Error('Cannot use multiple files');
+        if (this.isInitAndInsert) this.initEntityRecords();
+
+        const reader: FileReader = new FileReader();
+        reader.onload = (e: any) => {
+            /* read workbook */
+            const bstr: string = e.target.result;
+            const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
+
+            /* grab first sheet */
+            const wsname: string = wb.SheetNames[0];
+            const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+            /* save data */
+            let data = (XLSX.utils.sheet_to_json(ws, { header: 1 }));
+            let sendJsonData = this._fileImportService.parseJsonFromArray(data);
+            console.log(sendJsonData.values);
+            // this._paisesServiceProxy.importcsv(sendJsonData).subscribe(result => {
+            //     console.log(result);
+            // });
+
+
+            this._fincasServiceProxy.getAll(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)
+                .pipe(finalize(() => { this.initializing = false; this.reloadPage() }))
+                .subscribe(result => {
+                    console.log("fincas :",result)
+
+                    let resultMap = result.items.map((x) => {
+                        return [x.finca.iD_FINCA]
+                    });
+                    let sendValues = this._fileImportService.duplicatedMRObjectArray([...resultMap, ...sendJsonData.values], 0);
+                    console.log("send values :", sendValues)
+                    sendValues = sendValues.slice(resultMap.length, sendValues.length);
+                    console.log("send values :", sendValues, [...resultMap, ...sendJsonData.values])
+
+                    sendValues.forEach((x, i) => {//insert new list
+                        var finca: CreateOrEditFincaDto = new CreateOrEditFincaDto();
+                        finca.iD_FINCA = x[0];
+                        finca.nombrE_FINCA = x[1];
+                        finca.departamentO_FINCA = x[2];
+                        finca.municipiO_FINCA = x[3];
+                        finca.veredA_FINCA = x[4];
+                        finca.corregimientO_FINCA = x[5];
+                        finca.ubicacioN_FINCA = x[6];
+                        finca.longituD_FINCA = x[7];
+                        finca.latituD_FINCA = x[8];
+                        finca.contactO_FINCA = x[9];
+                        finca.telefonO_FINCA = x[10];
+                        finca.correO_FINCA = x[11];
+                        finca.clienteId = x[13];
+                        console.log(finca)
+                        this.insert(finca);
+                    });
+                });
+
+
+
+
+        };
+        reader.readAsBinaryString(target.files[0]);
+    }
+    initEntityRecords(): void {
+        this.initializing = true;
+        this._fincasServiceProxy.getAll(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)
+            .pipe(finalize(() => { this.initializing = false; this.reloadPage() }))
+            .subscribe(result => {
+                result.items.forEach((x) => {
+                    this._fincasServiceProxy.delete(x.finca.id)
+                        .subscribe(() => {
+                            // this.notify.success(this.l('SuccessfullyDeleted'));
+                        });
+                })
+            });
+    }
+
+    insert(finca: FincaDto): void {
+        this.saving = true;
+
+        this._fincasServiceProxy.createOrEdit(finca)
+            .pipe(finalize(() => { this.saving = false; this.reloadPage(); }))
+            .subscribe(() => {
+                this.notify.info(this.l('SavedSuccessfully'));
+            });
+    }
+
+    addFiles() {
+        this.file.nativeElement.click();
     }
 }

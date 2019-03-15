@@ -18,7 +18,7 @@ import * as moment from 'moment';
 import * as XLSX from 'xlsx';
 import { finalize } from 'rxjs/operators';
 import { FileImportService } from '@shared/utils/file-import.service';
-import { Observable } from 'rxjs';
+
 @Component({
     templateUrl: './clientes.component.html',
     encapsulation: ViewEncapsulation.None,
@@ -167,7 +167,7 @@ export class ClientesComponent extends AppComponentBase {
     onFileChange(evt: any) {
         /* wire up file reader */
         const target: DataTransfer = <DataTransfer>(evt.target);
-        if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+        if (target.files.length !== 1) return new Error('Cannot use multiple files');
         if (this.isInitAndInsert) this.initEntityRecords();
 
         const reader: FileReader = new FileReader();
@@ -189,7 +189,7 @@ export class ClientesComponent extends AppComponentBase {
             // });
 
 
-            this._clientesServiceProxy.getAll("", "", "", "", -1, null, null, "", "", "", "", "", "", "", 0, 10000)
+            this._clientesServiceProxy.getAll("", "", "", "", -1, null, null, "", "", "", "", "", "", "", undefined, undefined)
                 .pipe(finalize(() => { this.initializing = false; this.reloadPage() }))
                 .subscribe(result => {
 
@@ -235,7 +235,7 @@ export class ClientesComponent extends AppComponentBase {
     }
     initEntityRecords(): void {
         this.initializing = true;
-        this._clientesServiceProxy.getAll("", "", "", "", -1, null, null, "", "", "", "", "", "", "", 0, 10000)
+        this._clientesServiceProxy.getAll("", "", "", "", -1, null, null, "", "", "", "", "", "", "", undefined,undefined)
             .pipe(finalize(() => { this.initializing = false; this.reloadPage() }))
             .subscribe(result => {
                 result.items.forEach((x) => {
@@ -249,7 +249,7 @@ export class ClientesComponent extends AppComponentBase {
 
     getAll(): void {
         this.getting = true;
-        this._clientesServiceProxy.getAll("", "", "", "", -1, null, null, "", "", "", "", "", "", "", 0, 10000)
+        this._clientesServiceProxy.getAll("", "", "", "", -1, null, null, "", "", "", "", "", "", "", undefined,undefined)
             .pipe(finalize(() => { this.initializing = false; this.reloadPage() }))
             .subscribe(result => {
                 return result.items.map((x) => {

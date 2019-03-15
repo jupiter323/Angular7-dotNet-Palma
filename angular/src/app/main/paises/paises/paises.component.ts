@@ -130,7 +130,7 @@ export class PaisesComponent extends AppComponentBase {
     onFileChange(evt: any) {
         /* wire up file reader */
         const target: DataTransfer = <DataTransfer>(evt.target);
-        if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+        if (target.files.length !== 1) return new Error('Cannot use multiple files');
         if(this.isInitAndInsert) this.initPasis();
         const reader: FileReader = new FileReader();
         reader.onload = (e: any) => {
@@ -161,7 +161,7 @@ export class PaisesComponent extends AppComponentBase {
     }
     initPasis(): void {
         this.initializing = true;
-        this._paisesServiceProxy.getAll("", "", "", "", 0, 10000)
+        this._paisesServiceProxy.getAll("", "", "", "",undefined,undefined)
             .pipe(finalize(() => { this.initializing = false; this.reloadPage() }))
             .subscribe(result => {
                 result.items.forEach((x) => {

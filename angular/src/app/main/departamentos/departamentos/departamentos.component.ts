@@ -139,7 +139,7 @@ export class DepartamentosComponent extends AppComponentBase {
     onFileChange(evt: any) {
         /* wire up file reader */
         const target: DataTransfer = <DataTransfer>(evt.target);
-        if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+        if (target.files.length !== 1) return new Error('Cannot use multiple files');
         if (this.isInitAndInsert) this.initEntityRecords();
         const reader: FileReader = new FileReader();
         reader.onload = (e: any) => {
@@ -171,7 +171,7 @@ export class DepartamentosComponent extends AppComponentBase {
     }
     initEntityRecords(): void {
         this.initializing = true;
-        this._departamentosServiceProxy.getAll("", "", "", "", "", 0, 10000)
+        this._departamentosServiceProxy.getAll("", "", "", "", "", undefined,undefined)
             .pipe(finalize(() => { this.initializing = false; this.reloadPage() }))
             .subscribe(result => {
                 result.items.forEach((x) => {
