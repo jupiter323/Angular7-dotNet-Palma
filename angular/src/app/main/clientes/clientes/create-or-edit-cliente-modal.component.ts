@@ -1,4 +1,4 @@
-import { Component, ViewChild, Injector, Output, EventEmitter} from '@angular/core';
+import { Component, ViewChild, Injector, Output, EventEmitter } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 import { finalize } from 'rxjs/operators';
 import { ClientesServiceProxy, CreateOrEditClienteDto } from '@shared/service-proxies/service-proxies';
@@ -22,7 +22,7 @@ export class CreateOrEditClienteModalComponent extends AppComponentBase {
 
     cliente: CreateOrEditClienteDto = new CreateOrEditClienteDto();
 
-            fechA_CLIENTE: Date;
+    fechA_CLIENTE: Date;
 
 
     constructor(
@@ -33,7 +33,7 @@ export class CreateOrEditClienteModalComponent extends AppComponentBase {
     }
 
     show(clienteId?: number): void {
-this.fechA_CLIENTE = null;
+        this.fechA_CLIENTE = null;
 
         if (!clienteId) {
             this.cliente = new CreateOrEditClienteDto();
@@ -46,7 +46,7 @@ this.fechA_CLIENTE = null;
                 this.cliente = result.cliente;
 
                 if (this.cliente.fechA_CLIENTE) {
-					this.fechA_CLIENTE = this.cliente.fechA_CLIENTE.toDate();
+                    this.fechA_CLIENTE = this.cliente.fechA_CLIENTE.toDate();
                 }
 
                 this.active = true;
@@ -56,9 +56,9 @@ this.fechA_CLIENTE = null;
     }
 
     save(): void {
-            this.saving = true;
+        this.saving = true;
 
-			
+
         if (this.fechA_CLIENTE) {
             if (!this.cliente.fechA_CLIENTE) {
                 this.cliente.fechA_CLIENTE = moment(this.fechA_CLIENTE).startOf('day');
@@ -70,13 +70,13 @@ this.fechA_CLIENTE = null;
         else {
             this.cliente.fechA_CLIENTE = null;
         }
-            this._clientesServiceProxy.createOrEdit(this.cliente)
-             .pipe(finalize(() => { this.saving = false;}))
-             .subscribe(() => {
+        this._clientesServiceProxy.createOrEdit(this.cliente)
+            .pipe(finalize(() => { this.saving = false; }))
+            .subscribe(() => {
                 this.notify.info(this.l('SavedSuccessfully'));
                 this.close();
                 this.modalSave.emit(null);
-             });
+            });
     }
 
 
@@ -86,7 +86,7 @@ this.fechA_CLIENTE = null;
 
 
     close(): void {
-
+      
         this.active = false;
         this.modal.hide();
     }

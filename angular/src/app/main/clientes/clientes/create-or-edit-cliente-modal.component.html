@@ -1,91 +1,105 @@
-<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <form *ngIf="active" #clienteForm="ngForm" novalidate (ngSubmit)="save()" autocomplete="off">
-                <div class="modal-header">
-                    <h4 class="modal-title">
-                        <span *ngIf="cliente.id">{{l("EditCliente")}}</span>
-                        <span *ngIf="!cliente.id">{{l("CreateNewCliente")}}</span>
-                    </h4>
-                    <button type="button" class="close" (click)="close()" aria-label="Close" [disabled]="saving">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                 
+<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+	aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<form *ngIf="active" #clienteForm="ngForm" novalidate (ngSubmit)="save()" autocomplete="off">
+				<div class="modal-header">
+					<h4 class="modal-title">
+						<span *ngIf="cliente.id">{{l("EditCliente")}}</span>
+						<span *ngIf="!cliente.id">{{l("CreateNewCliente")}}</span>
+					</h4>
+					<button type="button" class="close" (click)="close()" aria-label="Close" [disabled]="saving">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+					<div class="form-group">
+						<label for="Cliente_ID_CLIENTE">{{l("ID_CLIENTE")}} *</label>
+						<input type="text" id="Cliente_ID_CLIENTE" class="form-control" [(ngModel)]="cliente.iD_CLIENTE"
+							name="ID_CLIENTE" minlength="2" maxlength="16" required />
+					</div>
+
+					<div class="form-group">
+						<label for="Cliente_NOMBRE_CLIENTE">{{l("NOMBRE_CLIENTE")}}</label>
+						<input type="text" id="Cliente_NOMBRE_CLIENTE" class="form-control"
+							[(ngModel)]="cliente.nombrE_CLIENTE" name="NOMBRE_CLIENTE" minlength="4" maxlength="36" />
+					</div>
+
+					<div class="form-group">
+						<label for="Cliente_APELLIDO_CLIENTE">{{l("APELLIDO_CLIENTE")}}</label>
+						<input type="text" id="Cliente_APELLIDO_CLIENTE" class="form-control"
+							[(ngModel)]="cliente.apellidO_CLIENTE" name="APELLIDO_CLIENTE" minlength="4"
+							maxlength="36" />
+					</div>
+
+					<div class="form-group">
+						<label for="Cliente_GENERO_CLIENTE">{{l("GENERO_CLIENTE")}}</label>
+						<select class="form-control" name="GENERO_CLIENTE" id="Cliente_GENERO_CLIENTE"
+							[(ngModel)]="cliente.generO_CLIENTE">
+							<option value="0">{{l('Masculino')}}</option>
+
+							<option value="1">{{l('Femenino')}}</option>
 
 
-								<div class="form-group">
-									<label for="Cliente_ID_CLIENTE">{{l("ID_CLIENTE")}} *</label>
-									<input type="text" id="Cliente_ID_CLIENTE" class="form-control" [(ngModel)]="cliente.iD_CLIENTE" name="ID_CLIENTE"   minlength="2"  maxlength="16"  required/>
-								</div>
-					
-								<div class="form-group">
-									<label for="Cliente_NOMBRE_CLIENTE">{{l("NOMBRE_CLIENTE")}}</label>
-									<input type="text" id="Cliente_NOMBRE_CLIENTE" class="form-control" [(ngModel)]="cliente.nombrE_CLIENTE" name="NOMBRE_CLIENTE"   minlength="4"  maxlength="36" />
-								</div>
-					
-								<div class="form-group">
-									<label for="Cliente_APELLIDO_CLIENTE">{{l("APELLIDO_CLIENTE")}}</label>
-									<input type="text" id="Cliente_APELLIDO_CLIENTE" class="form-control" [(ngModel)]="cliente.apellidO_CLIENTE" name="APELLIDO_CLIENTE"   minlength="4"  maxlength="36" />
-								</div>
-					
-								<div class="form-group">
-									<label for="Cliente_GENERO_CLIENTE">{{l("GENERO_CLIENTE")}}</label>
-									<select class="form-control" name="GENERO_CLIENTE" id="Cliente_GENERO_CLIENTE" [(ngModel)]="cliente.generO_CLIENTE">
-									<option value="0">{{l('Masculino')}}</option>
+						</select>
+					</div>
 
-									<option value="1">{{l('Femenino')}}</option>
+					<div class="form-group">
+						<label for="Cliente_FECHA_CLIENTE">{{l("FECHA_CLIENTE")}}</label>
+						<input class="form-control m-input" type="datetime" bsDatepicker [(ngModel)]="fechA_CLIENTE"
+							id="Cliente_FECHA_CLIENTE" name="Cliente_FECHA_CLIENTE">
+					</div>
+
+					<div class="form-group">
+						<label for="Cliente_CELULAR_CLIENTE">{{l("CELULAR_CLIENTE")}}</label>
+						<input type="text" id="Cliente_CELULAR_CLIENTE" class="form-control"
+							[(ngModel)]="cliente.celulaR_CLIENTE" name="CELULAR_CLIENTE" />
+					</div>
+
+					<div class="form-group">
+						<label for="Cliente_DIRECCION_CLIENTE">{{l("DIRECCION_CLIENTE")}}</label>
+						<input type="text" id="Cliente_DIRECCION_CLIENTE" class="form-control"
+							[(ngModel)]="cliente.direccioN_CLIENTE" name="DIRECCION_CLIENTE" />
+					</div>
+
+					<div class="form-group">
+						<label for="Cliente_DEPARTAMENTO_CLIENTE">{{l("DEPARTAMENTO_CLIENTE")}}</label>
+						<!--<input type="text" id="Cliente_DEPARTAMENTO_CLIENTE" class="form-control" [(ngModel)]="cliente.departamentO_CLIENTE" name="DEPARTAMENTO_CLIENTE" />-->
+						<departamento-combo name="DEPARTAMENTO_CLIENTE" [(ngModel)]="cliente.departamentO_CLIENTE">
+						</departamento-combo>
+					</div>
+
+					<div class="form-group">
+						<label for="Cliente_MUNICIPIO_CLIENTE">{{l("MUNICIPIO_CLIENTE")}}</label>
+						<!--<input type="text" id="Cliente_MUNICIPIO_CLIENTE" class="form-control" [(ngModel)]="cliente.municipiO_CLIENTE" name="MUNICIPIO_CLIENTE" />-->
+						<municipio-combo [departmentId]="cliente.departamentO_CLIENTE" name="MUNICIPIO_CLIENTE" [(ngModel)]="cliente.municipiO_CLIENTE">
+						</municipio-combo>
+					</div>
+
+					<div class="form-group">
+						<label for="Cliente_EMPRESA_CLIENTE">{{l("EMPRESA_CLIENTE")}}</label>
+						<input type="text" id="Cliente_EMPRESA_CLIENTE" class="form-control"
+							[(ngModel)]="cliente.empresA_CLIENTE" name="EMPRESA_CLIENTE" />
+					</div>
+
+					<div class="form-group">
+						<label for="Cliente_PROFESION_CLIENTE">{{l("PROFESION_CLIENTE")}}</label>
+						<input type="text" id="Cliente_PROFESION_CLIENTE" class="form-control"
+							[(ngModel)]="cliente.profesioN_CLIENTE" name="PROFESION_CLIENTE" />
+					</div>
 
 
-									</select>
-								</div>
-					
-								<div class="form-group">
-									<label for="Cliente_FECHA_CLIENTE">{{l("FECHA_CLIENTE")}}</label>
-									 <input class="form-control m-input" type="datetime" bsDatepicker [(ngModel)]="fechA_CLIENTE" id="Cliente_FECHA_CLIENTE" name="Cliente_FECHA_CLIENTE">
-								</div>
-					
-								<div class="form-group">
-									<label for="Cliente_CELULAR_CLIENTE">{{l("CELULAR_CLIENTE")}}</label>
-									<input type="text" id="Cliente_CELULAR_CLIENTE" class="form-control" [(ngModel)]="cliente.celulaR_CLIENTE" name="CELULAR_CLIENTE"    />
-								</div>
-					
-								<div class="form-group">
-									<label for="Cliente_DIRECCION_CLIENTE">{{l("DIRECCION_CLIENTE")}}</label>
-									<input type="text" id="Cliente_DIRECCION_CLIENTE" class="form-control" [(ngModel)]="cliente.direccioN_CLIENTE" name="DIRECCION_CLIENTE"    />
-								</div>
-					
-                                <div class="form-group">
-                                    <label for="Cliente_DEPARTAMENTO_CLIENTE">{{l("DEPARTAMENTO_CLIENTE")}}</label>
-                                    <!--<input type="text" id="Cliente_DEPARTAMENTO_CLIENTE" class="form-control" [(ngModel)]="cliente.departamentO_CLIENTE" name="DEPARTAMENTO_CLIENTE" />-->
-                                    <departamento-combo name="DEPARTAMENTO_CLIENTE" [(ngModel)]="cliente.departamentO_CLIENTE"></departamento-combo>
-                                </div>
-					
-                                <div class="form-group">
-                                    <label for="Cliente_MUNICIPIO_CLIENTE">{{l("MUNICIPIO_CLIENTE")}}</label>
-                                    <!--<input type="text" id="Cliente_MUNICIPIO_CLIENTE" class="form-control" [(ngModel)]="cliente.municipiO_CLIENTE" name="MUNICIPIO_CLIENTE" />-->
-                                    <municipio-combo name="MUNICIPIO_CLIENTE" [(ngModel)]="cliente.municipiO_CLIENTE"></municipio-combo>
-                                </div>
-					
-								<div class="form-group">
-									<label for="Cliente_EMPRESA_CLIENTE">{{l("EMPRESA_CLIENTE")}}</label>
-									<input type="text" id="Cliente_EMPRESA_CLIENTE" class="form-control" [(ngModel)]="cliente.empresA_CLIENTE" name="EMPRESA_CLIENTE"    />
-								</div>
-					
-								<div class="form-group">
-									<label for="Cliente_PROFESION_CLIENTE">{{l("PROFESION_CLIENTE")}}</label>
-									<input type="text" id="Cliente_PROFESION_CLIENTE" class="form-control" [(ngModel)]="cliente.profesioN_CLIENTE" name="PROFESION_CLIENTE"    />
-								</div>
-					
-
-                </div>
-                <div class="modal-footer">
-                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{l("Cancel")}}</button>
-                    <button type="submit" class="btn btn-primary blue" [disabled]="!clienteForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{l("Save")}}</span></button>
-                </div>
-            </form>
-        </div>
-    </div>
+				</div>
+				<div class="modal-footer">
+					<button [disabled]="saving" type="button" class="btn btn-default"
+						(click)="close()">{{l("Cancel")}}</button>
+					<button type="submit" class="btn btn-primary blue" [disabled]="!clienteForm.form.valid"
+						[buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i>
+						<span>{{l("Save")}}</span></button>
+				</div>
+			</form>
+		</div>
+	</div>
 
 </div>

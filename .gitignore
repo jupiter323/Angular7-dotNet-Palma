@@ -6,7 +6,7 @@
 /aspnet-core/src/PALMASoft.Web.Mvc/Properties/PublishProfiles/FolderProfile.pubxml
 aspnet-core/test/JMeter/AspNetZeroDotNetCoreSimpleTest.jmx
 /aspnet-core/build/outputs
-
+/aspnet-core/src/PALMASoft.Web.Host/appsettings.json
 # User-specific files
 *.suo
 *.user
