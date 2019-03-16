@@ -1,0 +1,143 @@
+<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #aFoliarForm="ngForm" novalidate (ngSubmit)="save()" autocomplete="off">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span *ngIf="aFoliar.id">{{l("EditAFoliar")}}</span>
+                        <span *ngIf="!aFoliar.id">{{l("CreateNewAFoliar")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close" [disabled]="saving">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                 
+
+
+								<div class="form-group">
+									<label for="AFoliar_COD_FOLIAR">{{l("COD_FOLIAR")}} *</label>
+									<input type="text" id="AFoliar_COD_FOLIAR" class="form-control" [(ngModel)]="aFoliar.coD_FOLIAR" name="COD_FOLIAR"   minlength="2"  maxlength="12"  required/>
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_ID_FOLIAR">{{l("ID_FOLIAR")}}</label>
+									<input type="text" id="AFoliar_ID_FOLIAR" class="form-control" [(ngModel)]="aFoliar.iD_FOLIAR" name="ID_FOLIAR"   minlength="2"  maxlength="36" />
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_MATERIAL_FOLIAR">{{l("MATERIAL_FOLIAR")}}</label>
+									<input type="text" id="AFoliar_MATERIAL_FOLIAR" class="form-control" [(ngModel)]="aFoliar.materiaL_FOLIAR" name="MATERIAL_FOLIAR"    />
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_NUM_HOJA_FOLIAR">{{l("NUM_HOJA_FOLIAR")}}</label>
+									<input type="number" id="AFoliar_NUM_HOJA_FOLIAR" class="form-control" [(ngModel)]="aFoliar.nuM_HOJA_FOLIAR" name="NUM_HOJA_FOLIAR"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_NITROGENO">{{l("NITROGENO")}}</label>
+									<input type="number" id="AFoliar_NITROGENO" class="form-control" [(ngModel)]="aFoliar.nitrogeno" name="NITROGENO"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_FOSFORO">{{l("FOSFORO")}}</label>
+									<input type="number" id="AFoliar_FOSFORO" class="form-control" [(ngModel)]="aFoliar.fosforo" name="FOSFORO"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_POTASIO">{{l("POTASIO")}}</label>
+									<input type="number" id="AFoliar_POTASIO" class="form-control" [(ngModel)]="aFoliar.potasio" name="POTASIO"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_CALCIO">{{l("CALCIO")}}</label>
+									<input type="number" id="AFoliar_CALCIO" class="form-control" [(ngModel)]="aFoliar.calcio" name="CALCIO"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_MAGNESIO">{{l("MAGNESIO")}}</label>
+									<input type="number" id="AFoliar_MAGNESIO" class="form-control" [(ngModel)]="aFoliar.magnesio" name="MAGNESIO"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_CLORO">{{l("CLORO")}}</label>
+									<input type="number" id="AFoliar_CLORO" class="form-control" [(ngModel)]="aFoliar.cloro" name="CLORO"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_AZUFRE">{{l("AZUFRE")}}</label>
+									<input type="number" id="AFoliar_AZUFRE" class="form-control" [(ngModel)]="aFoliar.azufre" name="AZUFRE"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_BORO">{{l("BORO")}}</label>
+									<input type="number" id="AFoliar_BORO" class="form-control" [(ngModel)]="aFoliar.boro" name="BORO"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_HIERRO">{{l("HIERRO")}}</label>
+									<input type="number" id="AFoliar_HIERRO" class="form-control" [(ngModel)]="aFoliar.hierro" name="HIERRO"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_COBRE">{{l("COBRE")}}</label>
+									<input type="number" id="AFoliar_COBRE" class="form-control" [(ngModel)]="aFoliar.cobre" name="COBRE"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_MANGANESO">{{l("MANGANESO")}}</label>
+									<input type="number" id="AFoliar_MANGANESO" class="form-control" [(ngModel)]="aFoliar.manganeso" name="MANGANESO"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_ZINC">{{l("ZINC")}}</label>
+									<input type="number" id="AFoliar_ZINC" class="form-control" [(ngModel)]="aFoliar.zinc" name="ZINC"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_Ca_Mg_K">{{l("Ca_Mg_K")}}</label>
+									<input type="number" id="AFoliar_Ca_Mg_K" class="form-control" [(ngModel)]="aFoliar.ca_Mg_K" name="Ca_Mg_K"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_Ca_Mg_div_K">{{l("Ca_Mg_div_K")}}</label>
+									<input type="number" id="AFoliar_Ca_Mg_div_K" class="form-control" [(ngModel)]="aFoliar.ca_Mg_div_K" name="Ca_Mg_div_K"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_N_div_K">{{l("N_div_K")}}</label>
+									<input type="number" id="AFoliar_N_div_K" class="form-control" [(ngModel)]="aFoliar.n_div_K" name="N_div_K"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_N_div_P">{{l("N_div_P")}}</label>
+									<input type="number" id="AFoliar_N_div_P" class="form-control" [(ngModel)]="aFoliar.n_div_P" name="N_div_P"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_K_div_P">{{l("K_div_P")}}</label>
+									<input type="number" id="AFoliar_K_div_P" class="form-control" [(ngModel)]="aFoliar.k_div_P" name="K_div_P"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_Ca_div_B">{{l("Ca_div_B")}}</label>
+									<input type="number" id="AFoliar_Ca_div_B" class="form-control" [(ngModel)]="aFoliar.ca_div_B" name="Ca_div_B"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="AFoliar_ANALISIS_ID">{{l("ANALISIS_ID")}}</label>
+									<input type="text" id="AFoliar_ANALISIS_ID" class="form-control" [(ngModel)]="aFoliar.analisiS_ID" name="ANALISIS_ID"    />
+								</div>
+					
+
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary blue" [disabled]="!aFoliarForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{l("Save")}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

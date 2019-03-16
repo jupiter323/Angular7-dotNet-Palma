@@ -6,6 +6,21 @@ namespace PALMASoft.Authorization
     /// </summary>
     public static class AppPermissions
     {
+        public const string Pages_ASuelos = "Pages.ASuelos";
+        public const string Pages_ASuelos_Create = "Pages.ASuelos.Create";
+        public const string Pages_ASuelos_Edit = "Pages.ASuelos.Edit";
+        public const string Pages_ASuelos_Delete = "Pages.ASuelos.Delete";
+
+        public const string Pages_AFoliares = "Pages.AFoliares";
+        public const string Pages_AFoliares_Create = "Pages.AFoliares.Create";
+        public const string Pages_AFoliares_Edit = "Pages.AFoliares.Edit";
+        public const string Pages_AFoliares_Delete = "Pages.AFoliares.Delete";
+
+        public const string Pages_Analises = "Pages.Analises";
+        public const string Pages_Analises_Create = "Pages.Analises.Create";
+        public const string Pages_Analises_Edit = "Pages.Analises.Edit";
+        public const string Pages_Analises_Delete = "Pages.Analises.Delete";
+
         public const string Pages_Fincas = "Pages.Fincas";
         public const string Pages_Fincas_Create = "Pages.Fincas.Create";
         public const string Pages_Fincas_Edit = "Pages.Fincas.Edit";

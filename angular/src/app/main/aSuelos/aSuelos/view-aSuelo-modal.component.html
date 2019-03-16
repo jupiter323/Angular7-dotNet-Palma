@@ -1,0 +1,178 @@
+<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>{{l("")}}</span>
+                </h4>
+                <button type="button" class="close" (click)="close()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <h6>{{l("COD_SUELOS")}} :</h6>
+                        {{item.aSuelo.coD_SUELOS}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("ID_SUELOS")}} :</h6>
+                        {{item.aSuelo.iD_SUELOS}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("MATERIAL_SUELOS")}} :</h6>
+                        {{item.aSuelo.materiaL_SUELOS}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("PROFUNDIDAD_MUESTRA")}} :</h6>
+                        {{item.aSuelo.profundidaD_MUESTRA}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("TEXTURA_SUELOS")}} :</h6>
+                        {{item.aSuelo.texturA_SUELOS}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("ARENA")}} :</h6>
+                        {{item.aSuelo.arena}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("LIMO")}} :</h6>
+                        {{item.aSuelo.limo}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("ARCILLA")}} :</h6>
+                        {{item.aSuelo.arcilla}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("PH")}} :</h6>
+                        {{item.aSuelo.ph}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("CARBONO_ORGANICO")}} :</h6>
+                        {{item.aSuelo.carbonO_ORGANICO}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("MATERIA_ORGANICA")}} :</h6>
+                        {{item.aSuelo.materiA_ORGANICA}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("FOSFORO")}} :</h6>
+                        {{item.aSuelo.fosforo}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("AZUFRE")}} :</h6>
+                        {{item.aSuelo.azufre}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("ACIDEZ")}} :</h6>
+                        {{item.aSuelo.acidez}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("ALUMINIO")}} :</h6>
+                        {{item.aSuelo.aluminio}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("CALCIO")}} :</h6>
+                        {{item.aSuelo.calcio}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("MAGNESIO")}} :</h6>
+                        {{item.aSuelo.magnesio}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("POTASIO")}} :</h6>
+                        {{item.aSuelo.potasio}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("SODIO")}} :</h6>
+                        {{item.aSuelo.sodio}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("CATIONICO")}} :</h6>
+                        {{item.aSuelo.cationico}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("ELECTRICA")}} :</h6>
+                        {{item.aSuelo.electrica}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("BORO")}} :</h6>
+                        {{item.aSuelo.boro}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("HIERRO")}} :</h6>
+                        {{item.aSuelo.hierro}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("COBRE")}} :</h6>
+                        {{item.aSuelo.cobre}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("MANGANESO")}} :</h6>
+                        {{item.aSuelo.manganeso}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("ZINC")}} :</h6>
+                        {{item.aSuelo.zinc}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("CICE")}} :</h6>
+                        {{item.aSuelo.cice}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("SUMA_BASES")}} :</h6>
+                        {{item.aSuelo.sumA_BASES}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("SAT_BASES")}} :</h6>
+                        {{item.aSuelo.saT_BASES}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("SAT_K")}} :</h6>
+                        {{item.aSuelo.saT_K}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("SAT_CA")}} :</h6>
+                        {{item.aSuelo.saT_CA}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("SAT_MG")}} :</h6>
+                        {{item.aSuelo.saT_MG}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("SAT_NA")}} :</h6>
+                        {{item.aSuelo.saT_NA}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("SAT_AL")}} :</h6>
+                        {{item.aSuelo.saT_AL}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("CA_MG")}} :</h6>
+                        {{item.aSuelo.cA_MG}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("K_MG")}} :</h6>
+                        {{item.aSuelo.k_MG}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("CA_MG_DIV_K")}} :</h6>
+                        {{item.aSuelo.cA_MG_DIV_K}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("ANALISIS_ID")}} :</h6>
+                        {{item.aSuelo.analisiS_ID}}
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="saving" type="button" class="btn btn-primary blue" (click)="close()">{{l("Close")}}</button>
+            </div>
+        </div>
+    </div>
+
+</div>

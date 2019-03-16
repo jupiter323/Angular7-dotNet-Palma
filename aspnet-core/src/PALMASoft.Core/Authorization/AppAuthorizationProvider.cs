@@ -30,6 +30,27 @@ namespace PALMASoft.Authorization
 
             var pages = context.GetPermissionOrNull(AppPermissions.Pages) ?? context.CreatePermission(AppPermissions.Pages, L("Pages"));
 
+            var aSuelos = pages.CreateChildPermission(AppPermissions.Pages_ASuelos, L("ASuelos"));
+            aSuelos.CreateChildPermission(AppPermissions.Pages_ASuelos_Create, L("CreateNewASuelo"));
+            aSuelos.CreateChildPermission(AppPermissions.Pages_ASuelos_Edit, L("EditASuelo"));
+            aSuelos.CreateChildPermission(AppPermissions.Pages_ASuelos_Delete, L("DeleteASuelo"));
+
+
+
+            var aFoliares = pages.CreateChildPermission(AppPermissions.Pages_AFoliares, L("AFoliares"));
+            aFoliares.CreateChildPermission(AppPermissions.Pages_AFoliares_Create, L("CreateNewAFoliar"));
+            aFoliares.CreateChildPermission(AppPermissions.Pages_AFoliares_Edit, L("EditAFoliar"));
+            aFoliares.CreateChildPermission(AppPermissions.Pages_AFoliares_Delete, L("DeleteAFoliar"));
+
+
+
+            var analises = pages.CreateChildPermission(AppPermissions.Pages_Analises, L("Analises"));
+            analises.CreateChildPermission(AppPermissions.Pages_Analises_Create, L("CreateNewAnalisis"));
+            analises.CreateChildPermission(AppPermissions.Pages_Analises_Edit, L("EditAnalisis"));
+            analises.CreateChildPermission(AppPermissions.Pages_Analises_Delete, L("DeleteAnalisis"));
+
+
+
             var fincas = pages.CreateChildPermission(AppPermissions.Pages_Fincas, L("Fincas"));
             fincas.CreateChildPermission(AppPermissions.Pages_Fincas_Create, L("CreateNewFinca"));
             fincas.CreateChildPermission(AppPermissions.Pages_Fincas_Edit, L("EditFinca"));

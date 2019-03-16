@@ -1,3 +1,9 @@
+using PALMASoft.ASuelos.Dtos;
+using PALMASoft.ASuelos;
+using PALMASoft.AFoliares.Dtos;
+using PALMASoft.AFoliares;
+using PALMASoft.Analises.Dtos;
+using PALMASoft.Analises;
 using PALMASoft.Fincas.Dtos;
 using PALMASoft.Fincas;
 using PALMASoft.Clientes.Dtos;
@@ -50,6 +56,12 @@ namespace PALMASoft
     {
         public static void CreateMappings(IMapperConfigurationExpression configuration)
         {
+           configuration.CreateMap<CreateOrEditASueloDto, ASuelo>();
+           configuration.CreateMap<ASuelo, ASueloDto>();
+           configuration.CreateMap<CreateOrEditAFoliarDto, AFoliar>();
+           configuration.CreateMap<AFoliar, AFoliarDto>();
+           configuration.CreateMap<CreateOrEditAnalisisDto, Analisis>();
+           configuration.CreateMap<Analisis, AnalisisDto>();
            configuration.CreateMap<CreateOrEditFincaDto, Finca>();
            configuration.CreateMap<Finca, FincaDto>();
            configuration.CreateMap<CreateOrEditClienteDto, Cliente>();

@@ -1,0 +1,50 @@
+<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>{{l("")}}</span>
+                </h4>
+                <button type="button" class="close" (click)="close()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <h6>{{l("ID_INFORME")}} :</h6>
+                        {{item.analisis.iD_INFORME}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("tipO_INFORME")}} :</h6>
+                        {{l( analisisTipo[item.analisis.tipO_INFORME])}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("FECHA_MUESTREO")}} :</h6>
+                        {{item.analisis.fechA_MUESTREO}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("FECHA_REGISTRO")}} :</h6>
+                        {{item.analisis.fechA_REGISTRO}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("FECHA_ENTREGA")}} :</h6>
+                        {{item.analisis.fechA_ENTREGA}}
+                    </div>
+
+                    <div class="col-6 mb-3">
+                        <h6>({{l("Finca")}}) {{l("NOMBRE_FINCA")}} :</h6>
+                        {{item.fincaNOMBRE_FINCA}}
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="saving" type="button" class="btn btn-primary blue" (click)="close()">{{l("Close")}}</button>
+            </div>
+        </div>
+    </div>
+
+</div>

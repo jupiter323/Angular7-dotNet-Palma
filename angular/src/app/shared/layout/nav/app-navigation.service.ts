@@ -30,6 +30,12 @@ export class AppNavigationService {
             new AppMenuItem('Clientes', 'Pages.Clientes', 'flaticon-more', '/app/main/clientes/clientes'),
             
             new AppMenuItem('Fincas', 'Pages.Fincas', 'flaticon-more', '/app/main/fincas/fincas'),
+            
+            new AppMenuItem('Analises', 'Pages.Analises', 'flaticon-more', '/app/main/analises/analises'),
+            
+            new AppMenuItem('AFoliares', 'Pages.AFoliares', 'flaticon-more', '/app/main/aFoliares/aFoliares'),
+            
+            new AppMenuItem('ASuelos', 'Pages.ASuelos', 'flaticon-more', '/app/main/aSuelos/aSuelos'),
              new AppMenuItem('Administration', '', 'flaticon-interface-8', '', [
                 new AppMenuItem('OrganizationUnits', 'Pages.Administration.OrganizationUnits', 'flaticon-map', '/app/admin/organization-units'),
                 new AppMenuItem('Roles', 'Pages.Administration.Roles', 'flaticon-suitcase', '/app/admin/roles'),

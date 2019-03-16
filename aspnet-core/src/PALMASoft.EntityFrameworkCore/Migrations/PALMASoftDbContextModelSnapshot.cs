@@ -913,6 +913,211 @@ namespace PALMASoft.Migrations
                     b.ToTable("AbpOrganizationUnitRoles");
                 });
 
+            modelBuilder.Entity("PALMASoft.AFoliares.AFoliar", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ANALISIS_ID");
+
+                    b.Property<decimal>("AZUFRE");
+
+                    b.Property<decimal>("BORO");
+
+                    b.Property<decimal>("CALCIO");
+
+                    b.Property<decimal>("CLORO");
+
+                    b.Property<decimal>("COBRE");
+
+                    b.Property<string>("COD_FOLIAR")
+                        .IsRequired()
+                        .HasMaxLength(12);
+
+                    b.Property<decimal>("Ca_Mg_K");
+
+                    b.Property<decimal>("Ca_Mg_div_K");
+
+                    b.Property<decimal>("Ca_div_B");
+
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<long?>("CreatorUserId");
+
+                    b.Property<long?>("DeleterUserId");
+
+                    b.Property<DateTime?>("DeletionTime");
+
+                    b.Property<decimal>("FOSFORO");
+
+                    b.Property<decimal>("HIERRO");
+
+                    b.Property<string>("ID_FOLIAR")
+                        .HasMaxLength(36);
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<decimal>("K_div_P");
+
+                    b.Property<DateTime?>("LastModificationTime");
+
+                    b.Property<long?>("LastModifierUserId");
+
+                    b.Property<decimal>("MAGNESIO");
+
+                    b.Property<decimal>("MANGANESO");
+
+                    b.Property<string>("MATERIAL_FOLIAR");
+
+                    b.Property<decimal>("NITROGENO");
+
+                    b.Property<int>("NUM_HOJA_FOLIAR");
+
+                    b.Property<decimal>("N_div_K");
+
+                    b.Property<decimal>("N_div_P");
+
+                    b.Property<decimal>("POTASIO");
+
+                    b.Property<decimal>("ZINC");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AFoliares");
+                });
+
+            modelBuilder.Entity("PALMASoft.ASuelos.ASuelo", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal?>("ACIDEZ");
+
+                    b.Property<decimal?>("ALUMINIO");
+
+                    b.Property<string>("ANALISIS_ID");
+
+                    b.Property<decimal>("ARCILLA");
+
+                    b.Property<decimal>("ARENA");
+
+                    b.Property<decimal>("AZUFRE");
+
+                    b.Property<decimal>("BORO");
+
+                    b.Property<decimal>("CALCIO");
+
+                    b.Property<decimal>("CARBONO_ORGANICO");
+
+                    b.Property<decimal>("CATIONICO");
+
+                    b.Property<decimal>("CA_MG");
+
+                    b.Property<decimal>("CA_MG_DIV_K");
+
+                    b.Property<decimal>("CICE");
+
+                    b.Property<decimal>("COBRE");
+
+                    b.Property<string>("COD_SUELOS");
+
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<long?>("CreatorUserId");
+
+                    b.Property<long?>("DeleterUserId");
+
+                    b.Property<DateTime?>("DeletionTime");
+
+                    b.Property<decimal>("ELECTRICA");
+
+                    b.Property<decimal>("FOSFORO");
+
+                    b.Property<decimal>("HIERRO");
+
+                    b.Property<string>("ID_SUELOS");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<decimal>("K_MG");
+
+                    b.Property<decimal>("LIMO");
+
+                    b.Property<DateTime?>("LastModificationTime");
+
+                    b.Property<long?>("LastModifierUserId");
+
+                    b.Property<decimal>("MAGNESIO");
+
+                    b.Property<decimal>("MANGANESO");
+
+                    b.Property<string>("MATERIAL_SUELOS");
+
+                    b.Property<decimal>("MATERIA_ORGANICA");
+
+                    b.Property<decimal>("PH");
+
+                    b.Property<decimal>("POTASIO");
+
+                    b.Property<int>("PROFUNDIDAD_MUESTRA");
+
+                    b.Property<decimal>("SAT_AL");
+
+                    b.Property<decimal>("SAT_BASES");
+
+                    b.Property<decimal>("SAT_CA");
+
+                    b.Property<decimal>("SAT_K");
+
+                    b.Property<decimal>("SAT_MG");
+
+                    b.Property<decimal>("SAT_NA");
+
+                    b.Property<decimal>("SODIO");
+
+                    b.Property<decimal>("SUMA_BASES");
+
+                    b.Property<string>("TEXTURA_SUELOS");
+
+                    b.Property<decimal>("ZINC");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ASuelos");
+                });
+
+            modelBuilder.Entity("PALMASoft.Analises.Analisis", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<long?>("CreatorUserId");
+
+                    b.Property<DateTime?>("FECHA_ENTREGA");
+
+                    b.Property<DateTime?>("FECHA_MUESTREO");
+
+                    b.Property<DateTime?>("FECHA_REGISTRO");
+
+                    b.Property<long>("FincaId");
+
+                    b.Property<string>("ID_INFORME")
+                        .IsRequired();
+
+                    b.Property<int>("TIPO_INFORME");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FincaId");
+
+                    b.ToTable("Analises");
+                });
+
             modelBuilder.Entity("PALMASoft.Authorization.Roles.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -1624,6 +1829,14 @@ namespace PALMASoft.Migrations
                     b.HasOne("Abp.Organizations.OrganizationUnit", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId");
+                });
+
+            modelBuilder.Entity("PALMASoft.Analises.Analisis", b =>
+                {
+                    b.HasOne("PALMASoft.Fincas.Finca", "Finca")
+                        .WithMany()
+                        .HasForeignKey("FincaId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("PALMASoft.Authorization.Roles.Role", b =>

@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ASuelosComponent } from './aSuelos/aSuelos/aSuelos.component';
+import { AFoliaresComponent } from './aFoliares/aFoliares/aFoliares.component';
+import { AnalisesComponent } from './analises/analises/analises.component';
 import { FincasComponent } from './fincas/fincas/fincas.component';
 import { ClientesComponent } from './clientes/clientes/clientes.component';
 import { MunicipiosComponent } from './municipios/municipios/municipios.component';
@@ -13,6 +16,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
             {
                 path: '',
                 children: [
+                    { path: 'aSuelos/aSuelos', component: ASuelosComponent, data: { permission: 'Pages.ASuelos' }  },
+                    { path: 'aFoliares/aFoliares', component: AFoliaresComponent, data: { permission: 'Pages.AFoliares' }  },
+                    { path: 'analises/analises', component: AnalisesComponent, data: { permission: 'Pages.Analises' }  },
                     { path: 'fincas/fincas', component: FincasComponent, data: { permission: 'Pages.Fincas' }  },
                     { path: 'clientes/clientes', component: ClientesComponent, data: { permission: 'Pages.Clientes' }  },
                     { path: 'municipios/municipios', component: MunicipiosComponent, data: { permission: 'Pages.Municipios' }  },

@@ -1,0 +1,73 @@
+<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #analisisForm="ngForm" novalidate (ngSubmit)="save()" autocomplete="off">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span *ngIf="analisis.id">{{l("EditAnalisis")}}</span>
+                        <span *ngIf="!analisis.id">{{l("CreateNewAnalisis")}}</span>
+                    </h4>
+                    <button type="button" class="close" (click)="close()" aria-label="Close" [disabled]="saving">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                 
+
+					<div class="form-group m-form__group">
+                        <label for="FincaNOMBRE_FINCA">{{l("Finca")}}</label>
+                        <div class="input-group">
+                            <input class="form-control" id="FincaNOMBRE_FINCA" name="fincaNOMBRE_FINCA" [(ngModel)]="fincaNOMBRE_FINCA" type="text" disabled>     
+                            <div class="input-group-append">
+                                <button class="btn btn-primary blue" (click)="openSelectFincaModal()" type="button"><i class="fa fa-search"></i> {{l("Pick")}}</button>
+                            </div> <div class="input-group-prepend">
+                                <button class="btn btn-danger" type="button" (click)="setFincaIdNull()"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <input class="form-control" name="analisis.fincaId" [(ngModel)]="analisis.fincaId" type="text" required hidden>
+		 
+
+								<div class="form-group">
+									<label for="Analisis_ID_INFORME">{{l("ID_INFORME")}} *</label>
+									<input type="text" id="Analisis_ID_INFORME" class="form-control" [(ngModel)]="analisis.iD_INFORME" name="ID_INFORME"     required/>
+								</div>
+					
+								<div class="form-group">
+									<label for="Analisis_TIPO_INFORME">{{l("TIPO_INFORME")}}</label>
+									<select class="form-control" name="TIPO_INFORME" id="Analisis_TIPO_INFORME" [(ngModel)]="analisis.tipO_INFORME">
+									<option value="0">{{l('Foliar')}}</option>
+
+									<option value="1">{{l('Suelo')}}</option>
+
+
+									</select>
+								</div>
+					
+								<div class="form-group">
+									<label for="Analisis_FECHA_MUESTREO">{{l("FECHA_MUESTREO")}}</label>
+									 <input class="form-control m-input" type="datetime" bsDatepicker [(ngModel)]="fechA_MUESTREO" id="Analisis_FECHA_MUESTREO" name="Analisis_FECHA_MUESTREO">
+								</div>
+					
+								<div class="form-group">
+									<label for="Analisis_FECHA_REGISTRO">{{l("FECHA_REGISTRO")}}</label>
+									 <input class="form-control m-input" type="datetime" bsDatepicker [(ngModel)]="fechA_REGISTRO" id="Analisis_FECHA_REGISTRO" name="Analisis_FECHA_REGISTRO">
+								</div>
+					
+								<div class="form-group">
+									<label for="Analisis_FECHA_ENTREGA">{{l("FECHA_ENTREGA")}}</label>
+									 <input class="form-control m-input" type="datetime" bsDatepicker [(ngModel)]="fechA_ENTREGA" id="Analisis_FECHA_ENTREGA" name="Analisis_FECHA_ENTREGA">
+								</div>
+					
+
+                </div>
+                <div class="modal-footer">
+                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{l("Cancel")}}</button>
+                    <button type="submit" class="btn btn-primary blue" [disabled]="!analisisForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{l("Save")}}</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+<fincaLookupTableModal #fincaLookupTableModal (modalSave)="getNewFincaId()"></fincaLookupTableModal>
+		 
+</div>

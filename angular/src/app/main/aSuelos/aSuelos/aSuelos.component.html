@@ -1,0 +1,761 @@
+<div [@routerTransition]>
+    <div class="m-subheader">
+        <div class="d-flex align-items-center">
+            <div class="mr-auto col-md-6">
+                <h3 class="m-subheader__title m-subheader__title--separator">
+                    <span>{{l("ASuelos")}}</span>
+                </h3>
+                <span class="m-section__sub">
+                    {{l("ASuelosHeaderInfo")}}
+                </span>
+            </div>
+            <div class="col-md-6 text-right">
+				<button (click)="exportToExcel()" class="btn btn-outline-success"><i class="fa fa-file-excel"></i> {{l("ExportToExcel")}}</button>
+                <button *ngIf="isGranted('Pages.ASuelos.Create')" (click)="createASuelo()" 
+			class="btn btn-primary blue"><i class="fa fa-plus"></i> {{l("CreateNewASuelo")}}</button>
+            </div>
+        </div>
+    </div>
+    <div class="m-content">
+        <div class="m-portlet m-portlet--mobile">
+            <div class="m-portlet__body">
+
+				<form class="horizontal-form" autocomplete="off">
+                    <div class="m-form m-form--label-align-right">
+                        <div class="row align-items-center m--margin-bottom-10">
+                            <div class="col-xl-12">
+                                <div class="form-group m-form__group align-items-center">
+                                    <div class="input-group">
+                                        <input [(ngModel)]="filterText" name="filterText" autoFocus class="form-control m-input" [placeholder]="l('SearchWithThreeDot')" type="text">
+                                        <span class="input-group-btn">
+                                            <button (click)="getASuelos()" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+						 <div class="row m--margin-bottom-10" [hidden]="!advancedFiltersAreShown">
+						 	<div class="col-md-12">
+						         <div class="m-separator m-separator--dashed"></div>
+						     </div>
+
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="COD_SUELOSFilter">{{l("COD_SUELOS")}}</label>
+									<input type="text" class="form-control" id="COD_SUELOSFilter" name="coD_SUELOSFilter" [(ngModel)]="coD_SUELOSFilter">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="ID_SUELOSFilter">{{l("ID_SUELOS")}}</label>
+									<input type="text" class="form-control" id="ID_SUELOSFilter" name="iD_SUELOSFilter" [(ngModel)]="iD_SUELOSFilter">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="MATERIAL_SUELOSFilter">{{l("MATERIAL_SUELOS")}}</label>
+									<input type="text" class="form-control" id="MATERIAL_SUELOSFilter" name="materiaL_SUELOSFilter" [(ngModel)]="materiaL_SUELOSFilter">
+								</div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinPROFUNDIDAD_MUESTRAFilter">{{l("MinMax")}} {{l("PROFUNDIDAD_MUESTRA")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinPROFUNDIDAD_MUESTRAFilter" [(ngModel)]="minPROFUNDIDAD_MUESTRAFilter" placeholder="{{l('MinValue')}}" name="minPROFUNDIDAD_MUESTRAFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxPROFUNDIDAD_MUESTRAFilter" placeholder="{{l('MaxValue')}}" name="maxPROFUNDIDAD_MUESTRAFilter" />
+									</div>
+                                </div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="TEXTURA_SUELOSFilter">{{l("TEXTURA_SUELOS")}}</label>
+									<input type="text" class="form-control" id="TEXTURA_SUELOSFilter" name="texturA_SUELOSFilter" [(ngModel)]="texturA_SUELOSFilter">
+								</div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinARENAFilter">{{l("MinMax")}} {{l("ARENA")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinARENAFilter" [(ngModel)]="minARENAFilter" placeholder="{{l('MinValue')}}" name="minARENAFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxARENAFilter" placeholder="{{l('MaxValue')}}" name="maxARENAFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinLIMOFilter">{{l("MinMax")}} {{l("LIMO")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinLIMOFilter" [(ngModel)]="minLIMOFilter" placeholder="{{l('MinValue')}}" name="minLIMOFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxLIMOFilter" placeholder="{{l('MaxValue')}}" name="maxLIMOFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinARCILLAFilter">{{l("MinMax")}} {{l("ARCILLA")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinARCILLAFilter" [(ngModel)]="minARCILLAFilter" placeholder="{{l('MinValue')}}" name="minARCILLAFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxARCILLAFilter" placeholder="{{l('MaxValue')}}" name="maxARCILLAFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinPHFilter">{{l("MinMax")}} {{l("PH")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinPHFilter" [(ngModel)]="minPHFilter" placeholder="{{l('MinValue')}}" name="minPHFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxPHFilter" placeholder="{{l('MaxValue')}}" name="maxPHFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinCARBONO_ORGANICOFilter">{{l("MinMax")}} {{l("CARBONO_ORGANICO")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinCARBONO_ORGANICOFilter" [(ngModel)]="minCARBONO_ORGANICOFilter" placeholder="{{l('MinValue')}}" name="minCARBONO_ORGANICOFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxCARBONO_ORGANICOFilter" placeholder="{{l('MaxValue')}}" name="maxCARBONO_ORGANICOFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinMATERIA_ORGANICAFilter">{{l("MinMax")}} {{l("MATERIA_ORGANICA")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinMATERIA_ORGANICAFilter" [(ngModel)]="minMATERIA_ORGANICAFilter" placeholder="{{l('MinValue')}}" name="minMATERIA_ORGANICAFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxMATERIA_ORGANICAFilter" placeholder="{{l('MaxValue')}}" name="maxMATERIA_ORGANICAFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinFOSFOROFilter">{{l("MinMax")}} {{l("FOSFORO")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinFOSFOROFilter" [(ngModel)]="minFOSFOROFilter" placeholder="{{l('MinValue')}}" name="minFOSFOROFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxFOSFOROFilter" placeholder="{{l('MaxValue')}}" name="maxFOSFOROFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinAZUFREFilter">{{l("MinMax")}} {{l("AZUFRE")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinAZUFREFilter" [(ngModel)]="minAZUFREFilter" placeholder="{{l('MinValue')}}" name="minAZUFREFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxAZUFREFilter" placeholder="{{l('MaxValue')}}" name="maxAZUFREFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinACIDEZFilter">{{l("MinMax")}} {{l("ACIDEZ")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinACIDEZFilter" [(ngModel)]="minACIDEZFilter" placeholder="{{l('MinValue')}}" name="minACIDEZFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxACIDEZFilter" placeholder="{{l('MaxValue')}}" name="maxACIDEZFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinALUMINIOFilter">{{l("MinMax")}} {{l("ALUMINIO")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinALUMINIOFilter" [(ngModel)]="minALUMINIOFilter" placeholder="{{l('MinValue')}}" name="minALUMINIOFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxALUMINIOFilter" placeholder="{{l('MaxValue')}}" name="maxALUMINIOFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinCALCIOFilter">{{l("MinMax")}} {{l("CALCIO")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinCALCIOFilter" [(ngModel)]="minCALCIOFilter" placeholder="{{l('MinValue')}}" name="minCALCIOFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxCALCIOFilter" placeholder="{{l('MaxValue')}}" name="maxCALCIOFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinMAGNESIOFilter">{{l("MinMax")}} {{l("MAGNESIO")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinMAGNESIOFilter" [(ngModel)]="minMAGNESIOFilter" placeholder="{{l('MinValue')}}" name="minMAGNESIOFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxMAGNESIOFilter" placeholder="{{l('MaxValue')}}" name="maxMAGNESIOFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinPOTASIOFilter">{{l("MinMax")}} {{l("POTASIO")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinPOTASIOFilter" [(ngModel)]="minPOTASIOFilter" placeholder="{{l('MinValue')}}" name="minPOTASIOFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxPOTASIOFilter" placeholder="{{l('MaxValue')}}" name="maxPOTASIOFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinSODIOFilter">{{l("MinMax")}} {{l("SODIO")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinSODIOFilter" [(ngModel)]="minSODIOFilter" placeholder="{{l('MinValue')}}" name="minSODIOFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxSODIOFilter" placeholder="{{l('MaxValue')}}" name="maxSODIOFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinCATIONICOFilter">{{l("MinMax")}} {{l("CATIONICO")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinCATIONICOFilter" [(ngModel)]="minCATIONICOFilter" placeholder="{{l('MinValue')}}" name="minCATIONICOFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxCATIONICOFilter" placeholder="{{l('MaxValue')}}" name="maxCATIONICOFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinELECTRICAFilter">{{l("MinMax")}} {{l("ELECTRICA")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinELECTRICAFilter" [(ngModel)]="minELECTRICAFilter" placeholder="{{l('MinValue')}}" name="minELECTRICAFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxELECTRICAFilter" placeholder="{{l('MaxValue')}}" name="maxELECTRICAFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinBOROFilter">{{l("MinMax")}} {{l("BORO")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinBOROFilter" [(ngModel)]="minBOROFilter" placeholder="{{l('MinValue')}}" name="minBOROFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxBOROFilter" placeholder="{{l('MaxValue')}}" name="maxBOROFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinHIERROFilter">{{l("MinMax")}} {{l("HIERRO")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinHIERROFilter" [(ngModel)]="minHIERROFilter" placeholder="{{l('MinValue')}}" name="minHIERROFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxHIERROFilter" placeholder="{{l('MaxValue')}}" name="maxHIERROFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinCOBREFilter">{{l("MinMax")}} {{l("COBRE")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinCOBREFilter" [(ngModel)]="minCOBREFilter" placeholder="{{l('MinValue')}}" name="minCOBREFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxCOBREFilter" placeholder="{{l('MaxValue')}}" name="maxCOBREFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinMANGANESOFilter">{{l("MinMax")}} {{l("MANGANESO")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinMANGANESOFilter" [(ngModel)]="minMANGANESOFilter" placeholder="{{l('MinValue')}}" name="minMANGANESOFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxMANGANESOFilter" placeholder="{{l('MaxValue')}}" name="maxMANGANESOFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinZINCFilter">{{l("MinMax")}} {{l("ZINC")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinZINCFilter" [(ngModel)]="minZINCFilter" placeholder="{{l('MinValue')}}" name="minZINCFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxZINCFilter" placeholder="{{l('MaxValue')}}" name="maxZINCFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinCICEFilter">{{l("MinMax")}} {{l("CICE")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinCICEFilter" [(ngModel)]="minCICEFilter" placeholder="{{l('MinValue')}}" name="minCICEFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxCICEFilter" placeholder="{{l('MaxValue')}}" name="maxCICEFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinSUMA_BASESFilter">{{l("MinMax")}} {{l("SUMA_BASES")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinSUMA_BASESFilter" [(ngModel)]="minSUMA_BASESFilter" placeholder="{{l('MinValue')}}" name="minSUMA_BASESFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxSUMA_BASESFilter" placeholder="{{l('MaxValue')}}" name="maxSUMA_BASESFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinSAT_BASESFilter">{{l("MinMax")}} {{l("SAT_BASES")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinSAT_BASESFilter" [(ngModel)]="minSAT_BASESFilter" placeholder="{{l('MinValue')}}" name="minSAT_BASESFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxSAT_BASESFilter" placeholder="{{l('MaxValue')}}" name="maxSAT_BASESFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinSAT_KFilter">{{l("MinMax")}} {{l("SAT_K")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinSAT_KFilter" [(ngModel)]="minSAT_KFilter" placeholder="{{l('MinValue')}}" name="minSAT_KFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxSAT_KFilter" placeholder="{{l('MaxValue')}}" name="maxSAT_KFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinSAT_CAFilter">{{l("MinMax")}} {{l("SAT_CA")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinSAT_CAFilter" [(ngModel)]="minSAT_CAFilter" placeholder="{{l('MinValue')}}" name="minSAT_CAFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxSAT_CAFilter" placeholder="{{l('MaxValue')}}" name="maxSAT_CAFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinSAT_MGFilter">{{l("MinMax")}} {{l("SAT_MG")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinSAT_MGFilter" [(ngModel)]="minSAT_MGFilter" placeholder="{{l('MinValue')}}" name="minSAT_MGFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxSAT_MGFilter" placeholder="{{l('MaxValue')}}" name="maxSAT_MGFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinSAT_NAFilter">{{l("MinMax")}} {{l("SAT_NA")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinSAT_NAFilter" [(ngModel)]="minSAT_NAFilter" placeholder="{{l('MinValue')}}" name="minSAT_NAFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxSAT_NAFilter" placeholder="{{l('MaxValue')}}" name="maxSAT_NAFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinSAT_ALFilter">{{l("MinMax")}} {{l("SAT_AL")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinSAT_ALFilter" [(ngModel)]="minSAT_ALFilter" placeholder="{{l('MinValue')}}" name="minSAT_ALFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxSAT_ALFilter" placeholder="{{l('MaxValue')}}" name="maxSAT_ALFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinCA_MGFilter">{{l("MinMax")}} {{l("CA_MG")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinCA_MGFilter" [(ngModel)]="minCA_MGFilter" placeholder="{{l('MinValue')}}" name="minCA_MGFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxCA_MGFilter" placeholder="{{l('MaxValue')}}" name="maxCA_MGFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinK_MGFilter">{{l("MinMax")}} {{l("K_MG")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinK_MGFilter" [(ngModel)]="minK_MGFilter" placeholder="{{l('MinValue')}}" name="minK_MGFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxK_MGFilter" placeholder="{{l('MaxValue')}}" name="maxK_MGFilter" />
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+									<label for="MinCA_MG_DIV_KFilter">{{l("MinMax")}} {{l("CA_MG_DIV_K")}}</label>
+									<div class="input-group">
+                                        <input type="number" class="form-control" id="MinCA_MG_DIV_KFilter" [(ngModel)]="minCA_MG_DIV_KFilter" placeholder="{{l('MinValue')}}" name="minCA_MG_DIV_KFilter" />
+                                        <input type="number" class="form-control" [(ngModel)]="maxCA_MG_DIV_KFilter" placeholder="{{l('MaxValue')}}" name="maxCA_MG_DIV_KFilter" />
+									</div>
+                                </div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="ANALISIS_IDFilter">{{l("ANALISIS_ID")}}</label>
+									<input type="text" class="form-control" id="ANALISIS_IDFilter" name="analisiS_IDFilter" [(ngModel)]="analisiS_IDFilter">
+								</div>
+                            </div>
+
+                        </div>
+                        <div class="row margin-bottom-10">
+                            <div class="col-sm-12">
+                                <span class="clickable-item text-muted" *ngIf="!advancedFiltersAreShown" (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i class="fa fa-angle-down"></i> {{l("ShowAdvancedFilters")}}</span>
+                                <span class="clickable-item text-muted" *ngIf="advancedFiltersAreShown" (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i class="fa fa-angle-up"></i> {{l("HideAdvancedFilters")}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="row align-items-center">
+                    <!--<Primeng-Datatable-Start>-->
+                    <div class="primeng-datatable-container"
+                         [busyIf]="primengTableHelper.isLoading">
+                        <p-table #dataTable
+                                     (onLazyLoad)="getASuelos($event)"
+                                     [value]="primengTableHelper.records"
+                                     rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
+                                     [paginator]="false"
+                                     [lazy]="true"
+                                     [scrollable]="true"
+                                     ScrollWidth="100%"
+                                     [responsive]="primengTableHelper.isResponsive"
+                                     [resizableColumns]="primengTableHelper.resizableColumns">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="width: 130px" [hidden]="!isGrantedAny('Pages.ASuelos.Edit', 'Pages.ASuelos.Delete')">{{l('Actions')}}</th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.coD_SUELOS">
+                                        {{l('COD_SUELOS')}}
+                                        <p-sortIcon field="aSuelo.coD_SUELOS"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.iD_SUELOS">
+                                        {{l('ID_SUELOS')}}
+                                        <p-sortIcon field="aSuelo.iD_SUELOS"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.materiaL_SUELOS">
+                                        {{l('MATERIAL_SUELOS')}}
+                                        <p-sortIcon field="aSuelo.materiaL_SUELOS"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.profundidaD_MUESTRA">
+                                        {{l('PROFUNDIDAD_MUESTRA')}}
+                                        <p-sortIcon field="aSuelo.profundidaD_MUESTRA"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.texturA_SUELOS">
+                                        {{l('TEXTURA_SUELOS')}}
+                                        <p-sortIcon field="aSuelo.texturA_SUELOS"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.arena">
+                                        {{l('ARENA')}}
+                                        <p-sortIcon field="aSuelo.arena"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.limo">
+                                        {{l('LIMO')}}
+                                        <p-sortIcon field="aSuelo.limo"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.arcilla">
+                                        {{l('ARCILLA')}}
+                                        <p-sortIcon field="aSuelo.arcilla"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.ph">
+                                        {{l('PH')}}
+                                        <p-sortIcon field="aSuelo.ph"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.carbonO_ORGANICO">
+                                        {{l('CARBONO_ORGANICO')}}
+                                        <p-sortIcon field="aSuelo.carbonO_ORGANICO"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.materiA_ORGANICA">
+                                        {{l('MATERIA_ORGANICA')}}
+                                        <p-sortIcon field="aSuelo.materiA_ORGANICA"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.fosforo">
+                                        {{l('FOSFORO')}}
+                                        <p-sortIcon field="aSuelo.fosforo"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.azufre">
+                                        {{l('AZUFRE')}}
+                                        <p-sortIcon field="aSuelo.azufre"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.acidez">
+                                        {{l('ACIDEZ')}}
+                                        <p-sortIcon field="aSuelo.acidez"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.aluminio">
+                                        {{l('ALUMINIO')}}
+                                        <p-sortIcon field="aSuelo.aluminio"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.calcio">
+                                        {{l('CALCIO')}}
+                                        <p-sortIcon field="aSuelo.calcio"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.magnesio">
+                                        {{l('MAGNESIO')}}
+                                        <p-sortIcon field="aSuelo.magnesio"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.potasio">
+                                        {{l('POTASIO')}}
+                                        <p-sortIcon field="aSuelo.potasio"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.sodio">
+                                        {{l('SODIO')}}
+                                        <p-sortIcon field="aSuelo.sodio"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.cationico">
+                                        {{l('CATIONICO')}}
+                                        <p-sortIcon field="aSuelo.cationico"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.electrica">
+                                        {{l('ELECTRICA')}}
+                                        <p-sortIcon field="aSuelo.electrica"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.boro">
+                                        {{l('BORO')}}
+                                        <p-sortIcon field="aSuelo.boro"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.hierro">
+                                        {{l('HIERRO')}}
+                                        <p-sortIcon field="aSuelo.hierro"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.cobre">
+                                        {{l('COBRE')}}
+                                        <p-sortIcon field="aSuelo.cobre"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.manganeso">
+                                        {{l('MANGANESO')}}
+                                        <p-sortIcon field="aSuelo.manganeso"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.zinc">
+                                        {{l('ZINC')}}
+                                        <p-sortIcon field="aSuelo.zinc"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.cice">
+                                        {{l('CICE')}}
+                                        <p-sortIcon field="aSuelo.cice"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.sumA_BASES">
+                                        {{l('SUMA_BASES')}}
+                                        <p-sortIcon field="aSuelo.sumA_BASES"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.saT_BASES">
+                                        {{l('SAT_BASES')}}
+                                        <p-sortIcon field="aSuelo.saT_BASES"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.saT_K">
+                                        {{l('SAT_K')}}
+                                        <p-sortIcon field="aSuelo.saT_K"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.saT_CA">
+                                        {{l('SAT_CA')}}
+                                        <p-sortIcon field="aSuelo.saT_CA"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.saT_MG">
+                                        {{l('SAT_MG')}}
+                                        <p-sortIcon field="aSuelo.saT_MG"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.saT_NA">
+                                        {{l('SAT_NA')}}
+                                        <p-sortIcon field="aSuelo.saT_NA"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.saT_AL">
+                                        {{l('SAT_AL')}}
+                                        <p-sortIcon field="aSuelo.saT_AL"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.cA_MG">
+                                        {{l('CA_MG')}}
+                                        <p-sortIcon field="aSuelo.cA_MG"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.k_MG">
+                                        {{l('K_MG')}}
+                                        <p-sortIcon field="aSuelo.k_MG"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.cA_MG_DIV_K">
+                                        {{l('CA_MG_DIV_K')}}
+                                        <p-sortIcon field="aSuelo.cA_MG_DIV_K"></p-sortIcon>
+                                    </th>
+                                    <th style="width: 150px" pSortableColumn="aSuelo.analisiS_ID">
+                                        {{l('ANALISIS_ID')}}
+                                        <p-sortIcon field="aSuelo.analisiS_ID"></p-sortIcon>
+                                    </th>
+
+                                </tr>
+                            </ng-template>                           
+							<ng-template pTemplate="body" let-record="$implicit">
+                                <tr>
+                                    <td style="width: 130px"
+                                        [hidden]="!isGrantedAny('Pages.ASuelos.Edit', 'Pages.ASuelos.Delete')">
+                                       <div class="btn-group dropdown" dropdown container="body">
+                                            <button class="dropdown-toggle btn btn-sm btn-primary" dropdownToggle>
+                                                <i class="fa fa-cog"></i><span class="caret"></span> {{l("Actions")}}
+                                            </button>
+												<ul class="dropdown-menu"  *dropdownMenu>
+												<li>
+													<a href="javascript:;"
+														(click)="viewASueloModal.show(record)">{{l('View')}}</a>
+												</li>
+												<li>
+													<a href="javascript:;" *ngIf="permission.isGranted('Pages.ASuelos.Edit')"
+														(click)="createOrEditASueloModal.show(record.aSuelo.id)">{{l('Edit')}}</a>
+												</li>
+												<li>
+											        <a href="javascript:;" *ngIf="permission.isGranted('Pages.ASuelos.Delete')"
+														(click)="deleteASuelo(record.aSuelo)">{{l('Delete')}}</a>
+												</li>
+                                                <li>
+                                                    <a href="javascript:;" *ngIf="entityHistoryEnabled"
+                                                       (click)="showHistory(record.aSuelo)">{{l('History')}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('COD_SUELOS')}}</span>
+											{{record.aSuelo.coD_SUELOS}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('ID_SUELOS')}}</span>
+											{{record.aSuelo.iD_SUELOS}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('MATERIAL_SUELOS')}}</span>
+											{{record.aSuelo.materiaL_SUELOS}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('PROFUNDIDAD_MUESTRA')}}</span>
+											{{record.aSuelo.profundidaD_MUESTRA}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('TEXTURA_SUELOS')}}</span>
+											{{record.aSuelo.texturA_SUELOS}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('ARENA')}}</span>
+											{{record.aSuelo.arena}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('LIMO')}}</span>
+											{{record.aSuelo.limo}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('ARCILLA')}}</span>
+											{{record.aSuelo.arcilla}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('PH')}}</span>
+											{{record.aSuelo.ph}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('CARBONO_ORGANICO')}}</span>
+											{{record.aSuelo.carbonO_ORGANICO}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('MATERIA_ORGANICA')}}</span>
+											{{record.aSuelo.materiA_ORGANICA}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('FOSFORO')}}</span>
+											{{record.aSuelo.fosforo}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('AZUFRE')}}</span>
+											{{record.aSuelo.azufre}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('ACIDEZ')}}</span>
+											{{record.aSuelo.acidez}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('ALUMINIO')}}</span>
+											{{record.aSuelo.aluminio}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('CALCIO')}}</span>
+											{{record.aSuelo.calcio}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('MAGNESIO')}}</span>
+											{{record.aSuelo.magnesio}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('POTASIO')}}</span>
+											{{record.aSuelo.potasio}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('SODIO')}}</span>
+											{{record.aSuelo.sodio}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('CATIONICO')}}</span>
+											{{record.aSuelo.cationico}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('ELECTRICA')}}</span>
+											{{record.aSuelo.electrica}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('BORO')}}</span>
+											{{record.aSuelo.boro}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('HIERRO')}}</span>
+											{{record.aSuelo.hierro}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('COBRE')}}</span>
+											{{record.aSuelo.cobre}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('MANGANESO')}}</span>
+											{{record.aSuelo.manganeso}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('ZINC')}}</span>
+											{{record.aSuelo.zinc}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('CICE')}}</span>
+											{{record.aSuelo.cice}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('SUMA_BASES')}}</span>
+											{{record.aSuelo.sumA_BASES}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('SAT_BASES')}}</span>
+											{{record.aSuelo.saT_BASES}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('SAT_K')}}</span>
+											{{record.aSuelo.saT_K}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('SAT_CA')}}</span>
+											{{record.aSuelo.saT_CA}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('SAT_MG')}}</span>
+											{{record.aSuelo.saT_MG}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('SAT_NA')}}</span>
+											{{record.aSuelo.saT_NA}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('SAT_AL')}}</span>
+											{{record.aSuelo.saT_AL}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('CA_MG')}}</span>
+											{{record.aSuelo.cA_MG}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('K_MG')}}</span>
+											{{record.aSuelo.k_MG}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('CA_MG_DIV_K')}}</span>
+											{{record.aSuelo.cA_MG_DIV_K}}
+										</td>
+                                    <td style="width:150px">
+											<span class="ui-column-title"> {{l('ANALISIS_ID')}}</span>
+											{{record.aSuelo.analisiS_ID}}
+										</td>
+
+                                </tr>
+                            </ng-template>
+                        </p-table>
+						<div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+                            {{l('NoData')}}
+                        </div>
+                        <div class="primeng-paging-container">
+                            <p-paginator rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
+                                         #paginator
+                                         (onPageChange)="getASuelos($event)"
+                                         [totalRecords]="primengTableHelper.totalRecordsCount"
+                                         [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage">
+                            </p-paginator>
+                            <span class="total-records-count">
+                                {{l('TotalRecordsCount', primengTableHelper.totalRecordsCount)}}
+                            </span>
+                        </div>
+                    </div>
+                    <!--<Primeng-Datatable-End>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <createOrEditASueloModal #createOrEditASueloModal (modalSave)="getASuelos()"></createOrEditASueloModal>
+    <viewASueloModal #viewASueloModal></viewASueloModal>
+     <entityTypeHistoryModal #entityTypeHistoryModal></entityTypeHistoryModal>
+</div>

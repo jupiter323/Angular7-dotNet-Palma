@@ -1,0 +1,118 @@
+<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>{{l("")}}</span>
+                </h4>
+                <button type="button" class="close" (click)="close()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <h6>{{l("COD_FOLIAR")}} :</h6>
+                        {{item.aFoliar.coD_FOLIAR}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("ID_FOLIAR")}} :</h6>
+                        {{item.aFoliar.iD_FOLIAR}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("MATERIAL_FOLIAR")}} :</h6>
+                        {{item.aFoliar.materiaL_FOLIAR}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("NUM_HOJA_FOLIAR")}} :</h6>
+                        {{item.aFoliar.nuM_HOJA_FOLIAR}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("NITROGENO")}} :</h6>
+                        {{item.aFoliar.nitrogeno}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("FOSFORO")}} :</h6>
+                        {{item.aFoliar.fosforo}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("POTASIO")}} :</h6>
+                        {{item.aFoliar.potasio}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("CALCIO")}} :</h6>
+                        {{item.aFoliar.calcio}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("MAGNESIO")}} :</h6>
+                        {{item.aFoliar.magnesio}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("CLORO")}} :</h6>
+                        {{item.aFoliar.cloro}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("AZUFRE")}} :</h6>
+                        {{item.aFoliar.azufre}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("BORO")}} :</h6>
+                        {{item.aFoliar.boro}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("HIERRO")}} :</h6>
+                        {{item.aFoliar.hierro}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("COBRE")}} :</h6>
+                        {{item.aFoliar.cobre}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("MANGANESO")}} :</h6>
+                        {{item.aFoliar.manganeso}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("ZINC")}} :</h6>
+                        {{item.aFoliar.zinc}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Ca_Mg_K")}} :</h6>
+                        {{item.aFoliar.ca_Mg_K}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Ca_Mg_div_K")}} :</h6>
+                        {{item.aFoliar.ca_Mg_div_K}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("N_div_K")}} :</h6>
+                        {{item.aFoliar.n_div_K}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("N_div_P")}} :</h6>
+                        {{item.aFoliar.n_div_P}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("K_div_P")}} :</h6>
+                        {{item.aFoliar.k_div_P}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("Ca_div_B")}} :</h6>
+                        {{item.aFoliar.ca_div_B}}
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>{{l("ANALISIS_ID")}} :</h6>
+                        {{item.aFoliar.analisiS_ID}}
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button [disabled]="saving" type="button" class="btn btn-primary blue" (click)="close()">{{l("Close")}}</button>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -2,6 +2,19 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppCommonModule } from '@app/shared/common/app-common.module';
+import { ASuelosComponent } from './aSuelos/aSuelos/aSuelos.component';
+import { ViewASueloModalComponent } from './aSuelos/aSuelos/view-aSuelo-modal.component';
+import { CreateOrEditASueloModalComponent } from './aSuelos/aSuelos/create-or-edit-aSuelo-modal.component';
+
+import { AFoliaresComponent } from './aFoliares/aFoliares/aFoliares.component';
+import { ViewAFoliarModalComponent } from './aFoliares/aFoliares/view-aFoliar-modal.component';
+import { CreateOrEditAFoliarModalComponent } from './aFoliares/aFoliares/create-or-edit-aFoliar-modal.component';
+
+import { AnalisesComponent } from './analises/analises/analises.component';
+import { ViewAnalisisModalComponent } from './analises/analises/view-analisis-modal.component';
+import { CreateOrEditAnalisisModalComponent } from './analises/analises/create-or-edit-analisis-modal.component';
+import { FincaLookupTableModalComponent } from './analises/analises/finca-lookup-table-modal.component';
+
 import { FincasComponent } from './fincas/fincas/fincas.component';
 import { ViewFincaModalComponent } from './fincas/fincas/view-finca-modal.component';
 import { CreateOrEditFincaModalComponent } from './fincas/fincas/create-or-edit-finca-modal.component';
@@ -67,6 +80,13 @@ NgxBootstrapDatePickerConfigService.registerNgxBootstrapDatePickerLocales();
         BsDropdownModule.forRoot()
     ],
     declarations: [
+		ASuelosComponent,
+		ViewASueloModalComponent,		CreateOrEditASueloModalComponent,
+		AFoliaresComponent,
+		ViewAFoliarModalComponent,		CreateOrEditAFoliarModalComponent,
+		AnalisesComponent,
+		ViewAnalisisModalComponent,		CreateOrEditAnalisisModalComponent,
+    FincaLookupTableModalComponent,
         FincasComponent,
         ViewFincaModalComponent, CreateOrEditFincaModalComponent,
         ClienteLookupTableModalComponent,

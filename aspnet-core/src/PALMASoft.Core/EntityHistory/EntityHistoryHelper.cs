@@ -1,3 +1,5 @@
+using PALMASoft.ASuelos;
+using PALMASoft.AFoliares;
 using PALMASoft.Fincas;
 using PALMASoft.Clientes;
 using PALMASoft.Municipios;
