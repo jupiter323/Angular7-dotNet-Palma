@@ -55,6 +55,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BsDatepickerModule, BsDatepickerConfig, BsDaterangepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { NgxBootstrapDatePickerConfigService } from 'assets/ngx-bootstrap/ngx-bootstrap-datepicker-config.service';
 import { AnaliseComboComponent } from './shared/analise-combo/analise-combo.component';
+import { ViewAnalisisDetailModalComponent } from './analises/analises/view-analisis-detail-modal.component';
 
 NgxBootstrapDatePickerConfigService.registerNgxBootstrapDatePickerLocales();
 
@@ -86,7 +87,9 @@ NgxBootstrapDatePickerConfigService.registerNgxBootstrapDatePickerLocales();
 		AFoliaresComponent,
 		ViewAFoliarModalComponent,		CreateOrEditAFoliarModalComponent,
 		AnalisesComponent,
-		ViewAnalisisModalComponent,		CreateOrEditAnalisisModalComponent,
+        ViewAnalisisModalComponent,
+        ViewAnalisisDetailModalComponent,
+        		CreateOrEditAnalisisModalComponent,
     FincaLookupTableModalComponent,
         FincasComponent,
         ViewFincaModalComponent, CreateOrEditFincaModalComponent,

@@ -14,6 +14,7 @@ import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
 import { FileDownloadService } from '@shared/utils/file-download.service';
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import { ViewAnalisisDetailModalComponent } from './view-analisis-detail-modal.component';
 
 @Component({
     templateUrl: './analises.component.html',
@@ -23,7 +24,8 @@ import * as moment from 'moment';
 export class AnalisesComponent extends AppComponentBase {
 
     @ViewChild('createOrEditAnalisisModal') createOrEditAnalisisModal: CreateOrEditAnalisisModalComponent;
-    @ViewChild('viewAnalisisModalComponent') viewAnalisisModal: ViewAnalisisModalComponent;
+    @ViewChild('viewAnalisisModal') viewAnalisisModal: ViewAnalisisModalComponent;
+    @ViewChild('viewAnalisisDetailModal') viewAnalisisDetailModal: ViewAnalisisDetailModalComponent;
     @ViewChild('dataTable') dataTable: Table;
     @ViewChild('paginator') paginator: Paginator;
 
@@ -54,7 +56,7 @@ export class AnalisesComponent extends AppComponentBase {
         super(injector);
     }
 
-    getAnalises(event?: LazyLoadEvent) {
+    getAnalises(event?: LazyLoadEvent) {       
         if (this.primengTableHelper.shouldResetPaging(event)) {
             this.paginator.changePage(0);
             return;

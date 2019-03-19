@@ -10,9 +10,10 @@
                 </span>
             </div>
             <div class="col-md-6 text-right">
-				<button (click)="exportToExcel()" class="btn btn-outline-success"><i class="fa fa-file-excel"></i> {{l("ExportToExcel")}}</button>
-                <button *ngIf="isGranted('Pages.Analises.Create')" (click)="createAnalisis()" 
-			class="btn btn-primary blue"><i class="fa fa-plus"></i> {{l("CreateNewAnalisis")}}</button>
+                <button (click)="exportToExcel()" class="btn btn-outline-success"><i class="fa fa-file-excel"></i>
+                    {{l("ExportToExcel")}}</button>
+                <button *ngIf="isGranted('Pages.Analises.Create')" (click)="createAnalisis()"
+                    class="btn btn-primary blue"><i class="fa fa-plus"></i> {{l("CreateNewAnalisis")}}</button>
             </div>
         </div>
     </div>
@@ -20,82 +21,104 @@
         <div class="m-portlet m-portlet--mobile">
             <div class="m-portlet__body">
 
-				<form class="horizontal-form" autocomplete="off">
+                <form class="horizontal-form" autocomplete="off">
                     <div class="m-form m-form--label-align-right">
                         <div class="row align-items-center m--margin-bottom-10">
                             <div class="col-xl-12">
                                 <div class="form-group m-form__group align-items-center">
                                     <div class="input-group">
-                                        <input [(ngModel)]="filterText" name="filterText" autoFocus class="form-control m-input" [placeholder]="l('SearchWithThreeDot')" type="text">
+                                        <input [(ngModel)]="filterText" name="filterText" autoFocus
+                                            class="form-control m-input" [placeholder]="l('SearchWithThreeDot')"
+                                            type="text">
                                         <span class="input-group-btn">
-                                            <button (click)="getAnalises()" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>
+                                            <button (click)="getAnalises()" class="btn btn-primary" type="submit"><i
+                                                    class="flaticon-search-1"></i></button>
                                         </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-						 <div class="row m--margin-bottom-10" [hidden]="!advancedFiltersAreShown">
-						 	<div class="col-md-12">
-						         <div class="m-separator m-separator--dashed"></div>
-						     </div>
-
-
-							<div class="col-md-3">
-								<div class="form-group">
-									<label for="ID_INFORMEFilter">{{l("ID_INFORME")}}</label>
-									<input type="text" class="form-control" id="ID_INFORMEFilter" name="iD_INFORMEFilter" [(ngModel)]="iD_INFORMEFilter">
-								</div>
+                        <div class="row m--margin-bottom-10" [hidden]="!advancedFiltersAreShown">
+                            <div class="col-md-12">
+                                <div class="m-separator m-separator--dashed"></div>
                             </div>
-							<div class="col-md-3">
-								<label for="TIPO_INFORMEFilterSelect">{{l("TIPO_INFORME")}}</label>
-								<select class="form-control" name="TIPO_INFORMEFilter" id="TIPO_INFORMEFilterSelect" [(ngModel)]="tipO_INFORMEFilter">
-								<option value="-1">{{l("All")}}</option>
-																			<option value="0">{{l('Foliar')}}</option>
-
-										<option value="1">{{l('Suelo')}}</option>
 
 
-								</select>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="ID_INFORMEFilter">{{l("ID_INFORME")}}</label>
+                                    <input type="text" class="form-control" id="ID_INFORMEFilter"
+                                        name="iD_INFORMEFilter" [(ngModel)]="iD_INFORMEFilter">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="TIPO_INFORMEFilterSelect">{{l("TIPO_INFORME")}}</label>
+                                <select class="form-control" name="TIPO_INFORMEFilter" id="TIPO_INFORMEFilterSelect"
+                                    [(ngModel)]="tipO_INFORMEFilter">
+                                    <option value="-1">{{l("All")}}</option>
+                                    <option value="0">{{l('Foliar')}}</option>
+
+                                    <option value="1">{{l('Suelo')}}</option>
+
+
+                                </select>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-									<label  for="MinFECHA_MUESTREOFilter">{{l("MinMax")}} {{l("FECHA_MUESTREO")}}</label>
-									<div class="input-group">
-                                        <input class="form-control m-input" id="MinFECHA_MUESTREOFilter" name="MinFECHA_MUESTREOFilter" type="datetime" bsDatepicker  placeholder="{{l('MinValue')}}" [(ngModel)]="minFECHA_MUESTREOFilter">
-                                        <input class="form-control m-input" id="MaxFECHA_MUESTREOFilter" name="MaxFECHA_MUESTREOFilter" type="datetime" bsDatepicker  placeholder="{{l('MaxValue')}}" [(ngModel)]="maxFECHA_MUESTREOFilter">
-									</div>
+                                    <label for="MinFECHA_MUESTREOFilter">{{l("MinMax")}} {{l("FECHA_MUESTREO")}}</label>
+                                    <div class="input-group">
+                                        <input class="form-control m-input" id="MinFECHA_MUESTREOFilter"
+                                            name="MinFECHA_MUESTREOFilter" type="datetime" bsDatepicker
+                                            placeholder="{{l('MinValue')}}" [(ngModel)]="minFECHA_MUESTREOFilter">
+                                        <input class="form-control m-input" id="MaxFECHA_MUESTREOFilter"
+                                            name="MaxFECHA_MUESTREOFilter" type="datetime" bsDatepicker
+                                            placeholder="{{l('MaxValue')}}" [(ngModel)]="maxFECHA_MUESTREOFilter">
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-									<label  for="MinFECHA_REGISTROFilter">{{l("MinMax")}} {{l("FECHA_REGISTRO")}}</label>
-									<div class="input-group">
-                                        <input class="form-control m-input" id="MinFECHA_REGISTROFilter" name="MinFECHA_REGISTROFilter" type="datetime" bsDatepicker  placeholder="{{l('MinValue')}}" [(ngModel)]="minFECHA_REGISTROFilter">
-                                        <input class="form-control m-input" id="MaxFECHA_REGISTROFilter" name="MaxFECHA_REGISTROFilter" type="datetime" bsDatepicker  placeholder="{{l('MaxValue')}}" [(ngModel)]="maxFECHA_REGISTROFilter">
-									</div>
+                                    <label for="MinFECHA_REGISTROFilter">{{l("MinMax")}} {{l("FECHA_REGISTRO")}}</label>
+                                    <div class="input-group">
+                                        <input class="form-control m-input" id="MinFECHA_REGISTROFilter"
+                                            name="MinFECHA_REGISTROFilter" type="datetime" bsDatepicker
+                                            placeholder="{{l('MinValue')}}" [(ngModel)]="minFECHA_REGISTROFilter">
+                                        <input class="form-control m-input" id="MaxFECHA_REGISTROFilter"
+                                            name="MaxFECHA_REGISTROFilter" type="datetime" bsDatepicker
+                                            placeholder="{{l('MaxValue')}}" [(ngModel)]="maxFECHA_REGISTROFilter">
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-									<label  for="MinFECHA_ENTREGAFilter">{{l("MinMax")}} {{l("FECHA_ENTREGA")}}</label>
-									<div class="input-group">
-                                        <input class="form-control m-input" id="MinFECHA_ENTREGAFilter" name="MinFECHA_ENTREGAFilter" type="datetime" bsDatepicker  placeholder="{{l('MinValue')}}" [(ngModel)]="minFECHA_ENTREGAFilter">
-                                        <input class="form-control m-input" id="MaxFECHA_ENTREGAFilter" name="MaxFECHA_ENTREGAFilter" type="datetime" bsDatepicker  placeholder="{{l('MaxValue')}}" [(ngModel)]="maxFECHA_ENTREGAFilter">
-									</div>
+                                    <label for="MinFECHA_ENTREGAFilter">{{l("MinMax")}} {{l("FECHA_ENTREGA")}}</label>
+                                    <div class="input-group">
+                                        <input class="form-control m-input" id="MinFECHA_ENTREGAFilter"
+                                            name="MinFECHA_ENTREGAFilter" type="datetime" bsDatepicker
+                                            placeholder="{{l('MinValue')}}" [(ngModel)]="minFECHA_ENTREGAFilter">
+                                        <input class="form-control m-input" id="MaxFECHA_ENTREGAFilter"
+                                            name="MaxFECHA_ENTREGAFilter" type="datetime" bsDatepicker
+                                            placeholder="{{l('MaxValue')}}" [(ngModel)]="maxFECHA_ENTREGAFilter">
+                                    </div>
                                 </div>
                             </div>
-							<div class="col-md-3">
-								<div class="form-group">
-									<label for="FincaNOMBRE_FINCAFilter">({{l("Finca")}}) {{l("NOMBRE_FINCA")}}</label>
-									<input type="text" class="form-control" id="FincaNOMBRE_FINCAFilter" name="fincaNOMBRE_FINCAFilter" [(ngModel)]="fincaNOMBRE_FINCAFilter">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="FincaNOMBRE_FINCAFilter">({{l("Finca")}}) {{l("NOMBRE_FINCA")}}</label>
+                                    <input type="text" class="form-control" id="FincaNOMBRE_FINCAFilter"
+                                        name="fincaNOMBRE_FINCAFilter" [(ngModel)]="fincaNOMBRE_FINCAFilter">
                                 </div>
                             </div>
 
                         </div>
                         <div class="row margin-bottom-10">
                             <div class="col-sm-12">
-                                <span class="clickable-item text-muted" *ngIf="!advancedFiltersAreShown" (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i class="fa fa-angle-down"></i> {{l("ShowAdvancedFilters")}}</span>
-                                <span class="clickable-item text-muted" *ngIf="advancedFiltersAreShown" (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i class="fa fa-angle-up"></i> {{l("HideAdvancedFilters")}}</span>
+                                <span class="clickable-item text-muted" *ngIf="!advancedFiltersAreShown"
+                                    (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i
+                                        class="fa fa-angle-down"></i> {{l("ShowAdvancedFilters")}}</span>
+                                <span class="clickable-item text-muted" *ngIf="advancedFiltersAreShown"
+                                    (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i
+                                        class="fa fa-angle-up"></i> {{l("HideAdvancedFilters")}}</span>
                             </div>
                         </div>
                     </div>
@@ -103,21 +126,16 @@
 
                 <div class="row align-items-center">
                     <!--<Primeng-Datatable-Start>-->
-                    <div class="primeng-datatable-container"
-                         [busyIf]="primengTableHelper.isLoading">
-                        <p-table #dataTable
-                                     (onLazyLoad)="getAnalises($event)"
-                                     [value]="primengTableHelper.records"
-                                     rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
-                                     [paginator]="false"
-                                     [lazy]="true"
-                                     [scrollable]="true"
-                                     ScrollWidth="100%"
-                                     [responsive]="primengTableHelper.isResponsive"
-                                     [resizableColumns]="primengTableHelper.resizableColumns">
+                    <div class="primeng-datatable-container" [busyIf]="primengTableHelper.isLoading">
+                        <p-table #dataTable (onLazyLoad)="getAnalises($event)" [value]="primengTableHelper.records"
+                            rows="{{primengTableHelper.defaultRecordsCountPerPage}}" [paginator]="false" [lazy]="true"
+                            [scrollable]="true" ScrollWidth="100%" [responsive]="primengTableHelper.isResponsive"
+                            [resizableColumns]="primengTableHelper.resizableColumns">
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th style="width: 130px" [hidden]="!isGrantedAny('Pages.Analises.Edit', 'Pages.Analises.Delete')">{{l('Actions')}}</th>
+                                    <th style="width: 130px"
+                                        [hidden]="!isGrantedAny('Pages.Analises.Edit', 'Pages.Analises.Delete')">
+                                        {{l('Actions')}}</th>
                                     <th style="width: 150px" pSortableColumn="fincaNOMBRE_FINCA">
                                         {{l('NOMBRE_FINCA')}}
                                         <p-sortIcon field="fincaNOMBRE_FINCA"></p-sortIcon>
@@ -144,61 +162,67 @@
                                     </th>
 
                                 </tr>
-                            </ng-template>                           
-							<ng-template pTemplate="body" let-record="$implicit">
+                            </ng-template>
+                            <ng-template pTemplate="body" let-record="$implicit">
                                 <tr>
                                     <td style="width: 130px"
                                         [hidden]="!isGrantedAny('Pages.Analises.Edit', 'Pages.Analises.Delete')">
-                                       <div class="btn-group dropdown" dropdown container="body">
+                                        <div class="btn-group dropdown" dropdown container="body">
                                             <button class="dropdown-toggle btn btn-sm btn-primary" dropdownToggle>
                                                 <i class="fa fa-cog"></i><span class="caret"></span> {{l("Actions")}}
                                             </button>
-												<ul class="dropdown-menu"  *dropdownMenu>
-												<li>
-													<a href="javascript:;"
-														(click)="viewAnalisisModal.show(record)">{{l('View')}}</a>
-												</li>
-												<li>
-													<a href="javascript:;" *ngIf="permission.isGranted('Pages.Analises.Edit')"
-														(click)="createOrEditAnalisisModal.show(record.analisis.id)">{{l('Edit')}}</a>
-												</li>
-												<li>
-											        <a href="javascript:;" *ngIf="permission.isGranted('Pages.Analises.Delete')"
-														(click)="deleteAnalisis(record.analisis)">{{l('Delete')}}</a>
-												</li>
+                                            <ul class="dropdown-menu" *dropdownMenu>
+                                                <li>
+                                                    <a href="javascript:;"
+                                                        (click)="viewAnalisisModal.show(record)">{{l('View')}}</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:;"
+                                                        (click)="viewAnalisisDetailModal.show(record)">{{l('View Detail')}}</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:;"
+                                                        *ngIf="permission.isGranted('Pages.Analises.Edit')"
+                                                        (click)="createOrEditAnalisisModal.show(record.analisis.id)">{{l('Edit')}}</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:;"
+                                                        *ngIf="permission.isGranted('Pages.Analises.Delete')"
+                                                        (click)="deleteAnalisis(record.analisis)">{{l('Delete')}}</a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </td>
                                     <td style="width:150px">
-												<span class="ui-column-title"> {{l('NOMBRE_FINCA')}}</span>
-												{{record.fincaNOMBRE_FINCA}}
-											</td>
-                                    <td style="width:150px">
-											<span class="ui-column-title"> {{l('ID_INFORME')}}</span>
-											{{record.analisis.iD_INFORME}}
-										</td>
-                                    <td style="width:150px">
-										<span class="ui-column-title"> {{l('TIPO_INFORME')}}</span>
-										{{l( analisisTipo[record.analisis.tipO_INFORME])}}
+                                        <span class="ui-column-title"> {{l('NOMBRE_FINCA')}}</span>
+                                        {{record.fincaNOMBRE_FINCA}}
                                     </td>
                                     <td style="width:150px">
-										<span class="ui-column-title"> {{l('FECHA_MUESTREO')}}</span>
+                                        <span class="ui-column-title"> {{l('ID_INFORME')}}</span>
+                                        {{record.analisis.iD_INFORME}}
+                                    </td>
+                                    <td style="width:150px">
+                                        <span class="ui-column-title"> {{l('TIPO_INFORME')}}</span>
+                                        {{l( analisisTipo[record.analisis.tipO_INFORME])}}
+                                    </td>
+                                    <td style="width:150px">
+                                        <span class="ui-column-title"> {{l('FECHA_MUESTREO')}}</span>
                                         <span *ngIf="record.analisis.fechA_MUESTREO">
-											{{record.analisis.fechA_MUESTREO | momentFormat:'L'}}
+                                            {{record.analisis.fechA_MUESTREO | momentFormat:'L'}}
                                         </span>
                                         <span *ngIf="!record.analisis.fechA_MUESTREO">-</span>
                                     </td>
                                     <td style="width:150px">
-										<span class="ui-column-title"> {{l('FECHA_REGISTRO')}}</span>
+                                        <span class="ui-column-title"> {{l('FECHA_REGISTRO')}}</span>
                                         <span *ngIf="record.analisis.fechA_REGISTRO">
-											{{record.analisis.fechA_REGISTRO | momentFormat:'L'}}
+                                            {{record.analisis.fechA_REGISTRO | momentFormat:'L'}}
                                         </span>
                                         <span *ngIf="!record.analisis.fechA_REGISTRO">-</span>
                                     </td>
                                     <td style="width:150px">
-										<span class="ui-column-title"> {{l('FECHA_ENTREGA')}}</span>
+                                        <span class="ui-column-title"> {{l('FECHA_ENTREGA')}}</span>
                                         <span *ngIf="record.analisis.fechA_ENTREGA">
-											{{record.analisis.fechA_ENTREGA | momentFormat:'L'}}
+                                            {{record.analisis.fechA_ENTREGA | momentFormat:'L'}}
                                         </span>
                                         <span *ngIf="!record.analisis.fechA_ENTREGA">-</span>
                                     </td>
@@ -206,15 +230,14 @@
                                 </tr>
                             </ng-template>
                         </p-table>
-						<div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
+                        <div class="primeng-no-data" *ngIf="primengTableHelper.totalRecordsCount == 0">
                             {{l('NoData')}}
                         </div>
                         <div class="primeng-paging-container">
-                            <p-paginator rows="{{primengTableHelper.defaultRecordsCountPerPage}}"
-                                         #paginator
-                                         (onPageChange)="getAnalises($event)"
-                                         [totalRecords]="primengTableHelper.totalRecordsCount"
-                                         [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage">
+                            <p-paginator rows="{{primengTableHelper.defaultRecordsCountPerPage}}" #paginator
+                                (onPageChange)="getAnalises($event)"
+                                [totalRecords]="primengTableHelper.totalRecordsCount"
+                                [rowsPerPageOptions]="primengTableHelper.predefinedRecordsCountPerPage">
                             </p-paginator>
                             <span class="total-records-count">
                                 {{l('TotalRecordsCount', primengTableHelper.totalRecordsCount)}}
@@ -229,5 +252,5 @@
 
     <createOrEditAnalisisModal #createOrEditAnalisisModal (modalSave)="getAnalises()"></createOrEditAnalisisModal>
     <viewAnalisisModal #viewAnalisisModal></viewAnalisisModal>
-    
+    <viewAnalisisDetailModal #viewAnalisisDetailModal></viewAnalisisDetailModal>
 </div>

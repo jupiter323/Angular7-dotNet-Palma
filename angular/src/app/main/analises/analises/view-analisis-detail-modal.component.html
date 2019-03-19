@@ -1,0 +1,304 @@
+<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>{{l("")}}</span>
+                </h4>
+                <button type="button" class="close" (click)="close()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div *ngIf="fRecords">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive table-wraper">
+                                <!--begin::Table-->
+                                <table class="table table-bordered table-hover">
+                                    <!--begin::Thead-->
+                                    <thead>
+                                        <tr>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("ID_INFO")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("CoD_FOLIAR")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Identificacion")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("MateriaL_FOLIAR")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("NuM_HOJA_FOLIAR")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Nitrogeno")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Potasio")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Calcio")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Magnesio")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Azufre")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Boro")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Cloro")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Cobre")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Fosforo")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Hierro")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Zinc")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Ca+Mg+K")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("(Ca+Mg)/K")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("N/K")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("N/P")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("K/P")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Ca/B")}}</h6>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let detail of fRecords">
+                                            <td>{{l(detail.aFoliar.id)}}</td>
+                                            <td>{{l(detail.aFoliar.coD_FOLIAR)}}</td>
+                                            <td>{{l(detail.aFoliar.iD_FOLIAR)}}</td>
+                                            <td>{{l(detail.aFoliar.materiaL_FOLIAR)}}</td>
+                                            <td>{{l(detail.aFoliar.nuM_HOJA_FOLIAR)}}</td>
+                                            <td>{{l(detail.aFoliar.nitrogeno)}}</td>
+                                            <td>{{l(detail.aFoliar.potasio)}}</td>
+                                            <td>{{l(detail.aFoliar.calcio)}}</td>
+                                            <td>{{l(detail.aFoliar.magnesio)}}</td>
+                                            <td>{{l(detail.aFoliar.azufre)}}</td>
+                                            <td>{{l(detail.aFoliar.boro)}}</td>
+                                            <td>{{l(detail.aFoliar.cloro)}}</td>
+                                            <td>{{l(detail.aFoliar.cobre)}}</td>
+                                            <td>{{l(detail.aFoliar.fosforo)}}</td>
+                                            <td>{{l(detail.aFoliar.hierro)}}</td>
+                                            <td>{{l(detail.aFoliar.zinc)}}</td>
+                                            <td>{{l(detail.aFoliar.ca_Mg_K)}}</td>
+                                            <td>{{l(detail.aFoliar.ca_Mg_div_K)}}</td>
+                                            <td>{{l(detail.aFoliar.n_div_K)}}</td>
+                                            <td>{{l(detail.aFoliar.n_div_P)}}</td>
+                                            <td>{{l(detail.aFoliar.k_div_P)}}</td>
+                                            <td>{{l(detail.aFoliar.ca_div_B)}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="sRecords">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive table-wraper">
+                                <!--begin::Table-->
+                                <table class="table table-bordered table-hover">
+                                    <!--begin::Thead-->
+                                    <thead>
+                                        <tr>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("ID_INFO")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Codigo")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Identificacion")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("MateriaL_SUELOS")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("ProfundidaD_MUESTRA")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("TexturA_SUELOS")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Arena")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Limo")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Arcilla")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("pH")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("CarbonO_ORGANICO")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("MateriA_ORGANICA")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Fosforo")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Azufre")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Acidez")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Aluminio")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Calcio")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Magnesio")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Potasio")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Sodio")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Capacidad_Cationico")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Conductivida_Electrica")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Boro")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Hierro")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Cobre")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Manganeso")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Zinc")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{"CICE"}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Suma_BASES")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Sat_BASES")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Sat_K")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Sat_CA")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Sat_MG")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Sat_NA")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("Sat_AL")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("CA:MG")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("k:MG")}}</h6>
+                                            </td>
+                                            <td class="m-widget11__label">
+                                                <h6>{{l("(CA+MG)/K")}}</h6>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let detail of sRecords">
+                                            <td>{{detail.aSuelo.id}}</td>
+                                            <td>{{detail.aSuelo.coD_SUELOS}}</td>
+                                            <td>{{detail.aSuelo.iD_SUELOS}}</td>
+                                            <td>{{detail.aSuelo.materiaL_SUELOS}}</td>
+                                            <td>{{detail.aSuelo.profundidaD_MUESTRA}}</td>
+                                            <td>{{detail.aSuelo.texturA_SUELOS}}</td>
+                                            <td>{{detail.aSuelo.arena}}</td>
+                                            <td>{{detail.aSuelo.limo}}</td>
+                                            <td>{{detail.aSuelo.arcilla}}</td>
+                                            <td>{{detail.aSuelo.ph}}</td>
+                                            <td>{{detail.aSuelo.carbonO_ORGANICO}}</td>
+                                            <td>{{detail.aSuelo.materiA_ORGANICA}}</td>
+                                            <td>{{detail.aSuelo.fosforo}}</td>
+                                            <td>{{detail.aSuelo.azufre}}</td>
+                                            <td>{{detail.aSuelo.acidez}}</td>
+                                            <td>{{detail.aSuelo.aluminio}}</td>
+                                            <td>{{detail.aSuelo.calcio}}</td>
+                                            <td>{{detail.aSuelo.magnesio}}</td>
+                                            <td>{{detail.aSuelo.potasio}}</td>
+                                            <td>{{detail.aSuelo.sodio}}</td>
+                                            <td>{{detail.aSuelo.cationico}}</td>
+                                            <td>{{detail.aSuelo.electrica}}</td>
+                                            <td>{{detail.aSuelo.boro}}</td>
+                                            <td>{{detail.aSuelo.hierro}}</td>
+                                            <td>{{detail.aSuelo.cobre}}</td>
+                                            <td>{{detail.aSuelo.manganeso}}</td>
+                                            <td>{{detail.aSuelo.zinc}}</td>
+                                            <td>{{detail.aSuelo.cice}}</td>
+                                            <td>{{detail.aSuelo.sumA_BASES}}</td>
+                                            <td>{{detail.aSuelo.saT_BASES}}</td>
+                                            <td>{{detail.aSuelo.saT_K}}</td>
+                                            <td>{{detail.aSuelo.saT_CA}}</td>
+                                            <td>{{detail.aSuelo.saT_MG}}</td>
+                                            <td>{{detail.aSuelo.saT_NA}}</td>
+                                            <td>{{detail.aSuelo.saT_AL}}</td>
+                                            <td>{{detail.aSuelo.cA_MG}}</td>
+                                            <td>{{detail.aSuelo.k_MG}}</td>
+                                            <td>{{detail.aSuelo.cA_MG_DIV_K}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button [disabled]="saving" type="button" class="btn btn-primary blue"
+                    (click)="close()">{{l("Close")}}</button>
+            </div>
+        </div>
+
+    </div>
+</div>

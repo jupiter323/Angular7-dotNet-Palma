@@ -105,3 +105,10 @@ body.swal2-height-auto {
 .display-none {
     display: none;
 }
+
+.table-wraper {
+    position: relative;
+    overflow: auto;
+    width: 100%;
+    max-height: 50vh;
+}
