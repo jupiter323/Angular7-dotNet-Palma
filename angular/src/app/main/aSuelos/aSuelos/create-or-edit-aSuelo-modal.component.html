@@ -1,218 +1,261 @@
-<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <form *ngIf="active" #aSueloForm="ngForm" novalidate (ngSubmit)="save()" autocomplete="off">
-                <div class="modal-header">
-                    <h4 class="modal-title">
-                        <span *ngIf="aSuelo.id">{{l("EditASuelo")}}</span>
-                        <span *ngIf="!aSuelo.id">{{l("CreateNewASuelo")}}</span>
-                    </h4>
-                    <button type="button" class="close" (click)="close()" aria-label="Close" [disabled]="saving">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                 
+<div bsModal #createOrEditModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+	aria-labelledby="createOrEditModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<form *ngIf="active" #aSueloForm="ngForm" novalidate (ngSubmit)="save()" autocomplete="off">
+				<div class="modal-header">
+					<h4 class="modal-title">
+						<span *ngIf="aSuelo.id">{{l("EditASuelo")}}</span>
+						<span *ngIf="!aSuelo.id">{{l("CreateNewASuelo")}}</span>
+					</h4>
+					<button type="button" class="close" (click)="close()" aria-label="Close" [disabled]="saving">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
 
 
-								<div class="form-group">
-									<label for="ASuelo_COD_SUELOS">{{l("COD_SUELOS")}}</label>
-									<input type="text" id="ASuelo_COD_SUELOS" class="form-control" [(ngModel)]="aSuelo.coD_SUELOS" name="COD_SUELOS"    />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_ID_SUELOS">{{l("ID_SUELOS")}}</label>
-									<input type="text" id="ASuelo_ID_SUELOS" class="form-control" [(ngModel)]="aSuelo.iD_SUELOS" name="ID_SUELOS"    />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_MATERIAL_SUELOS">{{l("MATERIAL_SUELOS")}}</label>
-									<input type="text" id="ASuelo_MATERIAL_SUELOS" class="form-control" [(ngModel)]="aSuelo.materiaL_SUELOS" name="MATERIAL_SUELOS"    />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_PROFUNDIDAD_MUESTRA">{{l("PROFUNDIDAD_MUESTRA")}}</label>
-									<input type="number" id="ASuelo_PROFUNDIDAD_MUESTRA" class="form-control" [(ngModel)]="aSuelo.profundidaD_MUESTRA" name="PROFUNDIDAD_MUESTRA"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_TEXTURA_SUELOS">{{l("TEXTURA_SUELOS")}}</label>
-									<input type="text" id="ASuelo_TEXTURA_SUELOS" class="form-control" [(ngModel)]="aSuelo.texturA_SUELOS" name="TEXTURA_SUELOS"    />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_ARENA">{{l("ARENA")}}</label>
-									<input type="number" id="ASuelo_ARENA" class="form-control" [(ngModel)]="aSuelo.arena" name="ARENA"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_LIMO">{{l("LIMO")}}</label>
-									<input type="number" id="ASuelo_LIMO" class="form-control" [(ngModel)]="aSuelo.limo" name="LIMO"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_ARCILLA">{{l("ARCILLA")}}</label>
-									<input type="number" id="ASuelo_ARCILLA" class="form-control" [(ngModel)]="aSuelo.arcilla" name="ARCILLA"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_PH">{{l("PH")}}</label>
-									<input type="number" id="ASuelo_PH" class="form-control" [(ngModel)]="aSuelo.ph" name="PH"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_CARBONO_ORGANICO">{{l("CARBONO_ORGANICO")}}</label>
-									<input type="number" id="ASuelo_CARBONO_ORGANICO" class="form-control" [(ngModel)]="aSuelo.carbonO_ORGANICO" name="CARBONO_ORGANICO"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_MATERIA_ORGANICA">{{l("MATERIA_ORGANICA")}}</label>
-									<input type="number" id="ASuelo_MATERIA_ORGANICA" class="form-control" [(ngModel)]="aSuelo.materiA_ORGANICA" name="MATERIA_ORGANICA"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_FOSFORO">{{l("FOSFORO")}}</label>
-									<input type="number" id="ASuelo_FOSFORO" class="form-control" [(ngModel)]="aSuelo.fosforo" name="FOSFORO"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_AZUFRE">{{l("AZUFRE")}}</label>
-									<input type="number" id="ASuelo_AZUFRE" class="form-control" [(ngModel)]="aSuelo.azufre" name="AZUFRE"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_ACIDEZ">{{l("ACIDEZ")}}</label>
-									<input type="number" id="ASuelo_ACIDEZ" class="form-control" [(ngModel)]="aSuelo.acidez" name="ACIDEZ"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_ALUMINIO">{{l("ALUMINIO")}}</label>
-									<input type="number" id="ASuelo_ALUMINIO" class="form-control" [(ngModel)]="aSuelo.aluminio" name="ALUMINIO"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_CALCIO">{{l("CALCIO")}}</label>
-									<input type="number" id="ASuelo_CALCIO" class="form-control" [(ngModel)]="aSuelo.calcio" name="CALCIO"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_MAGNESIO">{{l("MAGNESIO")}}</label>
-									<input type="number" id="ASuelo_MAGNESIO" class="form-control" [(ngModel)]="aSuelo.magnesio" name="MAGNESIO"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_POTASIO">{{l("POTASIO")}}</label>
-									<input type="number" id="ASuelo_POTASIO" class="form-control" [(ngModel)]="aSuelo.potasio" name="POTASIO"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_SODIO">{{l("SODIO")}}</label>
-									<input type="number" id="ASuelo_SODIO" class="form-control" [(ngModel)]="aSuelo.sodio" name="SODIO"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_CATIONICO">{{l("CATIONICO")}}</label>
-									<input type="number" id="ASuelo_CATIONICO" class="form-control" [(ngModel)]="aSuelo.cationico" name="CATIONICO"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_ELECTRICA">{{l("ELECTRICA")}}</label>
-									<input type="number" id="ASuelo_ELECTRICA" class="form-control" [(ngModel)]="aSuelo.electrica" name="ELECTRICA"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_BORO">{{l("BORO")}}</label>
-									<input type="number" id="ASuelo_BORO" class="form-control" [(ngModel)]="aSuelo.boro" name="BORO"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_HIERRO">{{l("HIERRO")}}</label>
-									<input type="number" id="ASuelo_HIERRO" class="form-control" [(ngModel)]="aSuelo.hierro" name="HIERRO"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_COBRE">{{l("COBRE")}}</label>
-									<input type="number" id="ASuelo_COBRE" class="form-control" [(ngModel)]="aSuelo.cobre" name="COBRE"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_MANGANESO">{{l("MANGANESO")}}</label>
-									<input type="number" id="ASuelo_MANGANESO" class="form-control" [(ngModel)]="aSuelo.manganeso" name="MANGANESO"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_ZINC">{{l("ZINC")}}</label>
-									<input type="number" id="ASuelo_ZINC" class="form-control" [(ngModel)]="aSuelo.zinc" name="ZINC"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_CICE">{{l("CICE")}}</label>
-									<input type="number" id="ASuelo_CICE" class="form-control" [(ngModel)]="aSuelo.cice" name="CICE"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_SUMA_BASES">{{l("SUMA_BASES")}}</label>
-									<input type="number" id="ASuelo_SUMA_BASES" class="form-control" [(ngModel)]="aSuelo.sumA_BASES" name="SUMA_BASES"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_SAT_BASES">{{l("SAT_BASES")}}</label>
-									<input type="number" id="ASuelo_SAT_BASES" class="form-control" [(ngModel)]="aSuelo.saT_BASES" name="SAT_BASES"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_SAT_K">{{l("SAT_K")}}</label>
-									<input type="number" id="ASuelo_SAT_K" class="form-control" [(ngModel)]="aSuelo.saT_K" name="SAT_K"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_SAT_CA">{{l("SAT_CA")}}</label>
-									<input type="number" id="ASuelo_SAT_CA" class="form-control" [(ngModel)]="aSuelo.saT_CA" name="SAT_CA"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_SAT_MG">{{l("SAT_MG")}}</label>
-									<input type="number" id="ASuelo_SAT_MG" class="form-control" [(ngModel)]="aSuelo.saT_MG" name="SAT_MG"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_SAT_NA">{{l("SAT_NA")}}</label>
-									<input type="number" id="ASuelo_SAT_NA" class="form-control" [(ngModel)]="aSuelo.saT_NA" name="SAT_NA"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_SAT_AL">{{l("SAT_AL")}}</label>
-									<input type="number" id="ASuelo_SAT_AL" class="form-control" [(ngModel)]="aSuelo.saT_AL" name="SAT_AL"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_CA_MG">{{l("CA_MG")}}</label>
-									<input type="number" id="ASuelo_CA_MG" class="form-control" [(ngModel)]="aSuelo.cA_MG" name="CA_MG"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_K_MG">{{l("K_MG")}}</label>
-									<input type="number" id="ASuelo_K_MG" class="form-control" [(ngModel)]="aSuelo.k_MG" name="K_MG"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_CA_MG_DIV_K">{{l("CA_MG_DIV_K")}}</label>
-									<input type="number" id="ASuelo_CA_MG_DIV_K" class="form-control" [(ngModel)]="aSuelo.cA_MG_DIV_K" name="CA_MG_DIV_K"  />
-								</div>
-					
-								<div class="form-group">
-									<label for="ASuelo_ANALISIS_ID">{{l("ANALISIS_ID")}}</label>
-									<input type="text" id="ASuelo_ANALISIS_ID" class="form-control" [(ngModel)]="aSuelo.analisiS_ID" name="ANALISIS_ID"    />
-								</div>
-					
 
-                </div>
-                <div class="modal-footer">
-                    <button [disabled]="saving" type="button" class="btn btn-default" (click)="close()">{{l("Cancel")}}</button>
-                    <button type="submit" class="btn btn-primary blue" [disabled]="!aSueloForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i> <span>{{l("Save")}}</span></button>
-                </div>
-            </form>
-        </div>
-    </div>
+					<div class="form-group">
+						<label for="ASuelo_COD_SUELOS">{{l("COD_SUELOS")}}</label>
+						<input type="text" id="ASuelo_COD_SUELOS" class="form-control" [(ngModel)]="aSuelo.coD_SUELOS"
+							name="COD_SUELOS" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_ID_SUELOS">{{l("ID_SUELOS")}}</label>
+						<input type="text" id="ASuelo_ID_SUELOS" class="form-control" [(ngModel)]="aSuelo.iD_SUELOS"
+							name="ID_SUELOS" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_MATERIAL_SUELOS">{{l("MATERIAL_SUELOS")}}</label>
+						<input type="text" id="ASuelo_MATERIAL_SUELOS" class="form-control"
+							[(ngModel)]="aSuelo.materiaL_SUELOS" name="MATERIAL_SUELOS" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_PROFUNDIDAD_MUESTRA">{{l("PROFUNDIDAD_MUESTRA")}}</label>
+						<input type="number" id="ASuelo_PROFUNDIDAD_MUESTRA" class="form-control"
+							[(ngModel)]="aSuelo.profundidaD_MUESTRA" name="PROFUNDIDAD_MUESTRA" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_TEXTURA_SUELOS">{{l("TEXTURA_SUELOS")}}</label>
+						<input type="text" id="ASuelo_TEXTURA_SUELOS" class="form-control"
+							[(ngModel)]="aSuelo.texturA_SUELOS" name="TEXTURA_SUELOS" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_ARENA">{{l("ARENA")}}</label>
+						<input type="number" id="ASuelo_ARENA" class="form-control" [(ngModel)]="aSuelo.arena"
+							name="ARENA" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_LIMO">{{l("LIMO")}}</label>
+						<input type="number" id="ASuelo_LIMO" class="form-control" [(ngModel)]="aSuelo.limo"
+							name="LIMO" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_ARCILLA">{{l("ARCILLA")}}</label>
+						<input type="number" id="ASuelo_ARCILLA" class="form-control" [(ngModel)]="aSuelo.arcilla"
+							name="ARCILLA" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_PH">{{l("PH")}}</label>
+						<input type="number" id="ASuelo_PH" class="form-control" [(ngModel)]="aSuelo.ph" name="PH" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_CARBONO_ORGANICO">{{l("CARBONO_ORGANICO")}}</label>
+						<input type="number" id="ASuelo_CARBONO_ORGANICO" class="form-control"
+							[(ngModel)]="aSuelo.carbonO_ORGANICO" name="CARBONO_ORGANICO" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_MATERIA_ORGANICA">{{l("MATERIA_ORGANICA")}}</label>
+						<input type="number" id="ASuelo_MATERIA_ORGANICA" class="form-control"
+							[(ngModel)]="aSuelo.materiA_ORGANICA" name="MATERIA_ORGANICA" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_FOSFORO">{{l("FOSFORO")}}</label>
+						<input type="number" id="ASuelo_FOSFORO" class="form-control" [(ngModel)]="aSuelo.fosforo"
+							name="FOSFORO" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_AZUFRE">{{l("AZUFRE")}}</label>
+						<input type="number" id="ASuelo_AZUFRE" class="form-control" [(ngModel)]="aSuelo.azufre"
+							name="AZUFRE" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_ACIDEZ">{{l("ACIDEZ")}}</label>
+						<input type="number" id="ASuelo_ACIDEZ" class="form-control" [(ngModel)]="aSuelo.acidez"
+							name="ACIDEZ" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_ALUMINIO">{{l("ALUMINIO")}}</label>
+						<input type="number" id="ASuelo_ALUMINIO" class="form-control" [(ngModel)]="aSuelo.aluminio"
+							name="ALUMINIO" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_CALCIO">{{l("CALCIO")}}</label>
+						<input type="number" id="ASuelo_CALCIO" class="form-control" [(ngModel)]="aSuelo.calcio"
+							name="CALCIO" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_MAGNESIO">{{l("MAGNESIO")}}</label>
+						<input type="number" id="ASuelo_MAGNESIO" class="form-control" [(ngModel)]="aSuelo.magnesio"
+							name="MAGNESIO" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_POTASIO">{{l("POTASIO")}}</label>
+						<input type="number" id="ASuelo_POTASIO" class="form-control" [(ngModel)]="aSuelo.potasio"
+							name="POTASIO" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_SODIO">{{l("SODIO")}}</label>
+						<input type="number" id="ASuelo_SODIO" class="form-control" [(ngModel)]="aSuelo.sodio"
+							name="SODIO" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_CATIONICO">{{l("CATIONICO")}}</label>
+						<input type="number" id="ASuelo_CATIONICO" class="form-control" [(ngModel)]="aSuelo.cationico"
+							name="CATIONICO" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_ELECTRICA">{{l("ELECTRICA")}}</label>
+						<input type="number" id="ASuelo_ELECTRICA" class="form-control" [(ngModel)]="aSuelo.electrica"
+							name="ELECTRICA" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_BORO">{{l("BORO")}}</label>
+						<input type="number" id="ASuelo_BORO" class="form-control" [(ngModel)]="aSuelo.boro"
+							name="BORO" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_HIERRO">{{l("HIERRO")}}</label>
+						<input type="number" id="ASuelo_HIERRO" class="form-control" [(ngModel)]="aSuelo.hierro"
+							name="HIERRO" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_COBRE">{{l("COBRE")}}</label>
+						<input type="number" id="ASuelo_COBRE" class="form-control" [(ngModel)]="aSuelo.cobre"
+							name="COBRE" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_MANGANESO">{{l("MANGANESO")}}</label>
+						<input type="number" id="ASuelo_MANGANESO" class="form-control" [(ngModel)]="aSuelo.manganeso"
+							name="MANGANESO" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_ZINC">{{l("ZINC")}}</label>
+						<input type="number" id="ASuelo_ZINC" class="form-control" [(ngModel)]="aSuelo.zinc"
+							name="ZINC" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_CICE">{{l("CICE")}}</label>
+						<input type="number" id="ASuelo_CICE" class="form-control" [(ngModel)]="aSuelo.cice"
+							name="CICE" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_SUMA_BASES">{{l("SUMA_BASES")}}</label>
+						<input type="number" id="ASuelo_SUMA_BASES" class="form-control" [(ngModel)]="aSuelo.sumA_BASES"
+							name="SUMA_BASES" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_SAT_BASES">{{l("SAT_BASES")}}</label>
+						<input type="number" id="ASuelo_SAT_BASES" class="form-control" [(ngModel)]="aSuelo.saT_BASES"
+							name="SAT_BASES" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_SAT_K">{{l("SAT_K")}}</label>
+						<input type="number" id="ASuelo_SAT_K" class="form-control" [(ngModel)]="aSuelo.saT_K"
+							name="SAT_K" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_SAT_CA">{{l("SAT_CA")}}</label>
+						<input type="number" id="ASuelo_SAT_CA" class="form-control" [(ngModel)]="aSuelo.saT_CA"
+							name="SAT_CA" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_SAT_MG">{{l("SAT_MG")}}</label>
+						<input type="number" id="ASuelo_SAT_MG" class="form-control" [(ngModel)]="aSuelo.saT_MG"
+							name="SAT_MG" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_SAT_NA">{{l("SAT_NA")}}</label>
+						<input type="number" id="ASuelo_SAT_NA" class="form-control" [(ngModel)]="aSuelo.saT_NA"
+							name="SAT_NA" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_SAT_AL">{{l("SAT_AL")}}</label>
+						<input type="number" id="ASuelo_SAT_AL" class="form-control" [(ngModel)]="aSuelo.saT_AL"
+							name="SAT_AL" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_CA_MG">{{l("CA_MG")}}</label>
+						<input type="number" id="ASuelo_CA_MG" class="form-control" [(ngModel)]="aSuelo.cA_MG"
+							name="CA_MG" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_K_MG">{{l("K_MG")}}</label>
+						<input type="number" id="ASuelo_K_MG" class="form-control" [(ngModel)]="aSuelo.k_MG"
+							name="K_MG" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_CA_MG_DIV_K">{{l("CA_MG_DIV_K")}}</label>
+						<input type="number" id="ASuelo_CA_MG_DIV_K" class="form-control"
+							[(ngModel)]="aSuelo.cA_MG_DIV_K" name="CA_MG_DIV_K" />
+					</div>
+
+					<div class="form-group">
+						<label for="ASuelo_ANALISIS_ID">{{l("ANALISIS_ID")}}</label>
+						<analise-combo tipo=1 name="ANALISIS_ID" [(ngModel)]="aSuelo.analisiS_ID">
+						</analise-combo>
+						<!-- <input type="text" id="ASuelo_ANALISIS_ID" class="form-control" [(ngModel)]="aSuelo.analisiS_ID"
+							name="ANALISIS_ID" /> -->
+					</div>
+
+
+				</div>
+				<div class="modal-footer">
+					<button [disabled]="saving" type="button" class="btn btn-default"
+						(click)="close()">{{l("Cancel")}}</button>
+					<button type="submit" class="btn btn-primary blue" [disabled]="!aSueloForm.form.valid"
+						[buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')"><i class="fa fa-save"></i>
+						<span>{{l("Save")}}</span></button>
+				</div>
+			</form>
+		</div>
+	</div>
 
 </div>

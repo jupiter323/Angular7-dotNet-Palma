@@ -1,0 +1,4 @@
+<select class="form-control" [formControl]="selectedAnalisis">
+  <option *ngFor="let analise of mis_analises" [value]="analise.analisis.id">
+    {{analise.analisis.iD_INFORME}}
+</select>

@@ -145,7 +145,7 @@ export class PaisesComponent extends AppComponentBase {
             /* save data */
             let data = (XLSX.utils.sheet_to_json(ws, { header: 1 }));
             let sendJsonData = this._fileImportService.parseJsonFromArray(data);
-            this._paisesServiceProxy.importcsv(sendJsonData).subscribe(result => {
+            this._paisesServiceProxy.importcsv(JSON.stringify(sendJsonData)).subscribe(result => {
                 console.log(result);
             });
             sendJsonData.values.forEach((x, i) => {

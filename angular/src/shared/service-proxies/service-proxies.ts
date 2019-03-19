@@ -8427,7 +8427,7 @@ export class PaisesServiceProxy {
      * @param data (optional) 
      * @return Success
      */
-    importcsv(data: Object | null | undefined): Observable<void> {
+    importcsv(data: string | null | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Paises/importcsv?";
         if (data !== undefined)
             url_ += "data=" + encodeURIComponent("" + data) + "&"; 
