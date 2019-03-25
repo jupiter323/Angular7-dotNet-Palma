@@ -9,6 +9,9 @@
                     </h4>
                 </div>
                 <div class="col-md-6 text-right">
+                    <button class="btn btn-outline-success" (click)="goToForm()">
+                        <i class="fa fa-paste"></i>
+                        {{l("Go to the Form")}}</button>
                     <button class="btn btn-outline-success" (click)="addFiles()">
                         <input #file type="file" class="display-none" accept=".xlsx,.xls,.csv"
                             (change)="onFileChange($event)"><i class="fa fa-file-excel"></i>

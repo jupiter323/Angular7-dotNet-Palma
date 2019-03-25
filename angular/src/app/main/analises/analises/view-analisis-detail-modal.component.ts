@@ -5,6 +5,7 @@ import { AppComponentBase } from '@shared/common/app-component-base';
 import * as XLSX from 'xlsx';
 import { finalize } from 'rxjs/operators';
 import { FileImportService } from '@shared/utils/file-import.service';
+import { Router } from '@angular/router';
 @Component({
     selector: 'viewAnalisisDetailModal',
     templateUrl: './view-analisis-detail-modal.component.html'
@@ -31,6 +32,7 @@ export class ViewAnalisisDetailModalComponent extends AppComponentBase {
         private _aSuelosServiceProxy: ASuelosServiceProxy,
         private _aFoliaresServiceProxy: AFoliaresServiceProxy,
         private _fileImportService: FileImportService,
+        private router: Router
     ) {
         super(injector);
         this.item = new GetAnalisisForViewDto();
@@ -74,6 +76,17 @@ export class ViewAnalisisDetailModalComponent extends AppComponentBase {
     }
 
     //
+    goToForm() {
+        const url = this.tipoId == this.analisisTipo.Foliar ? "/app/main/aFoliares/aFoliares/" : "/app/main/aSuelos/aSuelos/";
+        const id = this.analisisId;
+        this.router.navigate([url, id]).then((e) => {
+            if (e) {
+                console.log("Navigation is successful!");
+            } else {
+                console.log("Navigation has failed!");
+            }
+        });
+    }
     //
 
     @ViewChild('file') file;

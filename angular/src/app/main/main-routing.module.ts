@@ -16,6 +16,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
             {
                 path: '',
                 children: [
+                    { path: 'aSuelos/aSuelos/:id', component: ASuelosComponent, data: { permission: 'Pages.ASuelos' }  },
+                    { path: 'aFoliares/aFoliares/:id', component: AFoliaresComponent, data: { permission: 'Pages.AFoliares' }  },
                     { path: 'aSuelos/aSuelos', component: ASuelosComponent, data: { permission: 'Pages.ASuelos' }  },
                     { path: 'aFoliares/aFoliares', component: AFoliaresComponent, data: { permission: 'Pages.AFoliares' }  },
                     { path: 'analises/analises', component: AnalisesComponent, data: { permission: 'Pages.Analises' }  },

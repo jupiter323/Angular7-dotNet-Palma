@@ -115,7 +115,7 @@ export class AFoliaresComponent extends AppComponentBase {
 
     _entityTypeFullName = 'PALMASoft.AFoliares.AFoliar';
     entityHistoryEnabled = false;
-
+    analisisId
     constructor(
         injector: Injector,
         private _aFoliaresServiceProxy: AFoliaresServiceProxy,
@@ -129,6 +129,7 @@ export class AFoliaresComponent extends AppComponentBase {
 
     ngOnInit(): void {
         this.entityHistoryEnabled = this.setIsEntityHistoryEnabled();
+        this.analisisId = this._activatedRoute.snapshot.params['id'];
     }
 
     private setIsEntityHistoryEnabled(): boolean {
@@ -187,7 +188,7 @@ export class AFoliaresComponent extends AppComponentBase {
             this.minK_div_PFilter == null ? this.minK_div_PFilterEmpty: this.minK_div_PFilter,
             this.maxCa_div_BFilter == null ? this.maxCa_div_BFilterEmpty: this.maxCa_div_BFilter,
             this.minCa_div_BFilter == null ? this.minCa_div_BFilterEmpty: this.minCa_div_BFilter,
-            this.analisiS_IDFilter,
+            this.analisiS_IDFilter || this.analisisId,
             this.primengTableHelper.getSorting(this.dataTable),
             this.primengTableHelper.getSkipCount(this.paginator, event),
             this.primengTableHelper.getMaxResultCount(this.paginator, event)
